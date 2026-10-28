@@ -1,6 +1,6 @@
-# 빌드 report — 20261028T0027Z-7127307-dirty
+# 빌드 report — 20261028T0027Z-ee17d6b
 
-- builtAt: 2026-10-28T00:27:12+00:00  gitSha: 7127307 (dirty)
+- builtAt: 2026-10-28T00:27:30+00:00  gitSha: ee17d6b
 - inputs: {"schema": {"primary": "local_zzt-2026-10-28.sql (502 tables)", "secondary": "urimalo_zzt-2026-04-22.sql (517 tables)", "tables": "519"}, "classification": {"classified": "492", "excluded": "10"}, "docs": {"docs": "102", "statusCodeValues": "124", "domainColumns": "432", "policies": "8", "cronJobs": "59", "glossary": "14", "ownership": "27", "repos": "17"}}
 
 ## 건수

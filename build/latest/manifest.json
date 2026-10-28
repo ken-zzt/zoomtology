@@ -1,5 +1,5 @@
 {
-  "builtAt": "2026-10-28T00:27:12+00:00",
+  "builtAt": "2026-10-28T00:27:30+00:00",
   "counts": {
     "edges": {
       "CONTAINS": 519,
@@ -24,13 +24,13 @@
       "Table": 519
     }
   },
-  "dirty": true,
+  "dirty": false,
   "extractors": {
     "classification": "1",
     "docs": "1",
     "schema": "1"
   },
-  "gitSha": "7127307d7301f981a1486ff8a4f418e30f33a7d5",
+  "gitSha": "ee17d6b14b612fe7338e20d154e9b5859a5a727b",
   "inputs": {
     "classification": {
       "classified": "492",
@@ -84,5 +84,5 @@
       "sha": "7ec4de75322a70fa83e4dd03cf56d3952cd7d797"
     }
   },
-  "version": "20261028T0027Z-7127307-dirty"
+  "version": "20261028T0027Z-ee17d6b"
 }
