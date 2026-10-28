@@ -1,0 +1,11 @@
+{
+  "name": "@zoomtology/extractors-ts",
+  "version": "0.1.0",
+  "private": true,
+  "description": "ts-morph 로 NestJS 계열 저장소(zoomzoom-api·message-consumer·zoomzoom-back·external-api·data-api·zoomzoom-front)에서 메타데이터를 뽑는다. 3단계(ZDV-347)에서 구현",
+  "type": "module",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "extract": "echo 'TODO(ZDV-347)' && exit 2"
+  }
+}

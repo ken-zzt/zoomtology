@@ -1,0 +1,217 @@
+# zoomtology 온톨로지 v1 — 라벨·관계·속성의 원본.
+# 추출기(extractors/)·큐레이션 파일(curated/)·빌드(build.py)·Prism 로더는 이 파일로 검증한다.
+# 바꿀 때: uid.md 와 docs/design.md 도 같이 고치고, ADR 이 필요한 변경(라벨 추가·관계 의미 변경)은 docs/decisions/ 에 남긴다.
+schemaVersion: 1
+
+# ---------------------------------------------------------------------------
+# 모든 노드·관계가 갖는 거버넌스 속성 (docs/decisions/0005)
+# ---------------------------------------------------------------------------
+governance:
+  source:
+    description: 어디서 왔나. 추출기 id(`php@1`), 문서(`doc:<path>`), 사람(`manual`)
+    pattern: '^([a-z][a-z0-9_-]*@[0-9]+|doc:[^\s]+|manual)$'
+    required: true
+  confidence:
+    enum: [auto, verified]
+    required: true
+  status:
+    enum: [active, missing-from-source, retired]
+    required: true
+  firstSeenAt: { type: date, required: true }
+  lastSeenAt: { type: date, required: true }
+  lastVerifiedAt: { type: date, required: false, note: confidence=verified 일 때 필수 }
+  sourceRef:
+    description: "근거 위치. `repo/path:line[-line]`, 문서 경로, 또는 curated 파일 경로"
+    type: string
+    required: false
+  verifiedBy: { type: string, required: false }
+  # 병합 우선순위: manual > doc > extractor. 밀린 값은 props.alt.<source> 에 보존한다.
+
+# ---------------------------------------------------------------------------
+# 노드 라벨 (17 + 예약 4)
+# required: name 외에 반드시 있어야 하는 props. optional: 알려진 선택 props (검증은 안 함, 문서용)
+# ---------------------------------------------------------------------------
+labels:
+  Repo:
+    uid: '^repo:[a-z0-9-]+$'
+    required: [stack, tier, status]
+    optional: [remote, defaultBranch, deploy]
+    source_of_truth: zoomzoom-services/tools/repos.tsv
+  Service:
+    uid: '^svc:[a-z0-9-]+/[a-z0-9-]+$'
+    required: [repo]
+    optional: [process, port, host]
+  Module:
+    uid: '^module:[a-z0-9-]+/[^\s#]+(#[A-Za-z0-9_]+)?$'
+    required: [kind]
+    kinds: [nest, laravel-app, php-area, ts-dir]
+  File:
+    uid: '^file:[a-z0-9-]+/[^\s#]+$'
+    required: [repo, path, lang]
+    optional: [loc, sha1]
+  CodeUnit:
+    uid: '^code:[a-z0-9-]+/[^\s#]+#[A-Za-z0-9_\\]+(::[A-Za-z0-9_$]+)?$'
+    required: [kind, lineStart, lineEnd]
+    kinds: [class, method, function, entity, model, handler, command, controller]
+    optional: [visibility, columns]
+    forbidden_props: [body, source, sql]   # 코드 본문 금지 (docs/decisions/0003)
+  Route:
+    uid: '^route:[a-z0-9-]+ ([A-Z]+ \S+|route=[A-Za-z0-9_/.-]+)$'
+    required: [repo, kind]
+    kinds: [http, opencart, accessrule, front, task]
+    optional: [method, path, auth, login, version]
+  Queue:
+    uid: '^queue:[a-z]+$'
+    required: [role]
+    optional: [consumerService]
+  QueueMessage:
+    uid: '^msg:[a-z]+/[a-z0-9._-]+$'
+    required: [queue]
+    optional: [enumName]
+  CronJob:
+    uid: '^cron:[a-z0-9-]+/[^\s]+$'
+    required: [schedule, host]
+    optional: [summary, target]
+  Database:
+    uid: '^db:[a-z0-9-]+$'
+    required: [handle]
+    optional: [engine]
+  Table:
+    uid: '^table:([a-z0-9-]+/)?[A-Za-z0-9_]+$'
+    required: [db]
+    optional: [comment, pii, owner, aliases, usageByRepo, engine]
+  Column:
+    uid: '^col:[A-Za-z0-9_]+\.[A-Za-z0-9_]+$'
+    required: [type]
+    optional: [nullable, isPk, comment, meaning, piiRule, ordinal]
+    forbidden_props: [default]                # DDL 기본값은 넣지 않는다 (토큰·키가 들어갈 수 있음)
+  EnumValue:
+    uid: '^enum:[A-Za-z0-9_]+\.[A-Za-z0-9_]+=[^\s]+$'
+    required: [value, origin]
+    origins: [status-codes, ddl-comment, code-static-array, manual]
+    optional: [meaning, label]
+  BusinessRule:
+    uid: '^rule:[a-z0-9-]+$'
+    required: [title, doc]
+    optional: [status, summary]
+  Domain:
+    uid: '^domain:[a-z0-9-]+$'
+    required: [nameKo]
+    optional: [aliases]
+  ExternalService:
+    uid: '^ext:[a-z0-9-]+$'
+    required: [kind]
+    kinds: [payment, supplier, channel, messaging, infra, analytics, other]
+    optional: [doc]
+  Doc:
+    uid: '^doc:[a-z0-9-]+/[^\s#]+(#[^\s]+)?$'
+    required: [type]
+    optional: [status, lastVerified, title]
+
+reserved_prefixes:            # 1차엔 만들지 않는다. 추출기가 이 접두사를 내면 빌드 실패.
+  - 'dept:'
+  - 'role:'
+  - 'process:'
+  - 'person:'
+
+# ---------------------------------------------------------------------------
+# 관계 타입 (20). from/to 는 허용 라벨 목록. props 는 알려진 선택 속성.
+# ---------------------------------------------------------------------------
+edges:
+  CONTAINS:
+    from: [Repo, File, Module, Database, Service]
+    to: [File, CodeUnit, Module, Table]
+    pairs: [[Repo, File], [Repo, Module], [File, CodeUnit], [Module, File], [Database, Table], [Service, Module]]
+  DEFINES:
+    from: [CodeUnit, File]
+    to: [EnumValue, Route]
+  MAPS_TO:
+    from: [CodeUnit]
+    to: [Table]
+    props: [via]                      # typeorm-entity | laravel-table
+  CALLS:
+    from: [CodeUnit]
+    to: [CodeUnit]
+    props: [kind, lines]              # kind: zoomtu | model | method | di | cqrs
+  HANDLES:
+    from: [CodeUnit]
+    to: [Route]
+  READS:
+    from: [CodeUnit]
+    to: [Table]
+    props: [ops, lines, columns, handle]
+  WRITES:
+    from: [CodeUnit]
+    to: [Table]
+    props: [ops, lines, columns, handle]   # ops ⊂ INSERT UPDATE DELETE REPLACE TRUNCATE DDL
+  JOINS:
+    from: [Table]
+    to: [Table]
+    props: [count, examples, onColumns]
+  PUBLISHES:
+    from: [CodeUnit]
+    to: [QueueMessage]
+    props: [lines, heuristic]
+  CONSUMES:
+    from: [CodeUnit]
+    to: [QueueMessage]
+    props: [service]
+  TRIGGERS:
+    from: [CronJob]
+    to: [Route, CodeUnit]
+    props: [schedule]
+  CALLS_HTTP:
+    from: [CodeUnit, Route]
+    to: [Route]
+    props: [via, matchKind, lines]    # matchKind: exact | prefix
+  HAS_COLUMN:
+    from: [Table]
+    to: [Column]
+    props: [ordinal]
+  HAS_VALUE:
+    from: [Column]
+    to: [EnumValue]
+  REFERENCES:
+    from: [Column]
+    to: [Column]
+    props: [kind, fkName, evidence]   # kind: fk | logical
+  DOCUMENTED_BY:
+    from: [Repo, Service, Module, File, CodeUnit, Route, Queue, QueueMessage, CronJob, Database, Table, Column, EnumValue, BusinessRule, Domain, ExternalService]
+    to: [Doc]
+    props: [section]
+  IMPLEMENTS_RULE:
+    from: [CodeUnit, File, Route, CronJob]
+    to: [BusinessRule]
+  BELONGS_TO_DOMAIN:
+    from: [Table, Route, Queue, QueueMessage, CronJob, BusinessRule, CodeUnit, Module]
+    to: [Domain]
+  USES_EXTERNAL:
+    from: [CodeUnit, Module, Service]
+    to: [ExternalService]
+    props: [via]
+  SUPERSEDES:
+    from: [CodeUnit, Route, Table, Column]
+    to: [CodeUnit, Route, Table, Column]
+    props: [reason]
+
+# 영향도 탐색(kg_impact)에서 "흐름" 방향으로 따라가는 관계. HANDLES·CONSUMES 는 의미상 역방향이라 뒤집어 본다.
+impact_flow:
+  forward: [CALLS, READS, WRITES, MAPS_TO, PUBLISHES, TRIGGERS, CALLS_HTTP]
+  reverse: [HANDLES, CONSUMES]
+
+# 빌드·적재 시 prop 값에서 거부하는 패턴 (docs/decisions/0003)
+content_guard:
+  max_prop_length: 2000
+  deny_patterns:
+    - '(?i)\b(select|insert|update|delete|replace)\b[\s\S]{0,200}\b(from|into|set|where)\b'   # SQL 문장 형태
+    - '(?i)(password|passwd|secret|api[_-]?key|token)\s*[:=]\s*\S{6,}'                        # 자격증명 대입
+    - 'eyJ[A-Za-z0-9_-]{20,}\.[A-Za-z0-9_-]{10,}'                                                # JWT
+    - 'AKIA[0-9A-Z]{16}'                                                                         # AWS access key
+  deny_paths:            # 추출기가 아예 읽지 않는 경로 (glob, 저장소 루트 기준)
+    - 'zoomzoom-admin/scripts/**'
+    - '**/config.php'
+    - '**/.env*'
+    - '**/config/credentials*'
+    - 'zoomzoom-services/reference/server-config/**'
+    - '**/node_modules/**'
+    - '**/vendor/**'
