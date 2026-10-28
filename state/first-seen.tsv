@@ -115552,3 +115552,272 @@ cron:admin/cron/tasks/updatetransactionfee -TRIGGERS-> route:zoomzoom-admin rout
 cron:admin/task/task/checkproviderorderstatus -TRIGGERS-> route:zoomzoom-admin route=task/task/checkproviderorderstatus	2026-10-28
 cron:admin/task/task/rejectorderafterweek -TRIGGERS-> route:zoomzoom-admin route=task/task/rejectorderafterweek	2026-10-28
 cron:admin/task/task/runupdatestats -TRIGGERS-> route:zoomzoom-admin route=task/task/runupdatestats	2026-10-28
+doc:zoomtology/curated/processes/order-to-settlement.yaml	2026-10-28
+domain:order	2026-10-28
+domain:payment	2026-10-28
+domain:refund	2026-10-28
+domain:settlement	2026-10-28
+enum:zoom_order.order_status_id=0	2026-10-28
+queue:lambda	2026-10-28
+code:zoomzoom-admin/admin/controller/cron/tasks.php#ControllerCronTasks::check_overdue -IMPLEMENTS_RULE-> rule:reservation-status-flow	2026-10-28
+code:zoomzoom-admin/admin/controller/cron/tasks.php#ControllerCronTasks::check_reject_overdue -IMPLEMENTS_RULE-> rule:reservation-status-flow	2026-10-28
+code:zoomzoom-admin/admin/controller/cron/tasks.php#ControllerCronTasks::check_tourday -IMPLEMENTS_RULE-> rule:reservation-status-flow	2026-10-28
+code:zoomzoom-admin/admin/controller/cron/tasks.php#ControllerCronTasks::check_tourend -IMPLEMENTS_RULE-> rule:reservation-status-flow	2026-10-28
+code:zoomzoom-admin/admin/controller/cron/tasks.php#ControllerCronTasks::payoutBatchPayoutSchedules -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+code:zoomzoom-admin/admin/controller/cron/tasks.php#ControllerCronTasks::payoutBatchPayoutSchedules -DOCUMENTED_BY-> doc:zoomtology/curated/processes/order-to-settlement.yaml	2026-10-28
+code:zoomzoom-admin/admin/controller/cron/tasks.php#ControllerCronTasks::payoutBatchPayoutSchedules -IMPLEMENTS_RULE-> rule:seller-payout-policy	2026-10-28
+code:zoomzoom-admin/admin/controller/cron/tasks.php#ControllerCronTasks::payoutEstimate -IMPLEMENTS_RULE-> rule:seller-payout-policy	2026-10-28
+code:zoomzoom-admin/admin/controller/cron/tasks.php#ControllerCronTasks::statusCheck -DOCUMENTED_BY-> doc:zoomtology/curated/processes/order-to-settlement.yaml	2026-10-28
+code:zoomzoom-admin/admin/controller/cron/tasks.php#ControllerCronTasks::statusCheck -IMPLEMENTS_RULE-> rule:reservation-status-flow	2026-10-28
+code:zoomzoom-admin/admin/controller/cron/tasks.php#ControllerCronTasks::updateTransactionFee -IMPLEMENTS_RULE-> rule:seller-payout-policy	2026-10-28
+code:zoomzoom-admin/admin/controller/multiseller/enquiries.php#ControllerMultisellerEnquiries::refundCounpon -IMPLEMENTS_RULE-> rule:partial-refund	2026-10-28
+code:zoomzoom-admin/admin/controller/multiseller/enquiries.php#ControllerMultisellerEnquiries::refundPriceConfirm -IMPLEMENTS_RULE-> rule:partial-refund	2026-10-28
+code:zoomzoom-admin/admin/controller/multiseller/enquiries.php#ControllerMultisellerEnquiries::status -IMPLEMENTS_RULE-> rule:reservation-status-flow	2026-10-28
+code:zoomzoom-admin/admin/controller/multiseller/enquiries.php#ControllerMultisellerEnquiries::transactions -IMPLEMENTS_RULE-> rule:partial-refund	2026-10-28
+code:zoomzoom-admin/catalog/controller/task/task.php#ControllerTaskTask::_rejectNoAnswerOrder -IMPLEMENTS_RULE-> rule:auto-reject	2026-10-28
+code:zoomzoom-admin/catalog/controller/task/task.php#ControllerTaskTask::checkProviderOrderStatus -IMPLEMENTS_RULE-> rule:reservation-status-flow	2026-10-28
+code:zoomzoom-admin/catalog/controller/task/task.php#ControllerTaskTask::rejectOrderAfterWeek -IMPLEMENTS_RULE-> rule:auto-reject	2026-10-28
+code:zoomzoom-admin/catalog/controller/task/task.php#ControllerTaskTask::reject_internal -IMPLEMENTS_RULE-> rule:auto-reject	2026-10-28
+code:zoomzoom-admin/system/library/msseller.php#MsSeller::getPayoutMethod -IMPLEMENTS_RULE-> rule:seller-payout-policy	2026-10-28
+code:zoomzoom-admin/system/library/zoomtu/commission.php#ZZTCommission -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+code:zoomzoom-admin/system/library/zoomtu/commission.php#ZZTCommission::commissionInfoFromOrder -IMPLEMENTS_RULE-> rule:partial-refund	2026-10-28
+code:zoomzoom-admin/system/library/zoomtu/conversation.php#ZZTConversation::getStatusDBArray -IMPLEMENTS_RULE-> rule:reservation-status-flow	2026-10-28
+code:zoomzoom-admin/system/library/zoomtu/conversation.php#ZZTConversation::isValidStatus -IMPLEMENTS_RULE-> rule:reservation-status-flow	2026-10-28
+code:zoomzoom-admin/system/library/zoomtu/conversation.php#ZZTConversation::setConversationStatus -IMPLEMENTS_RULE-> rule:reservation-status-flow	2026-10-28
+code:zoomzoom-admin/system/library/zoomtu/iamport.php#ZZTIamport::refundAll -IMPLEMENTS_RULE-> rule:auto-reject	2026-10-28
+code:zoomzoom-admin/system/library/zoomtu/iamport.php#ZZTIamport::refundByExternal -IMPLEMENTS_RULE-> rule:auto-reject	2026-10-28
+code:zoomzoom-admin/system/library/zoomtu/naverpay.php#ZZTNaverPay::refundAll -IMPLEMENTS_RULE-> rule:auto-reject	2026-10-28
+code:zoomzoom-admin/system/library/zoomtu/order_info.php#ZZTOrderInfo::updatePaidInfo -IMPLEMENTS_RULE-> rule:partial-refund	2026-10-28
+code:zoomzoom-admin/system/library/zoomtu/payout.php#ZZTPayout -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+code:zoomzoom-admin/system/library/zoomtu/payout.php#ZZTPayout::confirmBatchPayoutScheduleItems -IMPLEMENTS_RULE-> rule:seller-payout-policy	2026-10-28
+code:zoomzoom-admin/system/library/zoomtu/payout.php#ZZTPayout::createAdditionalPayoutRecord -IMPLEMENTS_RULE-> rule:seller-payout-policy	2026-10-28
+code:zoomzoom-admin/system/library/zoomtu/payout.php#ZZTPayout::getPayoutEstimate -IMPLEMENTS_RULE-> rule:seller-payout-policy	2026-10-28
+code:zoomzoom-admin/system/library/zoomtu/payout.php#ZZTPayout::getPayoutLiabilityItems -IMPLEMENTS_RULE-> rule:seller-payout-policy	2026-10-28
+code:zoomzoom-admin/system/library/zoomtu/payout.php#ZZTPayout::markBatchPayoutScheduleAsDone -IMPLEMENTS_RULE-> rule:seller-payout-policy	2026-10-28
+code:zoomzoom-admin/system/library/zoomtu/payout.php#ZZTPayout::payoutBatchPayoutSchedule -IMPLEMENTS_RULE-> rule:seller-payout-policy	2026-10-28
+code:zoomzoom-admin/system/library/zoomtu/seller_charge.php#ZZTSellerCharge -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+code:zoomzoom-admin/system/library/zoomtu/seller_charge.php#ZZTSellerCharge::cancelCharge -IMPLEMENTS_RULE-> rule:seller-payout-policy	2026-10-28
+code:zoomzoom-admin/system/library/zoomtu/seller_charge.php#ZZTSellerCharge::createCharge -IMPLEMENTS_RULE-> rule:seller-payout-policy	2026-10-28
+code:zoomzoom-admin/system/library/zoomtu/seller_charge.php#ZZTSellerCharge::processCharge -IMPLEMENTS_RULE-> rule:seller-payout-policy	2026-10-28
+code:zoomzoom-admin/system/library/zoomtu/tpay.php#ZZTTPay::refundAll -IMPLEMENTS_RULE-> rule:auto-reject	2026-10-28
+code:zoomzoom-admin/system/library/zoomtu/transactions.php#ZZTTransactions -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+code:zoomzoom-admin/system/library/zoomtu/transactions.php#ZZTTransactions::addPaymentFromSellerTransaction -IMPLEMENTS_RULE-> rule:seller-payout-policy	2026-10-28
+code:zoomzoom-admin/system/library/zoomtu/transactions.php#ZZTTransactions::addPaymentSellerTransaction -IMPLEMENTS_RULE-> rule:seller-payout-policy	2026-10-28
+code:zoomzoom-admin/system/library/zoomtu/transactions.php#ZZTTransactions::addTransaction -IMPLEMENTS_RULE-> rule:partial-refund	2026-10-28
+code:zoomzoom-admin/system/library/zoomtu/transactions.php#ZZTTransactions::addTransaction -SUPERSEDES-> code:zoomzoom-admin/system/library/zoomtu/transactions.php#ZZTTransactions::addTransactionV2	2026-10-28
+code:zoomzoom-admin/system/library/zoomtu/transactions.php#ZZTTransactions::addTransaction -SUPERSEDES-> code:zoomzoom-partners/system/library/zoomtu/transactions.php#ZZTTransactions::addTransactionV2	2026-10-28
+code:zoomzoom-admin/system/library/zoomtu/transactions.php#ZZTTransactions::getDiscountedInfoByOrderId -IMPLEMENTS_RULE-> rule:discount-revenue	2026-10-28
+code:zoomzoom-admin/system/library/zoomtu/transactions.php#ZZTTransactions::refundMoneyFromScheduled -IMPLEMENTS_RULE-> rule:partial-refund	2026-10-28
+code:zoomzoom-admin/system/library/zoomtu/transactions.php#ZZTTransactions::updateInfoGetValuesForIncomeFromSeller -IMPLEMENTS_RULE-> rule:seller-payout-policy	2026-10-28
+code:zoomzoom-admin/system/library/zoomtu/transactions.php#ZZTTransactions::updateInfoGetValuesForPaymentSeller -IMPLEMENTS_RULE-> rule:seller-payout-policy	2026-10-28
+code:zoomzoom-admin/system/library/zoomtu/wholesale.php#ZZTWholesale::setProviderOrderConfirm -IMPLEMENTS_RULE-> rule:reservation-status-flow	2026-10-28
+code:zoomzoom-api/src/cart/application/commands/create-cart.command.ts#CreateCartCommand::execute -IMPLEMENTS_RULE-> rule:cart-status-flow	2026-10-28
+code:zoomzoom-api/src/cart/application/commands/extend-session.command-handler.ts#ExtendSessionCommandHandler::execute -IMPLEMENTS_RULE-> rule:cart-status-flow	2026-10-28
+code:zoomzoom-api/src/cart/application/commands/patch-cart.command.ts#PatchCartCommand::execute -IMPLEMENTS_RULE-> rule:cart-status-flow	2026-10-28
+code:zoomzoom-api/src/cart/application/commands/set-coupon.command-handler.ts#SetCouponCommandHandler::execute -IMPLEMENTS_RULE-> rule:cart-status-flow	2026-10-28
+code:zoomzoom-api/src/cart/application/commands/set-order-id.command-handler.ts#SetOrderIdCommandHandler::execute -IMPLEMENTS_RULE-> rule:cart-status-flow	2026-10-28
+code:zoomzoom-api/src/cart/application/commands/unset-coupon.command-handler.ts#UnsetCouponCommandHandler::execute -IMPLEMENTS_RULE-> rule:cart-status-flow	2026-10-28
+code:zoomzoom-api/src/cart/domain/cart.ts#Cart::expired -IMPLEMENTS_RULE-> rule:cart-status-flow	2026-10-28
+code:zoomzoom-api/src/cart/domain/cart.ts#Cart::extendSessionTimeout -IMPLEMENTS_RULE-> rule:cart-status-flow	2026-10-28
+code:zoomzoom-api/src/order/application/commands/create-order.command-handler.ts#CreateOrderCommandHandler::execute -IMPLEMENTS_RULE-> rule:discount-revenue	2026-10-28
+code:zoomzoom-api/src/order/domain/factories/order.factory.ts#OrderFactory::create -IMPLEMENTS_RULE-> rule:discount-revenue	2026-10-28
+code:zoomzoom-api/src/order/domain/factories/order.factory.ts#OrderFactory::createOrderProductData -IMPLEMENTS_RULE-> rule:discount-revenue	2026-10-28
+code:zoomzoom-api/src/order/domain/order.ts#Order::requestCancel -DOCUMENTED_BY-> doc:zoomtology/curated/processes/order-to-settlement.yaml	2026-10-28
+code:zoomzoom-api/src/order/domain/order.ts#Order::requestCancel -IMPLEMENTS_RULE-> rule:reservation-status-flow	2026-10-28
+code:zoomzoom-api/src/order/infra/persistence/orm/repositories/update-order.repository.ts#UpdateOrderRepository::completePayment -DOCUMENTED_BY-> doc:zoomtology/curated/processes/order-to-settlement.yaml	2026-10-28
+code:zoomzoom-api/src/order/infra/persistence/orm/repositories/update-order.repository.ts#UpdateOrderRepository::completePayment -IMPLEMENTS_RULE-> rule:reservation-status-flow	2026-10-28
+code:zoomzoom-api/src/order/infra/persistence/orm/repositories/update-order.repository.ts#UpdateOrderRepository::confirm -IMPLEMENTS_RULE-> rule:reservation-status-flow	2026-10-28
+code:zoomzoom-api/src/order/infra/persistence/orm/repositories/update-order.repository.ts#UpdateOrderRepository::reject -IMPLEMENTS_RULE-> rule:reservation-status-flow	2026-10-28
+code:zoomzoom-api/src/product-campaign/domain/product-campaign-price.ts#ProductCampaignPrice -IMPLEMENTS_RULE-> rule:discount-revenue	2026-10-28
+code:zoomzoom-api/src/product/application/services/get-commission-data-for-order.service.ts#GetCommissionDataForOrderService::get -IMPLEMENTS_RULE-> rule:discount-revenue	2026-10-28
+code:zoomzoom-api/src/product/application/services/get-revenue-data-for-order.service.ts#GetRevenueDataForOrderService::get -IMPLEMENTS_RULE-> rule:discount-revenue	2026-10-28
+code:zoomzoom-front/src/apis/checkout.ts#createOrder -DOCUMENTED_BY-> doc:zoomtology/curated/processes/order-to-settlement.yaml	2026-10-28
+code:zoomzoom-partners/catalog/controller/payment/pp_pro.php#ControllerPaymentPPPro::pending_capture -IMPLEMENTS_RULE-> rule:reservation-status-flow	2026-10-28
+code:zoomzoom-partners/catalog/controller/seller/account-order.php#ControllerSellerAccountOrder::jxAddHistory -DOCUMENTED_BY-> doc:zoomtology/curated/processes/order-to-settlement.yaml	2026-10-28
+code:zoomzoom-partners/catalog/controller/seller/account-order.php#ControllerSellerAccountOrder::jxAddHistory -IMPLEMENTS_RULE-> rule:reservation-status-flow	2026-10-28
+code:zoomzoom-partners/catalog/controller/seller/account-order.php#ControllerSellerAccountOrder::jxAddPendingHistory -IMPLEMENTS_RULE-> rule:reservation-status-flow	2026-10-28
+code:zoomzoom-partners/system/library/zoomtu/conversation.php#ZZTConversation::setConversationStatus -IMPLEMENTS_RULE-> rule:reservation-status-flow	2026-10-28
+code:zoomzoom-partners/system/library/zoomtu/payout.php#ZZTPayout::checkBatchPayoutSchedulesToLock -IMPLEMENTS_RULE-> rule:seller-payout-policy	2026-10-28
+code:zoomzoom-partners/system/library/zoomtu/payout.php#ZZTPayout::isOverMinimumPayoutAmount -IMPLEMENTS_RULE-> rule:seller-payout-policy	2026-10-28
+col:zoom_coupon_customer.order_id -REFERENCES-> col:zoom_order.order_id	2026-10-28
+col:zoom_ms_requestpayment.request_id -REFERENCES-> col:zoom_ms_conversation.conversation_id	2026-10-28
+col:zoom_ms_seller.seller_id -REFERENCES-> col:zoom_customer.customer_id	2026-10-28
+col:zoom_order.order_status_id -HAS_VALUE-> enum:zoom_order.order_status_id=0	2026-10-28
+col:zoom_transaction_scheduled.reference_id -REFERENCES-> col:zoom_order.order_id	2026-10-28
+cron:admin/cron/tasks/confirmbatchpayoutbalance -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+cron:admin/cron/tasks/confirmbatchpayoutbalance -IMPLEMENTS_RULE-> rule:seller-payout-policy	2026-10-28
+cron:admin/cron/tasks/payoutestimate -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+cron:admin/cron/tasks/payoutestimate -DOCUMENTED_BY-> doc:zoomtology/curated/processes/order-to-settlement.yaml	2026-10-28
+cron:admin/cron/tasks/payoutestimate -IMPLEMENTS_RULE-> rule:seller-payout-policy	2026-10-28
+cron:admin/cron/tasks/payoutmarkdone -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+cron:admin/cron/tasks/payoutmarkdone -IMPLEMENTS_RULE-> rule:seller-payout-policy	2026-10-28
+cron:admin/cron/tasks/statuscheck -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+cron:admin/cron/tasks/statuscheck -DOCUMENTED_BY-> doc:zoomtology/curated/processes/order-to-settlement.yaml	2026-10-28
+cron:admin/cron/tasks/updatetransactionfee -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+cron:admin/cron/tasks/updatetransactionfee -IMPLEMENTS_RULE-> rule:seller-payout-policy	2026-10-28
+cron:admin/task/task/checkproviderorderstatus -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+cron:admin/task/task/rejectorderafterweek -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+cron:admin/task/task/rejectorderafterweek -BELONGS_TO_DOMAIN-> domain:refund	2026-10-28
+cron:admin/task/task/rejectorderafterweek -DOCUMENTED_BY-> doc:zoomtology/curated/processes/order-to-settlement.yaml	2026-10-28
+cron:admin/task/task/rejectorderafterweek -IMPLEMENTS_RULE-> rule:auto-reject	2026-10-28
+cron:zoomzoom-auth/add-transaction -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+cron:zoomzoom-auth/cleanup-commission -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+cron:zoomzoom-auth/lock-scheduled-payout -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+cron:zoomzoom-auth/lock-scheduled-payout -DOCUMENTED_BY-> doc:zoomtology/curated/processes/order-to-settlement.yaml	2026-10-28
+cron:zoomzoom-auth/lock-scheduled-payout -IMPLEMENTS_RULE-> rule:seller-payout-policy	2026-10-28
+cron:zoomzoom-auth/remove-duplicate-transactions -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+domain:settlement -DOCUMENTED_BY-> doc:zoomtology/curated/processes/order-to-settlement.yaml	2026-10-28
+module:zoomzoom-api/src/cart -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+module:zoomzoom-api/src/order -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+msg:email/reject-order -BELONGS_TO_DOMAIN-> domain:refund	2026-10-28
+msg:order/bemyguest-booking -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+msg:order/confirm-order -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+msg:order/confirm-order -DOCUMENTED_BY-> doc:zoomtology/curated/processes/order-to-settlement.yaml	2026-10-28
+msg:order/jejumobile-booking -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+msg:order/jejumobile-voucher -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+msg:order/jtr-booking -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+msg:order/reject-order -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+msg:order/reject-order -BELONGS_TO_DOMAIN-> domain:refund	2026-10-28
+msg:order/reject-order -DOCUMENTED_BY-> doc:zoomtology/curated/processes/order-to-settlement.yaml	2026-10-28
+msg:order/viator-booking -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+msg:order/viator-patching -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+msg:order/waug-booking -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+msg:order/zoomzoom-voucher -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+msg:order/zzimcar-booking -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+queue:order -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+route:external-api GET /payment/:id -BELONGS_TO_DOMAIN-> domain:payment	2026-10-28
+route:external-api POST /payment/:id -BELONGS_TO_DOMAIN-> domain:payment	2026-10-28
+route:external-api POST /payment/:id/capture -BELONGS_TO_DOMAIN-> domain:payment	2026-10-28
+route:external-api POST /payment/:id/refund -BELONGS_TO_DOMAIN-> domain:payment	2026-10-28
+route:external-api POST /payment/iamport/callback -BELONGS_TO_DOMAIN-> domain:payment	2026-10-28
+route:zoomzoom-admin route=multiseller/batchpayout -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+route:zoomzoom-admin route=multiseller/batchpayout/airwallexapitest -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+route:zoomzoom-admin route=multiseller/batchpayout/getbalance -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+route:zoomzoom-admin route=multiseller/batchpayout/getlist -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+route:zoomzoom-admin route=multiseller/batchpayout/index -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+route:zoomzoom-admin route=multiseller/batchpayout/markdone -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+route:zoomzoom-admin route=multiseller/batchpayout/stripe2airwallex -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+route:zoomzoom-admin route=multiseller/batchpayout/updatecountryairwallexbeneficiaries -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+route:zoomzoom-admin route=multiseller/batchpayout/updatemissingairwallexbeneficiaries -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+route:zoomzoom-admin route=multiseller/enquiries/transactions -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+route:zoomzoom-admin route=multiseller/seller-charge -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+route:zoomzoom-admin route=multiseller/seller-charge/create -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+route:zoomzoom-admin route=multiseller/seller-charge/gettabledata -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+route:zoomzoom-admin route=multiseller/seller-charge/index -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+route:zoomzoom-admin route=multiseller/seller-charge/jxcancel -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+route:zoomzoom-admin route=multiseller/seller-charge/jxsave -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+route:zoomzoom-admin route=multiseller/seller-charge/jxsellerautocomplete -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+route:zoomzoom-api DELETE /transaction/order/:id -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+route:zoomzoom-api GET /cart/:uuid -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+route:zoomzoom-api GET /order/:id -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+route:zoomzoom-api GET /order/:id/custom-field -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+route:zoomzoom-api GET /order/:id/refund -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+route:zoomzoom-api GET /order/:id/refund -BELONGS_TO_DOMAIN-> domain:refund	2026-10-28
+route:zoomzoom-api GET /transaction -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+route:zoomzoom-api GET /transaction/download -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+route:zoomzoom-api PATCH /order/:id/confirm -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+route:zoomzoom-api PATCH /order/:id/confirm -DOCUMENTED_BY-> doc:zoomtology/curated/processes/order-to-settlement.yaml	2026-10-28
+route:zoomzoom-api PATCH /order/:id/confirmed -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+route:zoomzoom-api PATCH /order/:id/custom-field -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+route:zoomzoom-api PATCH /order/:id/payment -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+route:zoomzoom-api PATCH /order/:id/payment -BELONGS_TO_DOMAIN-> domain:payment	2026-10-28
+route:zoomzoom-api PATCH /order/:id/payment -DOCUMENTED_BY-> doc:zoomtology/curated/processes/order-to-settlement.yaml	2026-10-28
+route:zoomzoom-api PATCH /order/:id/reject -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+route:zoomzoom-api PATCH /order/:id/reject -BELONGS_TO_DOMAIN-> domain:refund	2026-10-28
+route:zoomzoom-api PATCH /order/:id/rejected -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+route:zoomzoom-api PATCH /order/:id/rejected -BELONGS_TO_DOMAIN-> domain:refund	2026-10-28
+route:zoomzoom-api PATCH /order/:id/rejected -DOCUMENTED_BY-> doc:zoomtology/curated/processes/order-to-settlement.yaml	2026-10-28
+route:zoomzoom-api PATCH /order/:id/status -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+route:zoomzoom-api POST /cart -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+route:zoomzoom-api POST /order -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+route:zoomzoom-api POST /order -DOCUMENTED_BY-> doc:zoomtology/curated/processes/order-to-settlement.yaml	2026-10-28
+route:zoomzoom-api POST /order/:id/refund -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+route:zoomzoom-api POST /order/:id/refund -BELONGS_TO_DOMAIN-> domain:refund	2026-10-28
+route:zoomzoom-api POST /order/:id/refund -DOCUMENTED_BY-> doc:zoomtology/curated/processes/order-to-settlement.yaml	2026-10-28
+route:zoomzoom-api POST /transaction -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+route:zoomzoom-api POST /webhook/imp/payment -BELONGS_TO_DOMAIN-> domain:payment	2026-10-28
+route:zoomzoom-api PUT /cart/:uuid -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+route:zoomzoom-back GET ^cart -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+route:zoomzoom-back GET ^order/(\d+) -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+route:zoomzoom-back GET ^order/(\d+)/custom-field$ -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+route:zoomzoom-back GET ^order/(\d+)/refund$ -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+route:zoomzoom-back GET ^order/(\d+)/refund$ -BELONGS_TO_DOMAIN-> domain:refund	2026-10-28
+route:zoomzoom-back PATCH ^order/(\d+)/cancel$ -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+route:zoomzoom-back PATCH ^order/(\d+)/confirm$ -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+route:zoomzoom-back PATCH ^order/(\d+)/confirmed$ -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+route:zoomzoom-back PATCH ^order/(\d+)/custom-field$ -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+route:zoomzoom-back PATCH ^order/(\d+)/payment$ -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+route:zoomzoom-back PATCH ^order/(\d+)/reject$ -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+route:zoomzoom-back PATCH ^order/(\d+)/rejected$ -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+route:zoomzoom-back PATCH ^order/(\d+)/status -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+route:zoomzoom-back POST ^cart -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+route:zoomzoom-back POST ^order$ -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+route:zoomzoom-back POST ^order$ -DOCUMENTED_BY-> doc:zoomtology/curated/processes/order-to-settlement.yaml	2026-10-28
+route:zoomzoom-back POST ^order/(\d+)/refund$ -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+route:zoomzoom-back POST ^order/(\d+)/refund$ -BELONGS_TO_DOMAIN-> domain:refund	2026-10-28
+route:zoomzoom-back PUT ^cart/([^?]+)(\?.*)?$ -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+route:zoomzoom-partners route=seller/account-payoutschedule -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+route:zoomzoom-partners route=seller/account-payoutschedule/index -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+route:zoomzoom-partners route=seller/account-payoutschedule/payoutscheduletable -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+route:zoomzoom-partners route=seller/account-payoutschedule/requestpayout -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+route:zoomzoom-partners route=seller/account-transaction -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+route:zoomzoom-partners route=seller/account-transaction/getpaymentdata -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+route:zoomzoom-partners route=seller/account-transaction/gettransactiondata -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+route:zoomzoom-partners route=seller/account-transaction/index -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+route:zoomzoom-partners route=seller/account-transaction/transactionbatchtable -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+route:zoomzoom-partners route=seller/account-transaction/transactionfile -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+route:zoomzoom-partners route=seller/account-transaction/transactiontable -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+rule:auto-reject -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+rule:auto-reject -BELONGS_TO_DOMAIN-> domain:refund	2026-10-28
+rule:auto-reject -DOCUMENTED_BY-> doc:zoomtology/curated/processes/order-to-settlement.yaml	2026-10-28
+rule:cart-status-flow -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+rule:cart-status-flow -DOCUMENTED_BY-> doc:zoomtology/curated/processes/order-to-settlement.yaml	2026-10-28
+rule:coupon-policy -BELONGS_TO_DOMAIN-> domain:payment	2026-10-28
+rule:discount-revenue -BELONGS_TO_DOMAIN-> domain:payment	2026-10-28
+rule:discount-revenue -DOCUMENTED_BY-> doc:zoomtology/curated/processes/order-to-settlement.yaml	2026-10-28
+rule:partial-refund -BELONGS_TO_DOMAIN-> domain:refund	2026-10-28
+rule:partial-refund -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+rule:partial-refund -DOCUMENTED_BY-> doc:zoomtology/curated/processes/order-to-settlement.yaml	2026-10-28
+rule:reservation-status-flow -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+rule:reservation-status-flow -DOCUMENTED_BY-> doc:zoomtology/curated/processes/order-to-settlement.yaml	2026-10-28
+rule:seller-payout-policy -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+rule:seller-payout-policy -DOCUMENTED_BY-> doc:zoomtology/curated/processes/order-to-settlement.yaml	2026-10-28
+svc:message-consumer/order -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+table:accounting_transaction -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+table:transaction -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+table:zoom_affiliate_transaction -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+table:zoom_batch_payout_schedule -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+table:zoom_batch_payout_schedule -DOCUMENTED_BY-> doc:zoomtology/curated/processes/order-to-settlement.yaml	2026-10-28
+table:zoom_batch_payout_schedule_item -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+table:zoom_cart -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+table:zoom_cart -DOCUMENTED_BY-> doc:zoomtology/curated/processes/order-to-settlement.yaml	2026-10-28
+table:zoom_coupon_customer -BELONGS_TO_DOMAIN-> domain:payment	2026-10-28
+table:zoom_customer_mileages -BELONGS_TO_DOMAIN-> domain:payment	2026-10-28
+table:zoom_customer_mileages -DOCUMENTED_BY-> doc:zoomtology/curated/processes/order-to-settlement.yaml	2026-10-28
+table:zoom_ms_commission_rate -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+table:zoom_ms_conversation -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+table:zoom_ms_order_product_data -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+table:zoom_ms_requestpayment -BELONGS_TO_DOMAIN-> domain:payment	2026-10-28
+table:zoom_ms_requestpayment -DOCUMENTED_BY-> doc:zoomtology/curated/processes/order-to-settlement.yaml	2026-10-28
+table:zoom_ms_requestpayment_quantity -BELONGS_TO_DOMAIN-> domain:payment	2026-10-28
+table:zoom_ms_seller -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+table:zoom_ms_seller_data -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+table:zoom_ms_suborder -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+table:zoom_ms_suborder_history -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+table:zoom_order -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+table:zoom_order -DOCUMENTED_BY-> doc:zoomtology/curated/processes/order-to-settlement.yaml	2026-10-28
+table:zoom_order_discount -BELONGS_TO_DOMAIN-> domain:payment	2026-10-28
+table:zoom_order_discount -DOCUMENTED_BY-> doc:zoomtology/curated/processes/order-to-settlement.yaml	2026-10-28
+table:zoom_order_history -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+table:zoom_order_product -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+table:zoom_order_status -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+table:zoom_order_total -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+table:zoom_provider_order -BELONGS_TO_DOMAIN-> domain:order	2026-10-28
+table:zoom_return -BELONGS_TO_DOMAIN-> domain:refund	2026-10-28
+table:zoom_seller_charge -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+table:zoom_seller_charge -DOCUMENTED_BY-> doc:zoomtology/curated/processes/order-to-settlement.yaml	2026-10-28
+table:zoom_seller_payout_type -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+table:zoom_transaction_scheduled -BELONGS_TO_DOMAIN-> domain:refund	2026-10-28
+table:zoom_transaction_scheduled -DOCUMENTED_BY-> doc:zoomtology/curated/processes/order-to-settlement.yaml	2026-10-28
+table:zoom_transactions -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
+table:zoom_transactions -DOCUMENTED_BY-> doc:zoomtology/curated/processes/order-to-settlement.yaml	2026-10-28

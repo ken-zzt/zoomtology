@@ -28639,6 +28639,7 @@ cron:zoomzoom-auth/updateViatorProduct
 db:numbers
 db:stats
 db:zzt
+doc:zoomtology/curated/processes/order-to-settlement.yaml
 doc:zoomzoom-services/docs/00-overview/glossary.md
 doc:zoomzoom-services/docs/00-overview/index.md
 doc:zoomzoom-services/docs/00-overview/legacy-vs-new.md
@@ -28800,6 +28801,10 @@ doc:zoomzoom-services/docs/95-incidents/2026-08-10-oom.md
 doc:zoomzoom-services/docs/95-incidents/2026-08-30-mem-alarm.md
 doc:zoomzoom-services/docs/95-incidents/index.md
 doc:zoomzoom-services/docs/index.md
+domain:order
+domain:payment
+domain:refund
+domain:settlement
 enum:cms_content_item.layout_width_type=1
 enum:cms_content_item.layout_width_type=2
 enum:cms_content_item.layout_width_type=3
@@ -28963,6 +28968,7 @@ enum:zoom_notification_backup.type=2
 enum:zoom_notification_jobs.status=0
 enum:zoom_notification_jobs.status=1
 enum:zoom_notification_jobs.status=2
+enum:zoom_order.order_status_id=0
 enum:zoom_order.order_status_id=1
 enum:zoom_order.order_status_id=10
 enum:zoom_order.order_status_id=2
@@ -36105,6 +36111,7 @@ msg:order/zzimcar-booking
 queue:email
 queue:entity
 queue:event
+queue:lambda
 queue:notif
 queue:order
 repo:data-api
