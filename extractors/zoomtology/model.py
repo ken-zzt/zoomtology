@@ -105,8 +105,9 @@ def route_uid(repo: str, method: str, path: str) -> str:
 
 
 def opencart_route_uid(repo: str, route: str) -> str:
-    """OpenCart 라우트 `폴더/파일/메서드` (index 는 `폴더/파일` 로도 등록한다)."""
-    return f"route:{repo} route={route}"
+    """OpenCart 라우트 `폴더/파일/메서드` (index 는 `폴더/파일` 로도 등록한다).
+    PHP 메서드 이름은 대소문자를 가리지 않아 crontab·문서·코드가 제각각 쓴다 → uid 는 소문자로 정규화한다 (uid.md 규칙 7)."""
+    return f"route:{repo} route={route.strip('/').lower()}"
 
 
 def queue_uid(role: str) -> str:

@@ -43,6 +43,8 @@ class Collector:
     warnings: list[Warning_] = field(default_factory=list)
     # 노드가 없을 때 만들지 않고 버린 부분 레코드(uid, source)
     dropped_partials: list[tuple[str, str]] = field(default_factory=list)
+    # 추출기가 report.md 에 붙이는 절. key 는 추출기 이름, 값은 markdown 줄
+    sections: dict[str, list[str]] = field(default_factory=dict)
 
     def warn(self, extractor: str, message: str) -> None:
         self.warnings.append(Warning_(extractor, message))

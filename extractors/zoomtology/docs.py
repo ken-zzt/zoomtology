@@ -110,9 +110,10 @@ def _source_target(col: Collector, src: str, doc_path: Path) -> str | None:
     if repo == HUB_REPO_NAME:
         return None
     ext = Path(rel).suffix.lower()
-    if ext and ext in LANG_BY_EXT:
+    name = Path(rel).name
+    if (ext and not rel.endswith("/")) or name in ("Dockerfile", "Makefile"):
         uid = model.file_uid(repo, rel)
-        col.node(node_rec(uid, "File", Path(rel).name, SOURCE, props={"repo": repo, "path": rel, "lang": LANG_BY_EXT[ext]},
+        col.node(node_rec(uid, "File", name, SOURCE, props={"repo": repo, "path": rel, "lang": LANG_BY_EXT.get(ext, ext[1:] or name.lower())},
                           source_ref=f"{doc_path.relative_to(HUB.parent).as_posix()} sources"))
         return uid
     uid = f"module:{repo}/{rel.rstrip('/')}"

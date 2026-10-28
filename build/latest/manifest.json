@@ -1,36 +1,47 @@
 {
-  "builtAt": "2026-10-28T00:27:30+00:00",
+  "builtAt": "2026-10-28T05:55:45+00:00",
   "counts": {
     "edges": {
-      "CONTAINS": 519,
+      "CALLS": 14503,
+      "CONTAINS": 14803,
+      "DEFINES": 81,
       "DOCUMENTED_BY": 580,
+      "HANDLES": 2855,
       "HAS_COLUMN": 4049,
-      "HAS_VALUE": 254,
+      "HAS_VALUE": 272,
       "IMPLEMENTS_RULE": 97,
-      "REFERENCES": 34,
-      "TRIGGERS": 47
+      "JOINS": 1172,
+      "PUBLISHES": 10,
+      "READS": 6863,
+      "REFERENCES": 432,
+      "TRIGGERS": 47,
+      "WRITES": 2762
     },
     "nodes": {
       "BusinessRule": 8,
+      "CodeUnit": 12924,
       "Column": 4049,
       "CronJob": 55,
-      "Database": 1,
+      "Database": 3,
       "Doc": 161,
-      "EnumValue": 254,
-      "File": 248,
-      "Module": 75,
+      "EnumValue": 272,
+      "File": 1560,
+      "Module": 60,
+      "Queue": 2,
+      "QueueMessage": 5,
       "Repo": 17,
-      "Route": 47,
-      "Table": 519
+      "Route": 2758,
+      "Table": 527
     }
   },
-  "dirty": false,
+  "dirty": true,
   "extractors": {
     "classification": "1",
     "docs": "1",
+    "php": "1",
     "schema": "1"
   },
-  "gitSha": "ee17d6b14b612fe7338e20d154e9b5859a5a727b",
+  "gitSha": "e3525493204e28ec2128da94d7e914fcdeb0f3f3",
   "inputs": {
     "classification": {
       "classified": "492",
@@ -45,6 +56,11 @@
       "policies": "8",
       "repos": "17",
       "statusCodeValues": "124"
+    },
+    "php": {
+      "placeholders": "46",
+      "zoomzoom-admin": "files=879 classes=906 units=8417 queries=5559",
+      "zoomzoom-partners": "files=463 classes=487 units=4461 queries=2875"
     },
     "schema": {
       "primary": "local_zzt-2026-10-28.sql (502 tables)",
@@ -77,12 +93,12 @@
   "sources": {
     "AgentPrism": {
       "dirty": true,
-      "sha": "4954a63bc380e77f13076f3a6d9ee068676a63b0"
+      "sha": "1812a1b47a0968fbef538ef944e39f41ce80946b"
     },
     "zoomzoom-services": {
       "dirty": true,
-      "sha": "7ec4de75322a70fa83e4dd03cf56d3952cd7d797"
+      "sha": "a40043b9bf7aeef27821e04e72a2cd72a18d18c5"
     }
   },
-  "version": "20261028T0027Z-ee17d6b"
+  "version": "20261028T0555Z-e352549-dirty"
 }

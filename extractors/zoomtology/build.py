@@ -9,11 +9,11 @@ import tarfile
 from collections import Counter, defaultdict
 from pathlib import Path
 
-from . import classification, docs, schema_ddl, sources
+from . import classification, docs, php, schema_ddl, sources
 from .collect import Collector, Record
 from .schema import Schema
 
-EXTRACTORS = {"schema": "1", "classification": "1", "docs": "1"}
+EXTRACTORS = {"schema": "1", "classification": "1", "docs": "1", "php": "1"}
 
 
 class BuildError(RuntimeError):
@@ -31,6 +31,8 @@ def run(out_dir: Path | None = None, update_state: bool = True, strict: bool = F
     meta["schema"] = schema_ddl.extract(col, sources.latest_local_dump(), sources.latest_hub_dump())
     meta["classification"] = classification.extract(col, sources.AGENT_PRISM / "classification" / "tables.yaml")
     meta["docs"] = docs.extract(col)
+    meta["php"] = php.extract(col, schema=schema)
+    meta["php"]["placeholders"] = str(php.ensure_placeholders(col))
 
     # 2. 노드가 없는 관계는 버리고 report 에 적는다 (문서 부패·아직 안 만든 추출기)
     dangling: dict[str, list[str]] = defaultdict(list)
@@ -168,6 +170,8 @@ def _report(manifest: dict, col: Collector, dangling: dict[str, list[str]], vani
         lines += ["", "### 사라진 uid (verified 는 tombstone 대상 — 4단계에서 처리)", ""] + [f"- `{u}`" for u in vanished[:100]]
     status_counts = Counter(n.get("status") for n in col.nodes.values())
     lines += ["", f"- status: {dict(status_counts)}"]
+    for name, body in col.sections.items():
+        lines += ["", f"## 추출기 report — {name}", ""] + body
     lines += ["", "## 추출기 경고", ""]
     lines += [f"- [{w.extractor}] {w.message}" for w in col.warnings] or ["- 없음"]
     lines += ["", f"## 노드가 없어 버린 관계 ({sum(len(v) for v in dangling.values())}건, 대상 uid {len(dangling)}개)", "",

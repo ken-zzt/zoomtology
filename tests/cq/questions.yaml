@@ -36,3 +36,44 @@
   tool: kg_neighbors
   args: { uid: "cron:admin/cron/tasks/statuscheck", types: [TRIGGERS] }
   must: ["route:zoomzoom-admin route=cron/tasks/statuscheck"]
+# --- 2단계 (ZDV-346): 레거시 PHP ---
+- id: 1
+  stage: 2
+  tool: kg_code_for_table
+  args: { table: "zoom_order", op: write, repo: zoomzoom-admin, limit: 200 }
+  must: ["code:zoomzoom-admin/system/library/zoomtu/order_info.php#ZZTOrderInfo::updateStatus"]
+- id: 3
+  stage: 2
+  tool: kg_neighbors
+  args: { uid: "col:zoom_order.order_status_id", direction: out, types: [HAS_VALUE] }
+  must: ["enum:zoom_order.order_status_id=1", "book_requested"]      # ZZTOrderInfo::$order_status_string 에서 온 의미
+- id: 8
+  stage: 2
+  tool: kg_code_for_table
+  args: { table: "zoom_order", op: join }
+  must: ["table:zoom_ms_requestpayment", "table:zoom_order_product", "zoom_order.order_id=zoom_order_product.order_id"]
+- id: 12
+  stage: 2
+  tool: kg_tables_for_code
+  args: { uid: "zoomzoom-admin/admin/controller/cron/tasks.php#ControllerCronTasks::payoutEstimate", depth: 2 }
+  must: ["table:zoom_ms_requestpayment", "table:zoom_order", "callee"]   # 직접 쿼리는 없고 ZZTPayout 을 거쳐 닿는다
+- id: 16
+  stage: 2
+  tool: kg_neighbors
+  args: { uid: "route:zoomzoom-admin route=cron/tasks/statuscheck", direction: in, types: [HANDLES, TRIGGERS] }
+  must: ["code:zoomzoom-admin/admin/controller/cron/tasks.php#ControllerCronTasks::statusCheck", "cron:admin/cron/tasks/statuscheck"]
+- id: 17
+  stage: 2
+  tool: kg_code_for_table
+  args: { table: "table:stats/zoom_stats_data" }
+  must: ["stats_db", "ZZTStats::addStatsData"]
+- id: 20
+  stage: 2
+  tool: kg_code_for_table
+  args: { table: "zoom_ms_requestpayment", op: write }
+  must: ["RequestCheckout::createRequest", "insert"]
+- id: 23
+  stage: 2
+  tool: kg_tables_for_code
+  args: { uid: "code:zoomzoom-admin/system/library/zoomtu/order_info.php#ZZTOrderInfo::updateStatus", depth: 0 }
+  must: ["table:zoom_order", "update"]

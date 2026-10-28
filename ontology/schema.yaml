@@ -204,7 +204,7 @@ content_guard:
   max_prop_length: 2000
   deny_patterns:
     - '(?i)\b(select|insert|update|delete|replace)\b[\s\S]{0,200}\b(from|into|set|where)\b'   # SQL 문장 형태
-    - '(?i)(password|passwd|secret|api[_-]?key|token)\s*[:=]\s*\S{6,}'                        # 자격증명 대입
+    - '(?i)(password|passwd|secret|api[_-]?key|token)\s*[:=]\s*(?![:=])\S{6,}'               # 자격증명 대입 (`Password::index` 같은 심볼은 제외)
     - 'eyJ[A-Za-z0-9_-]{20,}\.[A-Za-z0-9_-]{10,}'                                                # JWT
     - 'AKIA[0-9A-Z]{16}'                                                                         # AWS access key
   deny_paths:            # 추출기가 아예 읽지 않는 경로 (glob, 저장소 루트 기준)

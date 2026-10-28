@@ -37,10 +37,11 @@ related_to:
 | 14 | 부분환불 정책 문서는 어떤 코드를 근거로 하나? | `kg_neighbors {uid:"rule:partial-refund", direction:"in", types:["IMPLEMENTS_RULE"]}` | 정책 문서 `sources:` 의 파일/유닛 uid | 1 |
 | 15 | 프런트의 주문 취소 요청은 어떤 경로로 API 까지 가나? | `kg_path {from:<back accessrule route>, to:"table:zoom_order", maxDepth:6}` | `route:zoomzoom-api PATCH /order/…` 를 지나 리포지토리 유닛까지 | 3 |
 | 16 | 레거시 유저 웹(zoomzoom-admin/catalog)의 라우트는 폐기됐나? | `kg_search {q:"route=product/product", label:"Route"}` | admin/catalog 라우트 `status: retired`, partners 는 `active` | 4 (curated) |
-| 17 | `stats_db` 로 읽는 테이블은? | `kg_neighbors {uid:"db:stats", types:["CONTAINS"], limit:200}` | `stats_db->query` 로 참조되는 테이블 | 2 |
+| 17 | `stats_db` 로 읽는 테이블은? | `kg_neighbors {uid:"db:stats", types:["CONTAINS"], limit:200}` → `kg_code_for_table {table:"table:stats/zoom_stats_data"}` | `table:stats/*` 테이블과 `handle: stats_db` 인 READS/WRITES (`ZZTStats::addStatsData`) | 2 |
 | 18 | 정산 관련 Doc 중 `last_verified` 가 오래된 것은? | `kg_search {q:"정산", label:"Doc"}` → `props.lastVerified` | 존재 확인(정렬은 클라이언트) | 1 |
 | 19 | 이 번들은 언제 어떤 커밋으로 만들어졌나? | `kg_bundle_info {}` | `build/latest/manifest.json` 의 version/sha 와 일치 | 1 |
 | 20 | `zoom_ms_requestpayment` 에 INSERT 하는 코드와 그 라우트 | `kg_code_for_table {table:"zoom_ms_requestpayment", op:"write"}` → `kg_impact` | PHP 체크아웃 경로 1개 이상 + api 라우트 1개 이상 | 2 |
+| 23 | (회귀) `ZZTOrderInfo::updateStatus` 가 직접 쓰는 테이블 | `kg_tables_for_code {uid:"code:…#ZZTOrderInfo::updateStatus", depth:0}` | `table:zoom_order` · ops `update` · via direct | 2 |
 
 ## 측정
 

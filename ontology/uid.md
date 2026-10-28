@@ -15,7 +15,7 @@
 | Module | `module:` | `module:<repo>/<path>#<Symbol>` 또는 `module:<repo>/<dir>` | `module:zoomzoom-api/src/order/order.module.ts#OrderModule`, `module:zoomzoom-admin/admin/controller` |
 | File | `file:` | `file:<repo>/<path>` | `file:zoomzoom-admin/system/library/zoomtu/order_info.php` |
 | CodeUnit | `code:` | `code:<repo>/<path>#<Class>::<method>` / `#<function>` / `#<Class>` | `code:zoomzoom-admin/system/library/zoomtu/order_info.php#ZZTOrderInfo::getOrder` |
-| Route | `route:` | `route:<repo> <METHOD> <path>` (HTTP), `route:<repo> route=<a/b/c>` (OpenCart), `route:<repo> <METHOD> <regex>` (back AccessRule) | `route:zoomzoom-api PATCH /order/:id/rejected`, `route:zoomzoom-admin route=cron/tasks/statusCheck` |
+| Route | `route:` | `route:<repo> <METHOD> <path>` (HTTP), `route:<repo> route=<a/b/c>` (OpenCart, 소문자), `route:<repo> <METHOD> <regex>` (back AccessRule) | `route:zoomzoom-api PATCH /order/:id/rejected`, `route:zoomzoom-admin route=cron/tasks/statuscheck` |
 | Queue | `queue:` | `queue:<role>` | `queue:order` (email · entity · order · notif · event) |
 | QueueMessage | `msg:` | `msg:<role>/<key>` — key 는 enum 의 문자열 값 | `msg:order/confirm-order` |
 | CronJob | `cron:` | `cron:<host>/<route-or-command>` | `cron:admin/cron/tasks/statusCheck`, `cron:mq/task/product/discount-price`, `cron:zoomzoom-auth/zzt-cron:confim-mileage` |
@@ -40,5 +40,5 @@
 4. **이름이 바뀌면** 새 uid 를 만들고 `SUPERSEDES` 관계로 잇는다. uid 를 고쳐 쓰지 않는다.
 5. **한글은 uid 에 넣지 않는다.** `nameKo`, `summary` 에 넣는다.
 6. 테이블 접두사 `zoom_` 은 떼지 않는다(`provider_product` 처럼 접두사 없는 테이블이 있어서 떼면 충돌).
-7. OpenCart 라우트는 `route=` 뒤에 `폴더/파일/메서드`. `index` 메서드는 `폴더/파일` 로도 등록한다.
+7. OpenCart 라우트는 `route=` 뒤에 `폴더/파일/메서드` 를 **소문자**로 쓴다(PHP 메서드 이름은 대소문자를 가리지 않아 crontab·문서·코드 표기가 제각각이다. 코드 표기는 `props.path` 에 남긴다). `index` 메서드는 `폴더/파일` 로도 등록한다.
 8. 큐 메시지 key 는 `SQS<Role>ServiceKey` enum 의 **값**(`'confirm-order'`)이지 멤버 이름(`ConfirmOrder`)이 아니다. 멤버 이름은 `props.enumName` 에 둔다.

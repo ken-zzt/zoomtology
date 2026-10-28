@@ -26,6 +26,7 @@ cd extractors
 uv sync --extra dev                 # Python 3.12+, uv
 uv run pytest -q                    # 스키마 검증기 테스트
 uv run zoomtology validate ../tests/fixtures/nodes.jsonl ../tests/fixtures/edges.jsonl
+uv run zoomtology build               # 추출 → 병합 → 검증 → build/dist/*.tar.gz + build/latest/ + state/
 ```
 
 추출·빌드·배포 명령은 1~4단계(ZDV-345~348)에서 붙는다. 빌드는 **Ken 의 메인 Mac** 에서만 돌린다(형제 저장소 `../` 를 읽는다). 노트북(mbp2017)엔 번들만 보낸다 — [ADR 0002](docs/decisions/0002-git-source-laptop-gets-bundles.md).

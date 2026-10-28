@@ -50,14 +50,14 @@ curated/*.yaml ───┘        │ ontology/schema.yaml 로 검증    ▼
 |---|---|---|
 | 스키마 | `mysqldump --no-data local_zzt`(`build/inputs/`, gitignore) + 허브 덤프 파싱. 허브에만 있는 테이블·컬럼은 `missing-from-source`. 코멘트의 `0: 대기, 1: 완료`·`a, b, c` 꼴은 EnumValue(origin ddl-comment) | **완료** (`schema_ddl.py`) |
 | 문서 허브 | 모든 `docs/**/*.md`→Doc, 프론트매터 `sources`→DOCUMENTED_BY(File/Module placeholder), status-codes→EnumValue(origin status-codes, doc 우선), domains→Column.meaning, policies→BusinessRule+IMPLEMENTS_RULE(파일 수준), scheduled-jobs→CronJob+TRIGGERS(admin/mq/auth 3개 표), glossary→Table.aliases, table-ownership→usageByRepo, repos.tsv→Repo. AgentPrism tables.yaml→piiRule(`classification.py`) | **완료** (`docs.py`) |
-| 레거시 PHP | 정규식 + `$sql` 데이터플로, `load->zoomtu/model` 호출 | 2단계 |
+| 레거시 PHP | `phplex.py`(문자열·주석·heredoc 인식 토크나이저 + 중괄호 매칭)로 클래스/메서드 범위. 메서드 안 `$sql =`/`.=` 대입을 이어붙여 `->query(`(`db`·`read_db`·`numbers_db`·`stats_db`·`task_db`) 인자를 복원 → `sqlshape.py` 가 FROM/JOIN/INTO/UPDATE 자리의 테이블 토큰·연산·`ON a.x=b.y` 만 남기고 **SQL 텍스트는 버린다**. 스키마에 있는 테이블만 READS/WRITES(`ops`·`lines`·`handle`), 같은 문장의 쌍은 JOINS(`count`·`onColumns`), ON 절은 REFERENCES(logical, FK→PK 방향). `$this->zzt_x->m(`/`model_a_b->m(`/`$this->m(`/`Class::m(`/`load->controller('a/b')` → CALLS(kind). 컨트롤러 public 메서드 → Route(opencart, 소문자). `static $order_status_string` → EnumValue(code-static-array). `sendMessage(['key'=>…], SEND_X_QUEUE)` → PUBLISHES. 다른 DB 핸들은 `db:numbers`·`db:stats`·`db:stats-task` 와 `table:<db>/<name>` 로. 읽는 영역: `admin|catalog/{controller,model}`, `system/library/zoomtu`, `system/library/*.php`. report: 테이블 자리를 못 찾은 쿼리·동적 테이블명·스키마에 없는 이름·해석 못 한 load·placeholder | **완료** (`php.py`, ZDV-346) |
 | NestJS·consumer·back·front | ts-morph | 3단계 |
 | Laravel | `$table`·Kernel 스케줄 | 3단계 |
 | curated | YAML 오버레이 | 4단계 |
 
 ### 빌드 (`build.py`, `zoomtology build`)
 
-1. 추출기 순서: schema → classification → docs (뒤 단계에서 php → ts → laravel → curated).
+1. 추출기 순서: schema → classification → docs → php (뒤 단계에서 ts → laravel → curated). php 뒤에 `ensure_placeholders` 가 CALLS 만 가리키는 메서드를 `missing-from-source` 노드로 만든다.
 2. `Collector` 가 uid 로 병합. 값 우선순위 manual > doc > extractor. 노드의 `source`/`sourceRef` 는 처음 만든 쪽(보통 추출기)을 유지하고, 밀린 값은 `props.alt[<source>]`, 문서 근거는 `props.docRefs[]`. 부분 레코드(`partial=True`)는 노드가 없으면 버리고 report 에 적는다.
 3. 노드가 없는 관계는 버리고 report(`노드가 없어 버린 관계`)에 적는다 — 문서 부패 또는 아직 없는 추출기.
 4. `state/first-seen.tsv` 로 `firstSeenAt`, `state/uids.txt` 와 비교해 사라진 uid 를 report.
