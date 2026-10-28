@@ -82,6 +82,8 @@ scripts/rebuild-and-deploy.sh
 PRISM_URL=http://localhost:4300/mcp PRISM_TOKEN=prt_… uv run --project extractors python tests/cq/run_cq.py --stage 4
 ```
 
+번들 보관(Ken 결정 2026-10-28): **태그만** — `bundle/<version>` 태그 + 커밋된 `build/latest`·`state` 로 재현한다. `build/dist/*.tar.gz` 는 로컬(gitignore), 노트북은 `var/kg/` 최근 5개. GitHub release·JSONL 커밋은 하지 않는다. 재빌드 주기: 스키마 덤프를 갱신했을 때·큐레이션을 바꿨을 때, 그 밖엔 2주마다.
+
 `build/latest/report.md` 의 "이전 빌드 대비" 표로 무엇이 늘고 줄었는지 본다. `manifest.json` 의 `contentSha256` 이 같으면 입력이 안 바뀐 것이다(날짜 거버넌스는 제외).
 
 ## 규칙
