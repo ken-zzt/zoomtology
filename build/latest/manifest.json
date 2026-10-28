@@ -1,5 +1,5 @@
 {
-  "builtAt": "2026-10-28T09:04:11+00:00",
+  "builtAt": "2026-10-28T09:04:49+00:00",
   "contentSha256": "979ee68fea0ad70f6ba117148616669836163584623c81e3c0bb81bb8275d2b8",
   "counts": {
     "edges": {
@@ -42,7 +42,7 @@
       "Table": 527
     }
   },
-  "dirty": true,
+  "dirty": false,
   "drift": {
     "newNodes": 40371,
     "tombstones": 0,
@@ -57,7 +57,7 @@
     "schema": "1",
     "ts": "1"
   },
-  "gitSha": "1b7bb7a63ba702217f43fb2cda0e91758bcec396",
+  "gitSha": "5b39e896cf6f8f3601b47bec46be68c62ce76c4b",
   "inputs": {
     "classification": {
       "classified": "492",
@@ -103,15 +103,15 @@
       "tables": "519"
     },
     "ts": {
-      "data-api": "files=43 nodes=131 edges=170 ms=238",
-      "external-api": "files=452 nodes=1665 edges=2236 ms=303",
-      "message-consumer": "files=103 nodes=461 edges=458 ms=887",
-      "zoomzoom-api": "files=3198 nodes=10320 edges=15887 ms=3358",
-      "zoomzoom-back": "files=27 nodes=389 edges=394 ms=749",
-      "zoomzoom-front": "files=856 nodes=2306 edges=2307 ms=3097"
+      "data-api": "files=43 nodes=131 edges=170 ms=223",
+      "external-api": "files=452 nodes=1665 edges=2236 ms=254",
+      "message-consumer": "files=103 nodes=461 edges=458 ms=769",
+      "zoomzoom-api": "files=3198 nodes=10320 edges=15887 ms=2828",
+      "zoomzoom-back": "files=27 nodes=389 edges=394 ms=688",
+      "zoomzoom-front": "files=856 nodes=2306 edges=2307 ms=2631"
     }
   },
-  "previousVersion": "20261028T0903Z-c6f0a0c-dirty",
+  "previousVersion": "20261028T0904Z-1b7bb7a-dirty",
   "schemaVersion": 1,
   "smoke": [
     {
@@ -145,5 +145,5 @@
     }
   },
   "unchanged": true,
-  "version": "20261028T0904Z-1b7bb7a-dirty"
+  "version": "20261028T0904Z-5b39e89"
 }
