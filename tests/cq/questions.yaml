@@ -1,0 +1,38 @@
+# 역량 질문 회귀 — docs/competency-questions.md 의 번호와 같다. `must` 는 결과 JSON 어딘가에 반드시 있어야 하는 문자열.
+# stage: 이 질문이 통과해야 하는 단계. 러너는 --stage N 이하만 돌린다.
+- id: 2
+  stage: 1
+  tool: kg_node
+  args: { uid: "col:zoom_ms_requestpayment.status_id" }
+  must: ["enum:zoom_ms_requestpayment.status_id=7", "정산대기"]
+  min_enum_values: 20
+- id: 10
+  stage: 1
+  tool: kg_node
+  args: { uid: "col:zoom_seller_charge.status" }
+  must: ["pending", "recorded", "canceled"]
+- id: 14
+  stage: 1
+  tool: kg_neighbors
+  args: { uid: "rule:partial-refund", direction: in, types: [IMPLEMENTS_RULE] }
+  must: ["file:zoomzoom-admin/system/library/zoomtu/transactions.php", "file:zoomzoom-admin/system/library/zoomtu/payout.php"]
+- id: 18
+  stage: 1
+  tool: kg_search
+  args: { q: "정산", label: Doc, limit: 20 }
+  must: ["seller-settlement.md"]
+- id: 19
+  stage: 1
+  tool: kg_bundle_info
+  args: {}
+  must_match_manifest: version
+- id: 21
+  stage: 1
+  tool: kg_search
+  args: { q: "zoom_order", limit: 5 }
+  must_first: "table:zoom_order"
+- id: 22
+  stage: 1
+  tool: kg_neighbors
+  args: { uid: "cron:admin/cron/tasks/statuscheck", types: [TRIGGERS] }
+  must: ["route:zoomzoom-admin route=cron/tasks/statuscheck"]

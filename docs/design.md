@@ -48,12 +48,23 @@ curated/*.yaml ───┘        │ ontology/schema.yaml 로 검증    ▼
 
 | 출처 | 방법 | 상태 |
 |---|---|---|
-| 스키마 | `mysqldump --no-data local_zzt` + 허브 덤프 파싱 | 1단계 |
-| 문서 허브 | 프론트매터·status-codes·domains·policies·scheduled-jobs·glossary | 1단계 |
+| 스키마 | `mysqldump --no-data local_zzt`(`build/inputs/`, gitignore) + 허브 덤프 파싱. 허브에만 있는 테이블·컬럼은 `missing-from-source`. 코멘트의 `0: 대기, 1: 완료`·`a, b, c` 꼴은 EnumValue(origin ddl-comment) | **완료** (`schema_ddl.py`) |
+| 문서 허브 | 모든 `docs/**/*.md`→Doc, 프론트매터 `sources`→DOCUMENTED_BY(File/Module placeholder), status-codes→EnumValue(origin status-codes, doc 우선), domains→Column.meaning, policies→BusinessRule+IMPLEMENTS_RULE(파일 수준), scheduled-jobs→CronJob+TRIGGERS(admin/mq/auth 3개 표), glossary→Table.aliases, table-ownership→usageByRepo, repos.tsv→Repo. AgentPrism tables.yaml→piiRule(`classification.py`) | **완료** (`docs.py`) |
 | 레거시 PHP | 정규식 + `$sql` 데이터플로, `load->zoomtu/model` 호출 | 2단계 |
 | NestJS·consumer·back·front | ts-morph | 3단계 |
 | Laravel | `$table`·Kernel 스케줄 | 3단계 |
 | curated | YAML 오버레이 | 4단계 |
+
+### 빌드 (`build.py`, `zoomtology build`)
+
+1. 추출기 순서: schema → classification → docs (뒤 단계에서 php → ts → laravel → curated).
+2. `Collector` 가 uid 로 병합. 값 우선순위 manual > doc > extractor. 노드의 `source`/`sourceRef` 는 처음 만든 쪽(보통 추출기)을 유지하고, 밀린 값은 `props.alt[<source>]`, 문서 근거는 `props.docRefs[]`. 부분 레코드(`partial=True`)는 노드가 없으면 버리고 report 에 적는다.
+3. 노드가 없는 관계는 버리고 report(`노드가 없어 버린 관계`)에 적는다 — 문서 부패 또는 아직 없는 추출기.
+4. `state/first-seen.tsv` 로 `firstSeenAt`, `state/uids.txt` 와 비교해 사라진 uid 를 report.
+5. `schema.yaml` 로 전부 검증(실패하면 번들을 쓰지 않는다).
+6. `build/dist/zoomtology-<UTC시각>-<sha7>[-dirty].tar.gz` (manifest.json·nodes.jsonl·edges.jsonl·report.md, 정렬·결정적) + `build/latest/` + state 갱신.
+
+첫 번들(2026-10-28, `ee17d6b`): 노드 5,434 · 관계 5,577 · 0.75초.
 
 ## 6. 보안 경계
 
