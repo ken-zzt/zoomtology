@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import datetime as dt
+import hashlib
 import io
 import json
 import tarfile
@@ -67,6 +68,20 @@ def run(out_dir: Path | None = None, update_state: bool = True, strict: bool = F
         if rec.get("confidence") == "verified" and not rec.get("lastVerifiedAt"):
             rec["lastVerifiedAt"] = today
     vanished = sorted(u for u in prev_uids if u not in col.nodes)
+    # 드리프트: 지난 빌드에서 verified 였던 노드가 사라지면 tombstone(missing-from-source)으로 남긴다. auto 는 report 만.
+    prev_verified = _read_verified()
+    tombstones: list[str] = []
+    for uid in vanished:
+        if uid in prev_verified and uid not in col.nodes:
+            v = prev_verified[uid]
+            col.nodes[uid] = {
+                "uid": uid, "label": v["label"], "name": v["name"], "summary": v.get("summary") or None,
+                "props": {**_tombstone_props(v["label"]), "tombstone": True, "tombstonedAt": today, "note": "지난 빌드까지 verified 였으나 이번 소스에 없음 — 큐레이션 검토 필요"},
+                "source": "manual", "confidence": "verified", "status": "missing-from-source", "sourceRef": "state/verified.tsv",
+                "firstSeenAt": first_seen.get(uid, today), "lastSeenAt": today, "lastVerifiedAt": v.get("lastVerifiedAt") or today,
+            }
+            tombstones.append(uid)
+    vanished_auto = [u for u in vanished if u not in prev_verified]
 
     # 5. 검증
     nodes = [col.nodes[u] for u in sorted(col.nodes)]
@@ -87,16 +102,21 @@ def run(out_dir: Path | None = None, update_state: bool = True, strict: bool = F
         s = sources.git_sha(path)
         if s:
             src_shas[name] = {"sha": s, "dirty": sources.git_dirty(path)}
+    content_sha = _content_sha(nodes, edges)
+    previous = _read_previous_manifest()
     manifest = {
         "schemaVersion": schema.version, "version": version, "gitSha": sha, "dirty": dirty, "builtAt": now.isoformat(timespec="seconds"),
+        "contentSha256": content_sha, "unchanged": bool(previous and previous.get("contentSha256") == content_sha),
+        "previousVersion": previous.get("version") if previous else None,
         "extractors": EXTRACTORS, "inputs": meta, "sources": src_shas, "counts": counts,
+        "drift": {"vanished": len(vanished), "tombstones": len(tombstones), "newNodes": sum(1 for u in col.nodes if first_seen.get(u, today) == today)},
         "smoke": [
             {"tool": "kg_node", "args": {"uid": "table:zoom_order"}},
             {"tool": "kg_node", "args": {"uid": "col:zoom_ms_requestpayment.status_id"}},
             {"tool": "kg_search", "args": {"q": "zoom_order", "limit": 5}},
         ],
     }
-    report = _report(manifest, col, dangling, vanished, first_seen, today)
+    report = _report(manifest, col, dangling, vanished_auto, tombstones, first_seen, today, previous)
 
     # 7. 쓰기
     out = out_dir or sources.DIST
@@ -121,8 +141,10 @@ def run(out_dir: Path | None = None, update_state: bool = True, strict: bool = F
     if update_state:
         _write_first_seen(first_seen, nodes, edges, today)
         _write_uids(sorted(col.nodes))
-    return {"bundle": str(bundle), "version": version, "counts": counts, "dangling": sum(len(v) for v in dangling.values()),
-            "warnings": len(col.warnings), "vanished": len(vanished)}
+        _write_verified(nodes)
+    return {"bundle": str(bundle), "version": version, "contentSha256": content_sha, "unchanged": manifest["unchanged"],
+            "counts": counts, "dangling": sum(len(v) for v in dangling.values()),
+            "warnings": len(col.warnings), "vanished": len(vanished), "tombstones": len(tombstones)}
 
 
 def _ekey(e: Record) -> str:
@@ -150,6 +172,56 @@ def _write_first_seen(existing: dict[str, str], nodes: list[Record], edges: list
             fh.write(f"{uid}\t{today}\n")
 
 
+def _content_sha(nodes: list[Record], edges: list[Record]) -> str:
+    """입력이 같으면 같은 값. 날짜 거버넌스(firstSeenAt·lastSeenAt)는 뺀다 — 재현성 검사 기준."""
+    h = hashlib.sha256()
+    for rec in nodes:
+        h.update(json.dumps({k: v for k, v in rec.items() if k not in ("firstSeenAt", "lastSeenAt")}, ensure_ascii=False, sort_keys=True).encode("utf-8"))
+        h.update(b"\n")
+    h.update(b"--edges--\n")
+    for rec in edges:
+        h.update(json.dumps({k: v for k, v in rec.items() if k not in ("firstSeenAt", "lastSeenAt")}, ensure_ascii=False, sort_keys=True).encode("utf-8"))
+        h.update(b"\n")
+    return h.hexdigest()
+
+
+def _read_previous_manifest() -> dict | None:
+    path = sources.LATEST / "manifest.json"
+    if not path.exists():
+        return None
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return None
+
+
+def _tombstone_props(label: str) -> dict:
+    """라벨별 필수 props 의 빈 값(schema.yaml required) — tombstone 이 검증을 통과하게."""
+    req = Schema.load().labels.get(label, {}).get("required", [])
+    return {k: (0 if k in ("lineStart", "lineEnd") else "?") for k in req}
+
+
+def _read_verified() -> dict[str, dict]:
+    path = sources.STATE / "verified.tsv"
+    out: dict[str, dict] = {}
+    if path.exists():
+        for line in path.read_text(encoding="utf-8").splitlines()[1:]:
+            parts = line.split("\t")
+            if len(parts) >= 4:
+                out[parts[0]] = {"label": parts[1], "name": parts[2], "lastVerifiedAt": parts[3] or None, "summary": parts[4] if len(parts) > 4 else None}
+    return out
+
+
+def _write_verified(nodes: list[Record]) -> None:
+    path = sources.STATE / "verified.tsv"
+    lines = ["uid\tlabel\tname\tlastVerifiedAt\tsummary"]
+    for n in nodes:
+        if n.get("confidence") == "verified" and not n["props"].get("tombstone"):
+            summary = (n.get("summary") or "").replace("\t", " ").replace("\n", " ")[:200]
+            lines.append(f"{n['uid']}\t{n['label']}\t{n['name']}\t{n.get('lastVerifiedAt') or ''}\t{summary}")
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+
 def _read_uids() -> list[str]:
     path = sources.STATE / "uids.txt"
     return path.read_text(encoding="utf-8").splitlines() if path.exists() else []
@@ -159,18 +231,34 @@ def _write_uids(uids: list[str]) -> None:
     (sources.STATE / "uids.txt").write_text("\n".join(uids) + ("\n" if uids else ""), encoding="utf-8")
 
 
-def _report(manifest: dict, col: Collector, dangling: dict[str, list[str]], vanished: list[str], first_seen: dict[str, str], today: str) -> str:
+def _report(manifest: dict, col: Collector, dangling: dict[str, list[str]], vanished: list[str], tombstones: list[str],
+            first_seen: dict[str, str], today: str, previous: dict | None) -> str:
     lines = [f"# 빌드 report — {manifest['version']}", "",
              f"- builtAt: {manifest['builtAt']}  gitSha: {manifest['gitSha'][:7]}{' (dirty)' if manifest['dirty'] else ''}",
+             f"- contentSha256: `{manifest['contentSha256'][:16]}…` — 이전 빌드({manifest.get('previousVersion') or '없음'})와 {'**같음** (입력 불변)' if manifest['unchanged'] else '다름'}",
              f"- inputs: {json.dumps(manifest['inputs'], ensure_ascii=False)}", ""]
+    if previous and previous.get("counts"):
+        lines += ["## 이전 빌드 대비", "", "| 종류 | 이전 | 지금 | 증감 |", "|---|---|---|---|"]
+        for kind in ("nodes", "edges"):
+            prev_c, cur_c = previous["counts"].get(kind, {}), manifest["counts"].get(kind, {})
+            for k in sorted(set(prev_c) | set(cur_c)):
+                a, b = prev_c.get(k, 0), cur_c.get(k, 0)
+                if a != b:
+                    lines.append(f"| {k} | {a} | {b} | {b - a:+d} |")
+        if lines[-1].startswith("|---"):
+            lines.append("| (변화 없음) | | | |")
+        pd = previous.get("drift") or {}
+        lines += ["", f"- 드리프트: 사라진 uid {manifest['drift']['vanished']} (이전 {pd.get('vanished', '?')}) · tombstone {manifest['drift']['tombstones']} · 새 노드 {manifest['drift']['newNodes']}", ""]
     lines += ["## 건수", "", "| 라벨 | 노드 |", "|---|---|"]
     lines += [f"| {k} | {v} |" for k, v in manifest["counts"]["nodes"].items()]
     lines += ["", "| 관계 | 건수 |", "|---|---|"]
     lines += [f"| {k} | {v} |" for k, v in manifest["counts"]["edges"].items()]
     new_nodes = sum(1 for u in col.nodes if first_seen.get(u, today) == today)
-    lines += ["", f"- 이번 빌드에 처음 보인 노드: {new_nodes}", f"- 지난 빌드엔 있었는데 사라진 uid: {len(vanished)}"]
+    lines += ["", f"- 이번 빌드에 처음 보인 노드: {new_nodes}", f"- 지난 빌드엔 있었는데 사라진 uid(auto, 삭제): {len(vanished)}", f"- tombstone(verified 였는데 소스에 없음, missing-from-source 로 유지): {len(tombstones)}"]
+    if tombstones:
+        lines += ["", "### tombstone — 큐레이션 검토 필요 (curated 에서 지우거나 소스를 확인)", ""] + [f"- `{u}`" for u in tombstones[:100]]
     if vanished:
-        lines += ["", "### 사라진 uid (verified 는 tombstone 대상 — 4단계에서 처리)", ""] + [f"- `{u}`" for u in vanished[:100]]
+        lines += ["", "### 사라진 uid (auto — 삭제됨)", ""] + [f"- `{u}`" for u in vanished[:100]]
     status_counts = Counter(n.get("status") for n in col.nodes.values())
     lines += ["", f"- status: {dict(status_counts)}"]
     for name, body in col.sections.items():

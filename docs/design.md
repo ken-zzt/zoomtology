@@ -60,7 +60,7 @@ curated/*.yaml ───┘        │ ontology/schema.yaml 로 검증    ▼
 1. 추출기 순서: schema → classification → docs → php → ts → laravel → placeholders → curated(맨 끝, retired 전파까지). 끝에 `php.ensure_placeholders` 가 CALLS/CONSUMES/TRIGGERS 만 가리키는 메서드를 `missing-from-source` 노드로 만든다(모든 추출기 공통).
 2. `Collector` 가 uid 로 병합. 값 우선순위 manual > doc > extractor. 노드의 `source`/`sourceRef` 는 처음 만든 쪽(보통 추출기)을 유지하고, 밀린 값은 `props.alt[<source>]`, 문서 근거는 `props.docRefs[]`. 부분 레코드(`partial=True`)는 노드가 없으면 버리고 report 에 적는다.
 3. 노드가 없는 관계는 버리고 report(`노드가 없어 버린 관계`)에 적는다 — 문서 부패 또는 아직 없는 추출기.
-4. `state/first-seen.tsv` 로 `firstSeenAt`, `state/uids.txt` 와 비교해 사라진 uid 를 report.
+4. `state/first-seen.tsv` 로 `firstSeenAt`(append 만), `state/uids.txt` 와 비교해 사라진 uid 를 report. `state/verified.tsv`(지난 빌드의 verified 노드)에 있던 uid 가 사라지면 **tombstone**(같은 라벨, `status: missing-from-source`, `props.tombstone`)으로 남기고 report 의 "큐레이션 검토 필요" 에 적는다. auto 는 그냥 삭제·report. `manifest.contentSha256`(firstSeenAt·lastSeenAt 을 뺀 노드·관계 해시)이 이전 `build/latest/manifest.json` 과 같으면 `unchanged: true` — `rebuild-and-deploy.sh` 는 이때 커밋·태그·배포를 건너뛴다. report 에 "이전 빌드 대비" 라벨·관계별 증감 표.
 5. `schema.yaml` 로 전부 검증(실패하면 번들을 쓰지 않는다).
 6. `build/dist/zoomtology-<UTC시각>-<sha7>[-dirty].tar.gz` (manifest.json·nodes.jsonl·edges.jsonl·report.md, 정렬·결정적) + `build/latest/` + state 갱신.
 
