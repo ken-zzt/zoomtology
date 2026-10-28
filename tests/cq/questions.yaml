@@ -92,17 +92,17 @@
   stage: 3
   tool: kg_path
   args: { from: "code:message-consumer/src/services/sqs/order/confirm-order.ts#ConfirmOrderService::execute", to: "route:zoomzoom-api PATCH /order/:id/confirm", maxDepth: 3 }
-  must: ["\"found\":true", "route:zoomzoom-back PATCH ^order/(\\d+)/confirm$", "CALLS_HTTP"]
+  must: ['"found":true', 'route:zoomzoom-back PATCH ^order/(\\d+)/confirm$', "CALLS_HTTP"]   # JSON 텍스트엔 역슬래시가 두 번
 - id: 15
   stage: 3
   tool: kg_path
-  args: { from: "code:zoomzoom-front/src/apis/order.ts#createOrder", to: "table:zoom_order", maxDepth: 6 }
+  args: { from: "code:zoomzoom-front/src/apis/checkout.ts#createOrder", to: "table:zoom_order", maxDepth: 8 }
   must: ["\"found\":true", "route:zoomzoom-back POST ^order$", "route:zoomzoom-api POST /order", "CreateOrderController::create"]
 - id: 24
   stage: 3
   tool: kg_tables_for_code
-  args: { uid: "zoomzoom-api/src/order/presenters/http/controllers/confirm-order.controller.ts#ConfirmOrderController::confirm", depth: 2 }
-  must: ["table:zoom_order", "callee"]
+  args: { uid: "zoomzoom-api/src/order/application/commands/confirm-order.command.ts#ConfirmOrderCommand::execute", depth: 2 }
+  must: ["table:zoom_order", "table:zoom_customer_mileages", "callee"]      # 컨트롤러는 di→cqrs→repo 로 3단계라 커맨드에서 잰다
 - id: 25
   stage: 3
   tool: kg_neighbors
