@@ -18,6 +18,8 @@ if [ -n "$(git status --porcelain --untracked-files=no | grep -v -E '^ M (build/
   git status --short >&2
   exit 1
 fi
+# 커밋되지 않은 build/latest·state 는 이번 빌드가 다시 만든다 — 버려서 버전이 -dirty 로 찍히지 않게 한다
+git checkout -q -- build/latest state 2>/dev/null || true
 PREV_SHA="$(python3 -c "import json,sys;print(json.load(open('build/latest/manifest.json')).get('contentSha256',''))" 2>/dev/null || true)"
 scripts/build.sh
 VERSION="$(python3 -c "import json;print(json.load(open('build/latest/manifest.json'))['version'])")"
