@@ -1,7 +1,16 @@
-# 빌드 report — 20261028T0751Z-6611b84
+# 빌드 report — 20261028T0904Z-1b7bb7a-dirty
 
-- builtAt: 2026-10-28T07:51:12+00:00  gitSha: 6611b84
-- inputs: {"schema": {"primary": "local_zzt-2026-10-28.sql (502 tables)", "secondary": "urimalo_zzt-2026-04-22.sql (517 tables)", "tables": "519"}, "classification": {"classified": "492", "excluded": "10"}, "docs": {"docs": "102", "statusCodeValues": "124", "domainColumns": "432", "policies": "8", "cronJobs": "59", "glossary": "14", "ownership": "27", "repos": "17"}, "php": {"zoomzoom-admin": "files=879 classes=906 units=8417 queries=5559", "zoomzoom-partners": "files=463 classes=487 units=4461 queries=2875"}, "ts": {"zoomzoom-api": "files=3198 nodes=10320 edges=15887 ms=3544", "message-consumer": "files=103 nodes=461 edges=458 ms=872", "zoomzoom-back": "files=27 nodes=389 edges=394 ms=769", "external-api": "files=452 nodes=1665 edges=2236 ms=320", "data-api": "files=43 nodes=131 edges=170 ms=226", "zoomzoom-front": "files=856 nodes=2306 edges=2307 ms=3120"}, "laravel": {"zoomzoom-auth": "files=634 classes=594 units=2136 models=154 schedules=33 routes=194"}, "placeholders": {"calls": "85"}, "curated": {"files": "domains.yaml,references.yaml,enum-overrides.yaml,queues.yaml,rules/auto-reject.yaml,rules/cart-status-flow.yaml,rules/discount-revenue.yaml,rules/partial-refund.yaml,rules/reservation-status-flow.yaml,rules/seller-payout-policy.yaml,processes/order-to-settlement.yaml,retired.yaml", "belongs_to_domain": "148", "domains": "4", "enum_values": "8", "implements_rule": "73", "process_refs": "34", "processes": "1", "queue_constants": "5", "references": "26", "retired_edges": "4756", "retired_nodes": "1659", "supersedes": "2"}}
+- builtAt: 2026-10-28T09:04:11+00:00  gitSha: 1b7bb7a (dirty)
+- contentSha256: `979ee68fea0ad70f…` — 이전 빌드(20261028T0903Z-c6f0a0c-dirty)와 **같음** (입력 불변)
+- inputs: {"schema": {"primary": "local_zzt-2026-10-28.sql (502 tables)", "secondary": "urimalo_zzt-2026-04-22.sql (517 tables)", "tables": "519"}, "classification": {"classified": "492", "excluded": "10"}, "docs": {"docs": "102", "statusCodeValues": "124", "domainColumns": "432", "policies": "8", "cronJobs": "59", "glossary": "14", "ownership": "27", "repos": "17"}, "php": {"zoomzoom-admin": "files=879 classes=906 units=8417 queries=5559", "zoomzoom-partners": "files=463 classes=487 units=4461 queries=2875"}, "ts": {"zoomzoom-api": "files=3198 nodes=10320 edges=15887 ms=3358", "message-consumer": "files=103 nodes=461 edges=458 ms=887", "zoomzoom-back": "files=27 nodes=389 edges=394 ms=749", "external-api": "files=452 nodes=1665 edges=2236 ms=303", "data-api": "files=43 nodes=131 edges=170 ms=238", "zoomzoom-front": "files=856 nodes=2306 edges=2307 ms=3097"}, "laravel": {"zoomzoom-auth": "files=634 classes=594 units=2136 models=154 schedules=33 routes=194"}, "placeholders": {"calls": "85"}, "curated": {"files": "domains.yaml,references.yaml,enum-overrides.yaml,queues.yaml,rules/auto-reject.yaml,rules/cart-status-flow.yaml,rules/discount-revenue.yaml,rules/partial-refund.yaml,rules/reservation-status-flow.yaml,rules/seller-payout-policy.yaml,processes/order-to-settlement.yaml,retired.yaml", "belongs_to_domain": "148", "domains": "4", "enum_values": "8", "implements_rule": "73", "process_refs": "34", "processes": "1", "queue_constants": "5", "references": "26", "retired_edges": "4756", "retired_nodes": "1659", "supersedes": "2"}}
+
+## 이전 빌드 대비
+
+| 종류 | 이전 | 지금 | 증감 |
+|---|---|---|---|
+| (변화 없음) | | | |
+
+- 드리프트: 사라진 uid 0 (이전 0) · tombstone 0 · 새 노드 40371
 
 ## 건수
 
@@ -47,7 +56,8 @@
 | WRITES | 3178 |
 
 - 이번 빌드에 처음 보인 노드: 40371
-- 지난 빌드엔 있었는데 사라진 uid: 0
+- 지난 빌드엔 있었는데 사라진 uid(auto, 삭제): 0
+- tombstone(verified 였는데 소스에 없음, missing-from-source 로 유지): 0
 
 - status: {'active': 38402, 'missing-from-source': 310, 'retired': 1659}
 

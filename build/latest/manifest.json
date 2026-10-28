@@ -1,5 +1,6 @@
 {
-  "builtAt": "2026-10-28T07:51:12+00:00",
+  "builtAt": "2026-10-28T09:04:11+00:00",
+  "contentSha256": "979ee68fea0ad70f6ba117148616669836163584623c81e3c0bb81bb8275d2b8",
   "counts": {
     "edges": {
       "BELONGS_TO_DOMAIN": 148,
@@ -41,7 +42,12 @@
       "Table": 527
     }
   },
-  "dirty": false,
+  "dirty": true,
+  "drift": {
+    "newNodes": 40371,
+    "tombstones": 0,
+    "vanished": 0
+  },
   "extractors": {
     "classification": "1",
     "curated": "1",
@@ -51,7 +57,7 @@
     "schema": "1",
     "ts": "1"
   },
-  "gitSha": "6611b84629bbe0bcb95b5b63efd747dd4555d51e",
+  "gitSha": "1b7bb7a63ba702217f43fb2cda0e91758bcec396",
   "inputs": {
     "classification": {
       "classified": "492",
@@ -97,14 +103,15 @@
       "tables": "519"
     },
     "ts": {
-      "data-api": "files=43 nodes=131 edges=170 ms=226",
-      "external-api": "files=452 nodes=1665 edges=2236 ms=320",
-      "message-consumer": "files=103 nodes=461 edges=458 ms=872",
-      "zoomzoom-api": "files=3198 nodes=10320 edges=15887 ms=3544",
-      "zoomzoom-back": "files=27 nodes=389 edges=394 ms=769",
-      "zoomzoom-front": "files=856 nodes=2306 edges=2307 ms=3120"
+      "data-api": "files=43 nodes=131 edges=170 ms=238",
+      "external-api": "files=452 nodes=1665 edges=2236 ms=303",
+      "message-consumer": "files=103 nodes=461 edges=458 ms=887",
+      "zoomzoom-api": "files=3198 nodes=10320 edges=15887 ms=3358",
+      "zoomzoom-back": "files=27 nodes=389 edges=394 ms=749",
+      "zoomzoom-front": "files=856 nodes=2306 edges=2307 ms=3097"
     }
   },
+  "previousVersion": "20261028T0903Z-c6f0a0c-dirty",
   "schemaVersion": 1,
   "smoke": [
     {
@@ -130,12 +137,13 @@
   "sources": {
     "AgentPrism": {
       "dirty": false,
-      "sha": "cc23082ab3846a59359600fc3ed71292f70551eb"
+      "sha": "a384550a9aafc39c27a63ea8eaeb266da3b32e1d"
     },
     "zoomzoom-services": {
       "dirty": true,
       "sha": "a40043b9bf7aeef27821e04e72a2cd72a18d18c5"
     }
   },
-  "version": "20261028T0751Z-6611b84"
+  "unchanged": true,
+  "version": "20261028T0904Z-1b7bb7a-dirty"
 }
