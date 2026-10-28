@@ -17,3 +17,7 @@ extractors/ts/dist/
 
 # 로컬 스크래치
 tmp/
+
+# 빌드 입력(로컬 스키마 덤프 등) — 재현은 manifest 의 sha 로
+build/inputs/
+tests/fixtures/docs/hub/

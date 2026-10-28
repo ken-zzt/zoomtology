@@ -1,4 +1,4 @@
-"""`zoomtology validate <nodes.jsonl> <edges.jsonl>` — 번들 검증. 추출·빌드 명령은 1단계(ZDV-345)에서 붙는다."""
+"""`zoomtology validate <nodes.jsonl> <edges.jsonl>` — 번들 검증. `zoomtology build` — 추출·병합·번들 생성."""
 
 from __future__ import annotations
 
@@ -24,6 +24,9 @@ def main(argv: list[str] | None = None) -> int:
     v = sub.add_parser("validate", help="nodes.jsonl / edges.jsonl 을 schema.yaml 로 검증")
     v.add_argument("nodes", type=Path)
     v.add_argument("edges", type=Path)
+    b = sub.add_parser("build", help="추출 → 병합 → 검증 → 번들(build/dist) + build/latest + state")
+    b.add_argument("--out", type=Path, default=None)
+    b.add_argument("--no-state", action="store_true", help="state/ 를 갱신하지 않는다")
     args = parser.parse_args(argv)
 
     if args.cmd == "validate":
@@ -33,6 +36,15 @@ def main(argv: list[str] | None = None) -> int:
             print(p, file=sys.stderr)
         print(f"{'FAIL' if problems else 'OK'}: {len(problems)} problem(s)")
         return 1 if problems else 0
+    if args.cmd == "build":
+        from .build import BuildError, run
+        try:
+            result = run(out_dir=args.out, update_state=not args.no_state)
+        except BuildError as e:
+            print(f"BUILD FAILED: {e}", file=sys.stderr)
+            return 1
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+        return 0
     return 2
 
 

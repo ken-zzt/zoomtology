@@ -1,0 +1,88 @@
+{
+  "builtAt": "2026-10-28T00:27:12+00:00",
+  "counts": {
+    "edges": {
+      "CONTAINS": 519,
+      "DOCUMENTED_BY": 580,
+      "HAS_COLUMN": 4049,
+      "HAS_VALUE": 254,
+      "IMPLEMENTS_RULE": 97,
+      "REFERENCES": 34,
+      "TRIGGERS": 47
+    },
+    "nodes": {
+      "BusinessRule": 8,
+      "Column": 4049,
+      "CronJob": 55,
+      "Database": 1,
+      "Doc": 161,
+      "EnumValue": 254,
+      "File": 248,
+      "Module": 75,
+      "Repo": 17,
+      "Route": 47,
+      "Table": 519
+    }
+  },
+  "dirty": true,
+  "extractors": {
+    "classification": "1",
+    "docs": "1",
+    "schema": "1"
+  },
+  "gitSha": "7127307d7301f981a1486ff8a4f418e30f33a7d5",
+  "inputs": {
+    "classification": {
+      "classified": "492",
+      "excluded": "10"
+    },
+    "docs": {
+      "cronJobs": "59",
+      "docs": "102",
+      "domainColumns": "432",
+      "glossary": "14",
+      "ownership": "27",
+      "policies": "8",
+      "repos": "17",
+      "statusCodeValues": "124"
+    },
+    "schema": {
+      "primary": "local_zzt-2026-10-28.sql (502 tables)",
+      "secondary": "urimalo_zzt-2026-04-22.sql (517 tables)",
+      "tables": "519"
+    }
+  },
+  "schemaVersion": 1,
+  "smoke": [
+    {
+      "args": {
+        "uid": "table:zoom_order"
+      },
+      "tool": "kg_node"
+    },
+    {
+      "args": {
+        "uid": "col:zoom_ms_requestpayment.status_id"
+      },
+      "tool": "kg_node"
+    },
+    {
+      "args": {
+        "limit": 5,
+        "q": "zoom_order"
+      },
+      "tool": "kg_search"
+    }
+  ],
+  "sources": {
+    "AgentPrism": {
+      "dirty": true,
+      "sha": "4954a63bc380e77f13076f3a6d9ee068676a63b0"
+    },
+    "zoomzoom-services": {
+      "dirty": true,
+      "sha": "7ec4de75322a70fa83e4dd03cf56d3952cd7d797"
+    }
+  },
+  "version": "20261028T0027Z-7127307-dirty"
+}
