@@ -1,8 +1,8 @@
 # 정책 문서: zoomzoom-services/docs/20-database/policies/auto-reject.md (예약요청 자동거절). 파일 수준 IMPLEMENTS_RULE 은 docs.py 가 이미 만든다 — 여기는 유닛 수준.
 rule: rule:auto-reject
-confidence: auto
+confidence: verified
 lastVerifiedAt: 2026-10-28
-verifiedBy: claude
+verifiedBy: ken
 units:
   - uid: cron:admin/task/task/rejectorderafterweek
     role: 크론 진입점 — 유저웹 경로 task/task/rejectOrderAfterWeek 를 MQ crontab 이 부른다

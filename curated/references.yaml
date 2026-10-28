@@ -1,9 +1,9 @@
 # 파일럿 테이블의 논리 FK (DDL 엔 FK 가 없다 — ADR 0004). 방향은 참조하는 컬럼 → 참조되는 PK.
 # evidence 는 추출기가 ON 절에서 본 자리(`repo/path:line`) 또는 문서. 추출기의 REFERENCES(logical, auto) 위에 manual 로 얹힌다.
 # Ken 이 행을 승인하면 confidence: verified + lastVerifiedAt 으로 바꾼다 (파일 머리 또는 행마다).
-confidence: auto
+confidence: verified
 lastVerifiedAt: 2026-10-28
-verifiedBy: claude
+verifiedBy: ken
 
 references:
   - from: col:zoom_order.customer_id

@@ -1,8 +1,8 @@
 # 정책 문서: policies/reservation-status-flow.md (예약 상태 전이, zoom_ms_requestpayment.status_id). 유닛 수준.
 rule: rule:reservation-status-flow
-confidence: auto
+confidence: verified
 lastVerifiedAt: 2026-10-28
-verifiedBy: claude
+verifiedBy: ken
 units:
   - uid: code:zoomzoom-admin/system/library/zoomtu/conversation.php#ZZTConversation::setConversationStatus
     role: 레거시의 관문 — 대부분의 상태 쓰기가 거친다 (목표값만 검사)

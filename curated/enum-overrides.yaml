@@ -1,7 +1,7 @@
 # enum 보정. arrays: 코드 static 배열 → 컬럼 (php.py 가 읽어 EnumValue 를 만든다). values: 의미 덮어쓰기/추가 (manual 이 status-codes·DDL 보다 우선, 밀린 값은 props.alt).
-confidence: auto
+confidence: verified
 lastVerifiedAt: 2026-10-28
-verifiedBy: claude
+verifiedBy: ken
 
 arrays:
   - array: order_status_string          # ZZTOrderInfo::$order_status_string, ZZTPayment::$order_status_string, ModelAccountOrder 등

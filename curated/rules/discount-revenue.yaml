@@ -1,8 +1,8 @@
 # 정책 문서: policies/discount-revenue.md (할인과 수익 계산). 유닛 수준.
 rule: rule:discount-revenue
-confidence: auto
+confidence: verified
 lastVerifiedAt: 2026-10-28
-verifiedBy: claude
+verifiedBy: ken
 units:
   - uid: code:zoomzoom-api/src/order/application/commands/create-order.command-handler.ts#CreateOrderCommandHandler::execute
     role: 주문 생성 시 할인·수익 값 기록

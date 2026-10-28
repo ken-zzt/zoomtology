@@ -1,8 +1,8 @@
 # 정책 문서: policies/cart-status-flow.md (카트 상태, zoom_cart.status). 유닛 수준.
 rule: rule:cart-status-flow
-confidence: auto
+confidence: verified
 lastVerifiedAt: 2026-10-28
-verifiedBy: claude
+verifiedBy: ken
 units:
   - uid: code:zoomzoom-api/src/cart/domain/cart.ts#Cart::expired
     role: 만료 판정

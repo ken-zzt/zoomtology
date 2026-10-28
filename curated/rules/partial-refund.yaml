@@ -1,8 +1,8 @@
 # 정책 문서: policies/partial-refund.md (부분환불·정산 반영). 유닛 수준.
 rule: rule:partial-refund
-confidence: auto
+confidence: verified
 lastVerifiedAt: 2026-10-28
-verifiedBy: claude
+verifiedBy: ken
 units:
   - uid: code:zoomzoom-admin/admin/controller/multiseller/enquiries.php#ControllerMultisellerEnquiries::transactions
     role: 어드민 주문 상세의 거래 탭 — 부분환불 입력 화면

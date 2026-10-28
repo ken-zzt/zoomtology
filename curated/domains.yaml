@@ -1,9 +1,9 @@
 # 파일럿 도메인 — 주문 → 결제 → 취소/환불 → 정산 (ADR 0007). 나머지 도메인은 나중 슬라이스.
 # members: uid 또는 {glob: 패턴[, label: 라벨]}. 그래프에 없는 uid 는 report 에 남는다.
 # confidence 는 Ken 이 행을 승인하면 verified 로 바꾸고 lastVerifiedAt 을 적는다.
-confidence: auto
+confidence: verified
 lastVerifiedAt: 2026-10-28
-verifiedBy: claude
+verifiedBy: ken
 
 domains:
   - uid: domain:order

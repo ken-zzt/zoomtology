@@ -3,9 +3,9 @@ uid: doc:zoomtology/curated/processes/order-to-settlement.yaml
 title: 주문→결제→취소/환불→정산 (파일럿)
 summary: 고객 주문이 결제·파트너 확정·이용을 거쳐 정산되거나 취소·환불되는 흐름. 각 단계의 진입점(라우트·큐·크론)과 상태 원장을 잇는다.
 status: draft
-confidence: auto
+confidence: verified
 lastVerifiedAt: 2026-10-28
-verifiedBy: claude
+verifiedBy: ken
 steps:
   - id: order
     name: 주문 생성

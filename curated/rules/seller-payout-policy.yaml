@@ -1,8 +1,8 @@
 # 정책 문서: policies/seller-payout-policy.md (파트너 정산·지급). 유닛 수준.
 rule: rule:seller-payout-policy
-confidence: auto
+confidence: verified
 lastVerifiedAt: 2026-10-28
-verifiedBy: claude
+verifiedBy: ken
 units:
   - uid: cron:admin/cron/tasks/payoutestimate
     role: 정산 예정액 계산 크론
