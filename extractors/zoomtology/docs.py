@@ -346,7 +346,7 @@ def _admin_row(col: Collector, cell: str, schedule: str, summary: str | None, re
     if not ep:
         return 0
     endpoint = ep[0].split("&")[0].strip("/")
-    cuid = model.cron_uid("admin", endpoint)
+    cuid = model.cron_uid("admin", endpoint.lower())      # OpenCart 라우트는 대소문자 무관 → 라우트 uid 와 같이 소문자
     col.node(node_rec(cuid, "CronJob", endpoint.split("/")[-1], SOURCE, summary=summary,
                       props={"schedule": schedule, "host": "admin", "runner": "crontab-curl", "endpoint": ep[0]}, source_ref=ref))
     ruid = model.opencart_route_uid("zoomzoom-admin", endpoint)
@@ -375,7 +375,7 @@ def _mq_row(col: Collector, cell: str, schedule: str, summary: str | None, ref: 
     ep = [e for e in TICK_RE.findall(cell) if "/" in e and " " not in e]
     if ep:
         endpoint = ep[0].strip("/")
-        cuid = model.cron_uid("mq", endpoint)
+        cuid = model.cron_uid("mq", endpoint.lower())
         col.node(node_rec(cuid, "CronJob", endpoint.split("/")[-1], SOURCE, summary=summary,
                           props={"schedule": schedule, "host": "mq", "runner": "crontab-curl", "endpoint": ep[0]}, source_ref=ref))
         ruid = model.opencart_route_uid("zoomzoom-admin", endpoint)

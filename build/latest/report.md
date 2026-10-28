@@ -1,6 +1,6 @@
-# 빌드 report — 20261028T0628Z-41a3b4a-dirty
+# 빌드 report — 20261028T0639Z-0462990-dirty
 
-- builtAt: 2026-10-28T06:28:38+00:00  gitSha: 41a3b4a (dirty)
+- builtAt: 2026-10-28T06:39:13+00:00  gitSha: 0462990 (dirty)
 - inputs: {"schema": {"primary": "local_zzt-2026-10-28.sql (502 tables)", "secondary": "urimalo_zzt-2026-04-22.sql (517 tables)", "tables": "519"}, "classification": {"classified": "492", "excluded": "10"}, "docs": {"docs": "102", "statusCodeValues": "124", "domainColumns": "432", "policies": "8", "cronJobs": "59", "glossary": "14", "ownership": "27", "repos": "17"}, "php": {"zoomzoom-admin": "files=879 classes=906 units=8417 queries=5559", "zoomzoom-partners": "files=463 classes=487 units=4461 queries=2875"}, "ts": {"zoomzoom-api": "files=3198 nodes=10320 edges=15887 ms=2894", "message-consumer": "files=103 nodes=461 edges=458 ms=826", "zoomzoom-back": "files=27 nodes=389 edges=394 ms=734", "external-api": "files=452 nodes=1665 edges=2236 ms=253", "data-api": "files=43 nodes=131 edges=170 ms=230", "zoomzoom-front": "files=856 nodes=2306 edges=2307 ms=2960"}, "laravel": {"zoomzoom-auth": "files=634 classes=594 units=2136 models=154 schedules=33 routes=194"}, "placeholders": {"calls": "85"}}
 
 ## 건수
@@ -44,12 +44,21 @@
 | WRITES | 3178 |
 
 - 이번 빌드에 처음 보인 노드: 40364
-- 지난 빌드엔 있었는데 사라진 uid: 2
+- 지난 빌드엔 있었는데 사라진 uid: 11
 
 ### 사라진 uid (verified 는 tombstone 대상 — 4단계에서 처리)
 
-- `msg:push/push`
-- `queue:push`
+- `cron:admin/cron/tasks/checkContinuouslyBlockedDays`
+- `cron:admin/cron/tasks/confirmBatchPayoutBalance`
+- `cron:admin/cron/tasks/emailTaskRun`
+- `cron:admin/cron/tasks/payoutEstimate`
+- `cron:admin/cron/tasks/payoutMarkDone`
+- `cron:admin/cron/tasks/resetCampaignCredits`
+- `cron:admin/cron/tasks/updateElasticSearchData`
+- `cron:admin/cron/tasks/updateTransactionFee`
+- `cron:admin/task/task/checkProviderOrderStatus`
+- `cron:admin/task/task/rejectOrderAfterWeek`
+- `cron:admin/task/task/runUpdateStats`
 
 - status: {'active': 40049, 'missing-from-source': 315}
 

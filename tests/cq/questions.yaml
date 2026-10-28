@@ -81,8 +81,8 @@
 - id: 4
   stage: 3
   tool: kg_impact
-  args: { uid: "table:zoom_transactions", depth: 3 }
-  must: ["cron:admin/cron/tasks/updatetransactionfee", "cron:admin/cron/tasks/payoutestimate", "route:zoomzoom-admin route=cron/tasks/updatetransactionfee"]
+  args: { uid: "table:zoom_transactions", depth: 4 }      # 테이블←zoomtu 메서드←컨트롤러 메서드←라우트←크론 = 4단계
+  must: ["cron:admin/cron/tasks/updatetransactionfee", "route:zoomzoom-admin route=cron/tasks/updatetransactionfee"]
 - id: 6
   stage: 3
   tool: kg_neighbors

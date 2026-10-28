@@ -115530,3 +115530,25 @@ route:zoomzoom-back PUT ^vehicle/(\d+)$ -CALLS_HTTP-> route:zoomzoom-api PUT /ve
 route:zoomzoom-back PUT ^waug/category/(\d+)$ -CALLS_HTTP-> route:zoomzoom-api PUT /waug/category/:id	2026-10-28
 route:zoomzoom-back PUT ^waug/taxonomy/(\d+)$ -CALLS_HTTP-> route:zoomzoom-api PUT /waug/taxonomy/:id	2026-10-28
 svc:zoomzoom-api/mq -CONTAINS-> module:zoomzoom-api/src/task	2026-10-28
+cron:admin/cron/tasks/checkcontinuouslyblockeddays	2026-10-28
+cron:admin/cron/tasks/confirmbatchpayoutbalance	2026-10-28
+cron:admin/cron/tasks/emailtaskrun	2026-10-28
+cron:admin/cron/tasks/payoutestimate	2026-10-28
+cron:admin/cron/tasks/payoutmarkdone	2026-10-28
+cron:admin/cron/tasks/resetcampaigncredits	2026-10-28
+cron:admin/cron/tasks/updateelasticsearchdata	2026-10-28
+cron:admin/cron/tasks/updatetransactionfee	2026-10-28
+cron:admin/task/task/checkproviderorderstatus	2026-10-28
+cron:admin/task/task/rejectorderafterweek	2026-10-28
+cron:admin/task/task/runupdatestats	2026-10-28
+cron:admin/cron/tasks/checkcontinuouslyblockeddays -TRIGGERS-> route:zoomzoom-admin route=cron/tasks/checkcontinuouslyblockeddays	2026-10-28
+cron:admin/cron/tasks/confirmbatchpayoutbalance -TRIGGERS-> route:zoomzoom-admin route=cron/tasks/confirmbatchpayoutbalance	2026-10-28
+cron:admin/cron/tasks/emailtaskrun -TRIGGERS-> route:zoomzoom-admin route=cron/tasks/emailtaskrun	2026-10-28
+cron:admin/cron/tasks/payoutestimate -TRIGGERS-> route:zoomzoom-admin route=cron/tasks/payoutestimate	2026-10-28
+cron:admin/cron/tasks/payoutmarkdone -TRIGGERS-> route:zoomzoom-admin route=cron/tasks/payoutmarkdone	2026-10-28
+cron:admin/cron/tasks/resetcampaigncredits -TRIGGERS-> route:zoomzoom-admin route=cron/tasks/resetcampaigncredits	2026-10-28
+cron:admin/cron/tasks/updateelasticsearchdata -TRIGGERS-> route:zoomzoom-admin route=cron/tasks/updateelasticsearchdata	2026-10-28
+cron:admin/cron/tasks/updatetransactionfee -TRIGGERS-> route:zoomzoom-admin route=cron/tasks/updatetransactionfee	2026-10-28
+cron:admin/task/task/checkproviderorderstatus -TRIGGERS-> route:zoomzoom-admin route=task/task/checkproviderorderstatus	2026-10-28
+cron:admin/task/task/rejectorderafterweek -TRIGGERS-> route:zoomzoom-admin route=task/task/rejectorderafterweek	2026-10-28
+cron:admin/task/task/runupdatestats -TRIGGERS-> route:zoomzoom-admin route=task/task/runupdatestats	2026-10-28

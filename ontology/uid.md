@@ -18,7 +18,7 @@
 | Route | `route:` | `route:<repo> <METHOD> <path>` (HTTP), `route:<repo> route=<a/b/c>` (OpenCart, 소문자), `route:<repo> <METHOD> <regex>` (back AccessRule) | `route:zoomzoom-api PATCH /order/:id/rejected`, `route:zoomzoom-admin route=cron/tasks/statuscheck` |
 | Queue | `queue:` | `queue:<role>` — message-consumer 역할 = SQS 큐 이름 꼬리 | `queue:order` (email · entity · order · notif · event). 레거시 PHP 상수는 `SEND_ORDER/EMAIL/EVENT_QUEUE`→같은 이름, `SEND_PUSH_QUEUE`→`notif`, `SEND_LAMBDA_QUEUE`→`lambda`(zoomzoom-api 큐) |
 | QueueMessage | `msg:` | `msg:<role>/<key>` — key 는 enum 의 문자열 값 | `msg:order/confirm-order` |
-| CronJob | `cron:` | `cron:<host>/<route-or-command>` | `cron:admin/cron/tasks/statusCheck`, `cron:mq/task/product/discount-price`, `cron:zoomzoom-auth/confim-mileage`(시그니처의 `zzt-cron:` 접두사는 뗀다, 전체는 `props.signature`) |
+| CronJob | `cron:` | `cron:<host>/<route-or-command>` (OpenCart 라우트를 부르는 admin·mq 호스트는 소문자, Laravel 명령 이름은 그대로) | `cron:admin/cron/tasks/statuscheck`, `cron:mq/task/product/discount-price`, `cron:zoomzoom-auth/confim-mileage`(시그니처의 `zzt-cron:` 접두사는 뗀다, 전체는 `props.signature`) |
 | Database | `db:` | `db:<handle>` | `db:zzt`, `db:stats`, `db:numbers`, `db:iso`, `db:wc` |
 | Table | `table:` | `table:<name>` (기본 DB) / `table:<db>/<name>` | `table:zoom_order`, `table:iso/xxx` |
 | Column | `col:` | `col:<table>.<column>` | `col:zoom_order.order_status_id` |
