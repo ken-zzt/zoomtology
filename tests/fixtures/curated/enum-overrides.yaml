@@ -1,0 +1,6 @@
+confidence: auto
+values:
+  - column: zoom_order.order_status_id
+    values:
+      "1": {meaning: 예약요청, label: book_requested}
+      "6": {meaning: 예약대기}

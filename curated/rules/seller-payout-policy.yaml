@@ -1,0 +1,54 @@
+# 정책 문서: policies/seller-payout-policy.md (파트너 정산·지급). 유닛 수준.
+rule: rule:seller-payout-policy
+confidence: auto
+lastVerifiedAt: 2026-10-28
+verifiedBy: claude
+units:
+  - uid: cron:admin/cron/tasks/payoutestimate
+    role: 정산 예정액 계산 크론
+  - uid: code:zoomzoom-admin/admin/controller/cron/tasks.php#ControllerCronTasks::payoutEstimate
+    role: 정산 예정액 계산 핸들러
+  - uid: code:zoomzoom-admin/system/library/zoomtu/payout.php#ZZTPayout::getPayoutEstimate
+    role: 셀러별 정산 예정액
+  - uid: code:zoomzoom-admin/system/library/zoomtu/payout.php#ZZTPayout::getPayoutLiabilityItems
+    role: 정산 대상 항목(부채) 집계
+  - uid: code:zoomzoom-admin/admin/controller/cron/tasks.php#ControllerCronTasks::payoutBatchPayoutSchedules
+    role: 일괄 지급 핸들러(scheduled-jobs.md 엔 크론 행이 없다 — 어드민이 호출하거나 수동)
+  - uid: code:zoomzoom-admin/system/library/zoomtu/payout.php#ZZTPayout::payoutBatchPayoutSchedule
+    role: 지급 스케줄 1건 실행
+  - uid: code:zoomzoom-admin/system/library/zoomtu/payout.php#ZZTPayout::createAdditionalPayoutRecord
+    role: 추가 지급 기록
+  - uid: code:zoomzoom-admin/system/library/zoomtu/payout.php#ZZTPayout::markBatchPayoutScheduleAsDone
+    role: 지급 완료 표시
+  - uid: code:zoomzoom-admin/system/library/zoomtu/payout.php#ZZTPayout::confirmBatchPayoutScheduleItems
+    role: 지급 항목 확정
+  - uid: cron:admin/cron/tasks/confirmbatchpayoutbalance
+    role: 지급 잔액 확정 크론
+  - uid: cron:admin/cron/tasks/payoutmarkdone
+    role: 지급 완료 표시 크론
+  - uid: cron:zoomzoom-auth/lock-scheduled-payout
+    role: 매주 화요일 지급 스케줄 잠금(Laravel)
+  - uid: code:zoomzoom-partners/system/library/zoomtu/payout.php#ZZTPayout::checkBatchPayoutSchedulesToLock
+    role: 잠글 스케줄 확인(파트너 쪽 사본)
+  - uid: code:zoomzoom-partners/system/library/zoomtu/payout.php#ZZTPayout::isOverMinimumPayoutAmount
+    role: 최소 지급액 검사
+  - uid: code:zoomzoom-admin/system/library/zoomtu/transactions.php#ZZTTransactions::addPaymentSellerTransaction
+    role: 셀러 지급 거래 기록
+  - uid: code:zoomzoom-admin/system/library/zoomtu/transactions.php#ZZTTransactions::addPaymentFromSellerTransaction
+    role: 셀러로부터의 입금 거래 기록
+  - uid: code:zoomzoom-admin/system/library/zoomtu/transactions.php#ZZTTransactions::updateInfoGetValuesForPaymentSeller
+    role: 지급 정보 갱신
+  - uid: code:zoomzoom-admin/system/library/zoomtu/transactions.php#ZZTTransactions::updateInfoGetValuesForIncomeFromSeller
+    role: 입금 정보 갱신
+  - uid: code:zoomzoom-admin/system/library/zoomtu/seller_charge.php#ZZTSellerCharge::createCharge
+    role: 셀러 청구(zoom_seller_charge) 생성
+  - uid: code:zoomzoom-admin/system/library/zoomtu/seller_charge.php#ZZTSellerCharge::processCharge
+    role: 청구 처리(상태 recording → recorded)
+  - uid: code:zoomzoom-admin/system/library/zoomtu/seller_charge.php#ZZTSellerCharge::cancelCharge
+    role: 청구 취소
+  - uid: code:zoomzoom-admin/system/library/msseller.php#MsSeller::getPayoutMethod
+    role: 셀러의 지급 방식 조회
+  - uid: cron:admin/cron/tasks/updatetransactionfee
+    role: 거래 수수료 갱신 크론
+  - uid: code:zoomzoom-admin/admin/controller/cron/tasks.php#ControllerCronTasks::updateTransactionFee
+    role: 거래 수수료 갱신 핸들러

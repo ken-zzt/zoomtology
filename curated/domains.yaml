@@ -1,0 +1,113 @@
+# 파일럿 도메인 — 주문 → 결제 → 취소/환불 → 정산 (ADR 0007). 나머지 도메인은 나중 슬라이스.
+# members: uid 또는 {glob: 패턴[, label: 라벨]}. 그래프에 없는 uid 는 report 에 남는다.
+# confidence 는 Ken 이 행을 승인하면 verified 로 바꾸고 lastVerifiedAt 을 적는다.
+confidence: auto
+lastVerifiedAt: 2026-10-28
+verifiedBy: claude
+
+domains:
+  - uid: domain:order
+    name: order
+    nameKo: 주문
+    summary: 주문·예약 요청의 생성과 상태 전이. zoom_order(주문)·zoom_ms_requestpayment(예약 요청)가 중심이고 레거시 PHP 와 zoomzoom-api 가 함께 쓴다.
+    aliases: [주문, 예약, order, reservation, booking]
+    members:
+      - table:zoom_order
+      - table:zoom_order_product
+      - table:zoom_order_total
+      - table:zoom_order_history
+      - table:zoom_order_status
+      - table:zoom_ms_order_product_data
+      - table:zoom_ms_suborder
+      - table:zoom_ms_suborder_history
+      - table:zoom_provider_order
+      - table:zoom_cart
+      - table:zoom_ms_conversation
+      - {glob: "route:zoomzoom-api * /order*", label: Route}
+      - {glob: "route:zoomzoom-api * /cart*", label: Route}
+      - {glob: "route:zoomzoom-back * ^order*", label: Route}
+      - {glob: "route:zoomzoom-back * ^cart*", label: Route}
+      - {glob: "msg:order/*", label: QueueMessage}
+      - queue:order
+      - svc:message-consumer/order
+      - cron:admin/cron/tasks/statuscheck
+      - cron:admin/task/task/checkproviderorderstatus
+      - cron:admin/task/task/rejectorderafterweek
+      - rule:reservation-status-flow
+      - rule:cart-status-flow
+      - rule:auto-reject
+      - module:zoomzoom-api/src/order
+      - module:zoomzoom-api/src/cart
+
+  - uid: domain:payment
+    name: payment
+    nameKo: 결제
+    summary: 고객 결제(카드·간편결제·마일리지·쿠폰)와 결제 요청 상태. zoom_ms_requestpayment.status_id 가 예약 상태의 원장이다.
+    aliases: [결제, payment, 결제요청, requestpayment]
+    members:
+      - table:zoom_ms_requestpayment
+      - table:zoom_ms_requestpayment_quantity
+      - table:zoom_order_discount
+      - table:zoom_customer_mileages
+      - table:zoom_coupon_customer
+      - route:zoomzoom-api PATCH /order/:id/payment
+      - route:zoomzoom-api POST /webhook/imp/payment
+      - {glob: "route:external-api * /payment*", label: Route}
+      - rule:discount-revenue
+      - rule:coupon-policy
+
+  - uid: domain:refund
+    name: refund
+    nameKo: 취소·환불
+    summary: 고객 취소 요청, 파트너 거절, 자동거절, 부분환불과 환불 예약(zoom_transaction_scheduled).
+    aliases: [환불, 취소, refund, cancel, reject]
+    members:
+      - table:zoom_transaction_scheduled
+      - table:zoom_return
+      - {glob: "route:zoomzoom-api * /order/:id/refund*", label: Route}
+      - {glob: "route:zoomzoom-api * /order/:id/reject*", label: Route}
+      - {glob: "route:zoomzoom-back * ^order/(\\d+)/refund*", label: Route}
+      - msg:order/reject-order
+      - msg:email/reject-order
+      - cron:admin/task/task/rejectorderafterweek
+      - rule:partial-refund
+      - rule:auto-reject
+
+  - uid: domain:settlement
+    name: settlement
+    nameKo: 정산
+    summary: 파트너(셀러) 정산 — 거래 원장 zoom_transactions, 셀러 청구 zoom_seller_charge, 정산 예정(payout estimate)과 일괄 지급(batch payout).
+    aliases: [정산, 지급, payout, settlement, transaction, 수수료]
+    members:
+      - table:zoom_transactions
+      - table:zoom_seller_charge
+      - table:zoom_batch_payout_schedule
+      - table:zoom_batch_payout_schedule_item
+      - table:zoom_seller_payout_type
+      - table:zoom_ms_seller_data
+      - table:zoom_ms_seller
+      - table:accounting_transaction
+      - table:transaction
+      - table:zoom_affiliate_transaction
+      - table:zoom_ms_commission_rate
+      - cron:admin/cron/tasks/payoutestimate
+      - code:zoomzoom-admin/admin/controller/cron/tasks.php#ControllerCronTasks::payoutBatchPayoutSchedules
+      - cron:admin/cron/tasks/confirmbatchpayoutbalance
+      - cron:admin/cron/tasks/payoutmarkdone
+      - cron:admin/cron/tasks/updatetransactionfee
+      - cron:zoomzoom-auth/lock-scheduled-payout
+      - cron:zoomzoom-auth/remove-duplicate-transactions
+      - cron:zoomzoom-auth/add-transaction
+      - cron:zoomzoom-auth/cleanup-commission
+      - {glob: "route:zoomzoom-admin route=multiseller/batchpayout*", label: Route}
+      - {glob: "route:zoomzoom-admin route=multiseller/seller-charge*", label: Route}
+      - {glob: "route:zoomzoom-admin route=multiseller/enquiries/transactions*", label: Route}
+      - {glob: "route:zoomzoom-partners route=seller/account-payoutschedule*", label: Route}
+      - {glob: "route:zoomzoom-partners route=seller/account-transaction*", label: Route}
+      - {glob: "route:zoomzoom-api * /transaction*", label: Route}
+      - rule:seller-payout-policy
+      - rule:partial-refund
+      - code:zoomzoom-admin/system/library/zoomtu/payout.php#ZZTPayout
+      - code:zoomzoom-admin/system/library/zoomtu/transactions.php#ZZTTransactions
+      - code:zoomzoom-admin/system/library/zoomtu/seller_charge.php#ZZTSellerCharge
+      - code:zoomzoom-admin/system/library/zoomtu/commission.php#ZZTCommission

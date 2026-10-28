@@ -9,11 +9,11 @@ import tarfile
 from collections import Counter, defaultdict
 from pathlib import Path
 
-from . import classification, docs, laravel, php, schema_ddl, sources, ts
+from . import classification, curated, docs, laravel, php, schema_ddl, sources, ts
 from .collect import Collector, Record
 from .schema import Schema
 
-EXTRACTORS = {"schema": "1", "classification": "1", "docs": "1", "php": "1", "ts": "1", "laravel": "1"}
+EXTRACTORS = {"schema": "1", "classification": "1", "docs": "1", "php": "1", "ts": "1", "laravel": "1", "curated": "1"}
 
 
 class BuildError(RuntimeError):
@@ -35,6 +35,7 @@ def run(out_dir: Path | None = None, update_state: bool = True, strict: bool = F
     meta["ts"] = ts.extract(col, schema=schema)
     meta["laravel"] = laravel.extract(col, schema=schema)
     meta["placeholders"] = {"calls": str(php.ensure_placeholders(col))}
+    meta["curated"] = curated.extract(col)
 
     # 2. 노드가 없는 관계는 버리고 report 에 적는다 (문서 부패·아직 안 만든 추출기)
     dangling: dict[str, list[str]] = defaultdict(list)

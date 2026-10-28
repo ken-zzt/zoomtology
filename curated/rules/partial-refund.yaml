@@ -1,0 +1,20 @@
+# 정책 문서: policies/partial-refund.md (부분환불·정산 반영). 유닛 수준.
+rule: rule:partial-refund
+confidence: auto
+lastVerifiedAt: 2026-10-28
+verifiedBy: claude
+units:
+  - uid: code:zoomzoom-admin/admin/controller/multiseller/enquiries.php#ControllerMultisellerEnquiries::transactions
+    role: 어드민 주문 상세의 거래 탭 — 부분환불 입력 화면
+  - uid: code:zoomzoom-admin/admin/controller/multiseller/enquiries.php#ControllerMultisellerEnquiries::refundPriceConfirm
+    role: 부분환불 금액 확정 처리
+  - uid: code:zoomzoom-admin/admin/controller/multiseller/enquiries.php#ControllerMultisellerEnquiries::refundCounpon
+    role: 환불 시 쿠폰 복구
+  - uid: code:zoomzoom-admin/system/library/zoomtu/order_info.php#ZZTOrderInfo::updatePaidInfo
+    role: 결제 금액·마일리지·쿠폰을 다시 써서 주문 금액을 갱신
+  - uid: code:zoomzoom-admin/system/library/zoomtu/commission.php#ZZTCommission::commissionInfoFromOrder
+    role: 주문의 수수료·수익 계산(부분환불 뒤 재계산)
+  - uid: code:zoomzoom-admin/system/library/zoomtu/transactions.php#ZZTTransactions::addTransaction
+    role: 환불·수익 조정 거래 기록(zoom_transactions)
+  - uid: code:zoomzoom-admin/system/library/zoomtu/transactions.php#ZZTTransactions::refundMoneyFromScheduled
+    role: 환불 예약(zoom_transaction_scheduled) 처리 완료 표시

@@ -1,0 +1,10 @@
+uid: doc:zoomtology/curated/processes/pilot.yaml
+title: 파일럿
+confidence: auto
+steps:
+  - id: order
+    name: 주문
+    refs: [table:zoom_order]
+  - id: settle
+    name: 정산
+    refs: [table:zoom_seller_charge]

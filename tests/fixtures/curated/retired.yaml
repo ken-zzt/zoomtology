@@ -1,0 +1,15 @@
+confidence: auto
+retired:
+  - name: legacy-user-web
+    reason: 은퇴
+    match:
+      - uid_glob: "file:zoomzoom-admin/catalog/*"
+      - label: Route
+        props: {repo: zoomzoom-admin, area: catalog}
+    except:
+      - uid_glob: "*zoomzoom-admin/catalog/controller/task/*"
+      - uid_glob: "route:zoomzoom-admin route=task/*"
+  - name: add-transaction-v2
+    reason: 미사용
+    uids: [code:zoomzoom-admin/system/library/zoomtu/transactions.php#ZZTTransactions::addTransactionV2]
+    supersededBy: code:zoomzoom-admin/system/library/zoomtu/transactions.php#ZZTTransactions::addTransaction

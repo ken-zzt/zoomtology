@@ -1,0 +1,67 @@
+# 파일럿 프로세스 — 주문 → 결제 → 확정 → 이용 → 취소/환불 → 정산. v1 은 Doc 노드 + 단계별 DOCUMENTED_BY 로 내보낸다 (v1.1 에서 Process 노드로 전환).
+uid: doc:zoomtology/curated/processes/order-to-settlement.yaml
+title: 주문→결제→취소/환불→정산 (파일럿)
+summary: 고객 주문이 결제·파트너 확정·이용을 거쳐 정산되거나 취소·환불되는 흐름. 각 단계의 진입점(라우트·큐·크론)과 상태 원장을 잇는다.
+status: draft
+confidence: auto
+lastVerifiedAt: 2026-10-28
+verifiedBy: claude
+steps:
+  - id: order
+    name: 주문 생성
+    actor: 고객 (zoomzoom-front → zoomzoom-back → zoomzoom-api)
+    refs:
+      - code:zoomzoom-front/src/apis/checkout.ts#createOrder
+      - route:zoomzoom-back POST ^order$
+      - route:zoomzoom-api POST /order
+      - table:zoom_order
+      - table:zoom_ms_requestpayment
+      - table:zoom_cart
+      - rule:cart-status-flow
+  - id: payment
+    name: 결제 완료
+    actor: 고객 / PG 웹훅
+    refs:
+      - route:zoomzoom-api PATCH /order/:id/payment
+      - code:zoomzoom-api/src/order/infra/persistence/orm/repositories/update-order.repository.ts#UpdateOrderRepository::completePayment
+      - table:zoom_order_discount
+      - table:zoom_customer_mileages
+      - rule:discount-revenue
+  - id: confirm
+    name: 파트너 확정 / 거절 / 예약대기
+    actor: 파트너 (zoomzoom-partners) → SQS → zoomzoom-api
+    refs:
+      - code:zoomzoom-partners/catalog/controller/seller/account-order.php#ControllerSellerAccountOrder::jxAddHistory
+      - msg:order/confirm-order
+      - msg:order/reject-order
+      - route:zoomzoom-api PATCH /order/:id/confirm
+      - route:zoomzoom-api PATCH /order/:id/rejected
+      - rule:reservation-status-flow
+  - id: use
+    name: 이용 · 만료
+    actor: 크론 (admin statuscheck)
+    refs:
+      - cron:admin/cron/tasks/statuscheck
+      - code:zoomzoom-admin/admin/controller/cron/tasks.php#ControllerCronTasks::statusCheck
+  - id: cancel
+    name: 취소 요청 · 자동거절 · 환불
+    actor: 고객 / 크론 / 어드민
+    refs:
+      - route:zoomzoom-api POST /order/:id/refund
+      - code:zoomzoom-api/src/order/domain/order.ts#Order::requestCancel
+      - cron:admin/task/task/rejectorderafterweek
+      - rule:auto-reject
+      - rule:partial-refund
+      - table:zoom_transaction_scheduled
+  - id: settlement
+    name: 정산 · 지급
+    actor: 크론 (admin payout*, auth lock-scheduled-payout) / 어드민
+    refs:
+      - cron:admin/cron/tasks/payoutestimate
+      - code:zoomzoom-admin/admin/controller/cron/tasks.php#ControllerCronTasks::payoutBatchPayoutSchedules
+      - cron:zoomzoom-auth/lock-scheduled-payout
+      - table:zoom_transactions
+      - table:zoom_seller_charge
+      - table:zoom_batch_payout_schedule
+      - rule:seller-payout-policy
+      - domain:settlement

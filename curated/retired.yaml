@@ -1,0 +1,65 @@
+# 폐기(retired) 플래그. 소스에는 남아 있지만 운영에서 쓰지 않는 코드. 폐기 노드에 닿는 관계(호출자 포함)도 retired 가 된다.
+# match: uid_glob 또는 label+props. except 로 뺀다. uids 는 명시 목록. supersededBy 가 있으면 SUPERSEDES(new → old) 를 만든다.
+confidence: auto
+lastVerifiedAt: 2026-10-28
+verifiedBy: claude
+
+retired:
+  - name: legacy-user-web
+    reason: 유저 웹(zoomzoom-admin/catalog)은 은퇴했고 고객 기능은 Next.js 로 옮겨졌다. 예외 — 크론이 부르는 task/task.php, MQ 서버의 ALB 경로(api/naver/*, feed/*, api/health-check)는 운영 중.
+    evidence: doc:zoomzoom-services/docs/10-services/zoomzoom-admin.md
+    match:
+      - uid_glob: "file:zoomzoom-admin/catalog/*"
+      - uid_glob: "code:zoomzoom-admin/catalog/*"
+      - label: Route
+        props: {repo: zoomzoom-admin, area: catalog}
+      - uid_glob: "module:zoomzoom-admin/catalog*"
+    except:
+      - uid_glob: "*zoomzoom-admin/catalog/controller/task/*"
+      - uid_glob: "*zoomzoom-admin/catalog/controller/api/*"
+      - uid_glob: "*zoomzoom-admin/catalog/controller/feed/*"
+      - uid_glob: "*zoomzoom-admin/catalog/controller/seo/*"
+      - uid_glob: "*zoomzoom-admin/catalog/controller/common/*"
+      - uid_glob: "*zoomzoom-admin/catalog/controller/startup/*"
+      - uid_glob: "*zoomzoom-admin/catalog/model/*"
+      - uid_glob: "route:zoomzoom-admin route=task/*"
+      - uid_glob: "route:zoomzoom-admin route=api/*"
+      - uid_glob: "route:zoomzoom-admin route=feed/*"
+      - uid_glob: "route:zoomzoom-admin route=common/*"
+      - uid_glob: "route:zoomzoom-admin route=startup/*"
+
+  - name: add-transaction-v2
+    reason: 반쯤 만들다 둔 거래 V2(zoom_transactions_v2 계열). 호출되지 않으며 zoom_transactions 만 따른다.
+    evidence: Ken 확인 2026-10 (메모리 transaction-v2-abandoned), zoomzoom-services/docs/30-operations/scheduled-jobs.md
+    uids:
+      - code:zoomzoom-admin/system/library/zoomtu/transactions.php#ZZTTransactions::addTransactionV2
+      - code:zoomzoom-partners/system/library/zoomtu/transactions.php#ZZTTransactions::addTransactionV2
+    supersededBy: code:zoomzoom-admin/system/library/zoomtu/transactions.php#ZZTTransactions::addTransaction
+
+  - name: paypal
+    reason: PayPal 결제·셀러 지급은 오래전에 중단됐다. 코드는 남아 있지만 죽은 경로.
+    evidence: Ken 확인 2026-10 (메모리 no-paypal)
+    match:
+      - uid_glob: "file:zoomzoom-*/system/library/ms-paypal.php"
+      - uid_glob: "code:zoomzoom-*/system/library/ms-paypal.php#*"
+      - uid_glob: "file:zoomzoom-*/system/library/zoomtu/paypalseller.php"
+      - uid_glob: "code:zoomzoom-*/system/library/zoomtu/paypalseller.php#*"
+      - uid_glob: "file:zoomzoom-*/catalog/controller/payment/multimerch-paypal.php"
+      - uid_glob: "code:zoomzoom-*/catalog/controller/payment/multimerch-paypal.php#*"
+      - uid_glob: "code:zoomzoom-*/system/library/zoomtu/payout.php#ZZTPayout::paypalMasspay"
+      - uid_glob: "code:zoomzoom-*/system/library/msseller.php#MsSeller::getPaypal"
+      - uid_glob: "code:zoomzoom-*/system/library/msseller.php#MsSeller::setPaypal"
+
+  - name: stripe-destination-payout
+    reason: Stripe destination(connected account)으로 파트너에게 지급하던 경로. 지금은 Stripe 로 받는 파트너가 없다(Airwallex 로 옮김). 고객 결제 capture 쪽 Stripe 코드는 살아 있다.
+    evidence: Ken 확인 2026-10 (메모리 no-stripe-destination-sellers)
+    match:
+      - uid_glob: "file:zoomzoom-*/system/library/zoomtu/stripeseller.php"
+      - uid_glob: "code:zoomzoom-*/system/library/zoomtu/stripeseller.php#*"
+      - uid_glob: "code:zoomzoom-*/system/library/zoomtu/payout.php#ZZTPayout::stripePayoutForOrder"
+      - uid_glob: "code:zoomzoom-*/system/library/zoomtu/payout.php#ZZTPayout::stripePayoutToSeller"
+      - uid_glob: "code:zoomzoom-*/system/library/zoomtu/payout.php#ZZTPayout::stripeTransfer"
+      - uid_glob: "code:zoomzoom-*/system/library/zoomtu/payout.php#ZZTPayout::payoutFromStripeToAirwallex"
+      - uid_glob: "code:zoomzoom-*/system/library/zoomtu/payout.php#ZZTPayout::changePayoutFromStripeToAirwallex"
+      - uid_glob: "code:zoomzoom-admin/admin/controller/multiseller/batchpayout.php#ControllerMultisellerBatchpayout::stripe2Airwallex"
+      - uid_glob: "code:zoomzoom-*/system/library/msseller.php#MsSeller::getStripeAccountId"

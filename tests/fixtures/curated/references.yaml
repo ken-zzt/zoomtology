@@ -1,0 +1,10 @@
+confidence: verified
+lastVerifiedAt: 2026-10-28
+verifiedBy: ken
+references:
+  - from: col:zoom_order.product_id
+    to: col:zoom_product.product_id
+    evidence: [zoomzoom-admin/x.php:1]
+  - from: col:zoom_ms_seller.seller_id
+    to: col:zoom_seller_charge.seller_id
+    evidence: [x]

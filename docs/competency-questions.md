@@ -31,7 +31,7 @@ related_to:
 | 8 | `zoom_order` 와 가장 자주 JOIN 되는 테이블은? | `kg_code_for_table {table:"zoom_order", op:"join"}` | `joins[]` 에 `zoom_ms_order_product_data`, `zoom_order_product`, `zoom_ms_requestpayment` | 2 |
 | 9 | 정산(settlement) 도메인에 속한 테이블 목록 | `kg_neighbors {uid:"domain:settlement", direction:"in", types:["BELONGS_TO_DOMAIN"], limit:100}` | `zoom_seller_charge`, payout 계열 | 4 (curated) |
 | 10 | `zoom_seller_charge.status` 값과 의미 | `kg_node {uid:"col:zoom_seller_charge.status"}` | status-codes.md 의 값들 | 1 |
-| 11 | `zoom_order.product_id` 는 어느 테이블을 가리키나? (FK 없음) | `kg_neighbors {uid:"col:zoom_order.product_id", types:["REFERENCES"]}` | `col:zoom_product.product_id`, `kind: logical`, `confidence: verified` | 4 (curated) |
+| 11 | `zoom_order_product.product_id` 는 어느 테이블을 가리키나? (FK 없음; `zoom_order` 엔 product_id 가 없다) | `kg_neighbors {uid:"col:zoom_order_product.product_id", types:["REFERENCES"]}` | `col:zoom_product.product_id`, `kind: logical`, `source: manual` (Ken 승인 뒤 `verified`) | 4 (curated) |
 | 12 | `payoutEstimate` 크론이 읽고 쓰는 테이블 | `kg_tables_for_code {ref:"code:zoomzoom-admin/admin/controller/cron/tasks.php#ControllerCronTasks::payoutEstimate"}` | callee 경유 포함 3개 이상 | 2 |
 | 13 | `addTransactionV2` 는 아직 쓰이나? | `kg_node {uid:"code:zoomzoom-admin/system/library/zoomtu/transactions.php#ZZTTransactions::addTransactionV2"}` | `status: retired`, `SUPERSEDES` 관계, 호출자 관계도 retired | 4 (curated) |
 | 14 | 부분환불 정책 문서는 어떤 코드를 근거로 하나? | `kg_neighbors {uid:"rule:partial-refund", direction:"in", types:["IMPLEMENTS_RULE"]}` | 정책 문서 `sources:` 의 파일/유닛 uid | 1 |
@@ -45,6 +45,8 @@ related_to:
 | 24 | (회귀) api `ConfirmOrderCommand::execute` 가 피호출자를 거쳐 닿는 테이블 | `kg_tables_for_code {uid:"zoomzoom-api/…#ConfirmOrderCommand::execute", depth:2}` | `table:zoom_order`·`table:zoom_customer_mileages` via callee (컨트롤러→서비스→커맨드→리포지토리는 3단계) | 3 |
 | 25 | (회귀) Laravel 스케줄 `confim-mileage` 가 실행하는 명령 클래스 | `kg_neighbors {uid:"cron:zoomzoom-auth/confim-mileage", types:["TRIGGERS"]}` | `app/Console/Commands/Crons/…::handle` | 3 |
 | 26 | (회귀) MQ 서버의 zoomzoom-api 사본이 담당하는 모듈 | `kg_neighbors {uid:"svc:zoomzoom-api/mq", types:["CONTAINS"]}` | `module:zoomzoom-api/src/task` | 3 |
+| 27 | (회귀) 레거시 유저 웹 라우트는 폐기로 표시되나 | `kg_node {uid:"route:zoomzoom-admin route=product/product"}` | `status: retired`, `retiredBy: legacy-user-web` | 4 (curated) |
+| 28 | (회귀) 크론이 부르는 유저 웹 task 라우트는 살아 있나 | `kg_node {uid:"route:zoomzoom-admin route=task/task/rejectorderafterweek"}` | `status: active` (retired.yaml 의 except) | 4 (curated) |
 
 ## 측정
 

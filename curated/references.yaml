@@ -1,0 +1,95 @@
+# 파일럿 테이블의 논리 FK (DDL 엔 FK 가 없다 — ADR 0004). 방향은 참조하는 컬럼 → 참조되는 PK.
+# evidence 는 추출기가 ON 절에서 본 자리(`repo/path:line`) 또는 문서. 추출기의 REFERENCES(logical, auto) 위에 manual 로 얹힌다.
+# Ken 이 행을 승인하면 confidence: verified + lastVerifiedAt 으로 바꾼다 (파일 머리 또는 행마다).
+confidence: auto
+lastVerifiedAt: 2026-10-28
+verifiedBy: claude
+
+references:
+  - from: col:zoom_order.customer_id
+    to: col:zoom_customer.customer_id
+    evidence: [zoomzoom-admin/admin/model/report/customer.php:128]
+  - from: col:zoom_order.order_status_id
+    to: col:zoom_order_status.order_status_id
+    evidence: [zoomzoom-admin/admin/model/account/review.php:140]
+    note: 상태 이름 표. 의미는 enum:zoom_order.order_status_id=* 에 있다.
+  - from: col:zoom_order.marketing_id
+    to: col:zoom_marketing.marketing_id
+    evidence: [zoomzoom-admin/admin/model/affiliate/transaction.php:118]
+  - from: col:zoom_order.discount_id
+    to: col:zoom_order_discount.order_discount_id
+    evidence: [zoomzoom-admin/system/library/zoomtu/transactions.php]
+    note: 주문 할인(쿠폰·캠페인) 행. zoom_order_discount.order_id 와 양방향으로 가리킨다.
+  - from: col:zoom_order_product.order_id
+    to: col:zoom_order.order_id
+    evidence: [zoomzoom-admin/admin/controller/module/zztdatabase.php:226]
+  - from: col:zoom_order_product.product_id
+    to: col:zoom_product.product_id
+    evidence: [zoomzoom-admin/admin/model/account/order.php:216, zoomzoom-admin/admin/model/report/product.php:212]
+    note: zoom_order 자체엔 product_id 가 없다(product_campaign_id 만). 주문의 상품은 zoom_order_product 를 거친다. CQ 11.
+  - from: col:zoom_order_total.order_id
+    to: col:zoom_order.order_id
+    evidence: [zoomzoom-admin/admin/model/report/sale.php:192]
+  - from: col:zoom_order_history.order_id
+    to: col:zoom_order.order_id
+    evidence: [zoomzoom-admin/admin/controller/module/zztdatabase.php:3147]
+  - from: col:zoom_ms_order_product_data.order_id
+    to: col:zoom_order.order_id
+    evidence: [zoomzoom-admin/admin/controller/module/zztdatabase.php:2035]
+  - from: col:zoom_ms_order_product_data.seller_id
+    to: col:zoom_ms_seller.seller_id
+    evidence: [zoomzoom-admin/system/library/zoomtu/payout.php]
+  - from: col:zoom_ms_requestpayment.order_id
+    to: col:zoom_order.order_id
+    evidence: [zoomzoom-admin/admin/controller/module/zztdatabase.php:226]
+    note: 예약 요청(결제 요청) 1건 = 주문 1건. 예약 상태 원장은 zoom_ms_requestpayment.status_id.
+  - from: col:zoom_ms_requestpayment.request_id
+    to: col:zoom_ms_conversation.conversation_id
+    evidence: [zoomzoom-admin/admin/controller/cron/tasks.php:551]
+    note: 같은 id 를 공유하는 1:1 관계(문의 = 예약 요청). 둘 다 PK 라 추출기는 방향을 정하지 못한다.
+  - from: col:zoom_ms_requestpayment_quantity.request_id
+    to: col:zoom_ms_requestpayment.request_id
+    evidence: [zoomzoom-admin/admin/model/affiliate/transaction.php:118]
+  - from: col:zoom_ms_suborder.order_id
+    to: col:zoom_order.order_id
+    evidence: [zoomzoom-admin/admin/controller/module/zztdatabase.php:682]
+  - from: col:zoom_ms_suborder_history.suborder_id
+    to: col:zoom_ms_suborder.suborder_id
+    evidence: [zoomzoom-admin/admin/controller/module/zztdatabase.php:682]
+  - from: col:zoom_provider_order.order_id
+    to: col:zoom_order.order_id
+    evidence: [zoomzoom-admin/admin/model/multiseller/conversation.php:42]
+  - from: col:zoom_order_discount.order_id
+    to: col:zoom_order.order_id
+    evidence: [zoomzoom-admin/admin/controller/module/zztdatabase.php:2035]
+  - from: col:zoom_order_discount.coupon_id
+    to: col:zoom_coupon.coupon_id
+    evidence: [zoomzoom-admin/admin/model/sale/order.php:85]
+  - from: col:zoom_coupon_customer.order_id
+    to: col:zoom_order.order_id
+    evidence: [zoomzoom-admin/admin/model/sale/order.php:85]
+  - from: col:zoom_customer_mileages.order_id
+    to: col:zoom_order.order_id
+    evidence: [zoomzoom-partners/system/library/zoomtu/transactions.php:3262]
+  - from: col:zoom_transactions.reference_id
+    to: col:zoom_order.order_id
+    evidence: [zoomzoom-admin/admin/controller/module/zztdatabase.php:2754, zoomzoom-services/docs/20-database/status-codes.md]
+    note: 다형 참조 — kind 가 주문 계열(revenue_captured·refund 등)일 때만 order_id 다. seller_charge 계열은 zoom_seller_charge.id 를 가리킨다.
+  - from: col:zoom_transaction_scheduled.reference_id
+    to: col:zoom_order.order_id
+    evidence: [zoomzoom-admin/system/library/zoomtu/transactions.php]
+    note: 다형 참조(reference_type 과 함께). 환불 예약은 주문을 가리킨다.
+  - from: col:zoom_seller_charge.seller_id
+    to: col:zoom_ms_seller.seller_id
+    evidence: [zoomzoom-services/reference/schema (DDL FK zoom_seller_charge_ibfk_1)]
+    note: DDL 에 FK 가 있는 드문 경우 — 추출기의 kind fk 와 같은 방향이라 그대로 겹친다.
+  - from: col:zoom_seller_payout_type.seller_id
+    to: col:zoom_ms_seller.seller_id
+    evidence: [zoomzoom-admin/admin/controller/cron/tasks.php:802]
+  - from: col:zoom_ms_seller_data.seller_id
+    to: col:zoom_ms_seller.seller_id
+    evidence: [zoomzoom-admin/catalog/controller/feed/google_sitemap.php:141]
+  - from: col:zoom_ms_seller.seller_id
+    to: col:zoom_customer.customer_id
+    evidence: [zoomzoom-admin/admin/model/multiseller/seller.php:47]
+    note: 셀러 id = 고객 id (멀티셀러 확장의 관례).

@@ -1,0 +1,6 @@
+rule: rule:auto-reject
+confidence: auto
+units:
+  - uid: cron:admin/cron/tasks/statuscheck
+    role: 크론
+  - uid: code:nope/x.php#X::y

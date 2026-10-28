@@ -1,0 +1,22 @@
+# 정책 문서: zoomzoom-services/docs/20-database/policies/auto-reject.md (예약요청 자동거절). 파일 수준 IMPLEMENTS_RULE 은 docs.py 가 이미 만든다 — 여기는 유닛 수준.
+rule: rule:auto-reject
+confidence: auto
+lastVerifiedAt: 2026-10-28
+verifiedBy: claude
+units:
+  - uid: cron:admin/task/task/rejectorderafterweek
+    role: 크론 진입점 — 유저웹 경로 task/task/rejectOrderAfterWeek 를 MQ crontab 이 부른다
+  - uid: code:zoomzoom-admin/catalog/controller/task/task.php#ControllerTaskTask::rejectOrderAfterWeek
+    role: 크론 핸들러. 기한이 지난 예약요청을 찾아 _rejectNoAnswerOrder 로 넘긴다
+  - uid: code:zoomzoom-admin/catalog/controller/task/task.php#ControllerTaskTask::_rejectNoAnswerOrder
+    role: 건별 자동거절(상태 전이 + 환불 + 알림)
+  - uid: code:zoomzoom-admin/catalog/controller/task/task.php#ControllerTaskTask::reject_internal
+    role: 거절 공통 처리
+  - uid: code:zoomzoom-admin/system/library/zoomtu/iamport.php#ZZTIamport::refundAll
+    role: 아임포트 전액 환불
+  - uid: code:zoomzoom-admin/system/library/zoomtu/iamport.php#ZZTIamport::refundByExternal
+    role: external-api 를 거친 환불(아임포트 v2)
+  - uid: code:zoomzoom-admin/system/library/zoomtu/naverpay.php#ZZTNaverPay::refundAll
+    role: 네이버페이 전액 환불
+  - uid: code:zoomzoom-admin/system/library/zoomtu/tpay.php#ZZTTPay::refundAll
+    role: 티페이 전액 환불

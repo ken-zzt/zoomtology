@@ -1,0 +1,17 @@
+confidence: auto
+lastVerifiedAt: 2026-10-28
+domains:
+  - uid: domain:order
+    nameKo: 주문
+    aliases: [주문]
+    members:
+      - table:zoom_order
+      - table:zoom_product
+      - {glob: "route:zoomzoom-admin route=cron/*", label: Route}
+      - cron:admin/cron/tasks/statuscheck
+      - col:zoom_nope.x
+  - uid: domain:ghost
+    nameKo: 유령
+    confidence: verified          # 날짜 없음 → 적용 안 함
+    lastVerifiedAt: null
+    members: []

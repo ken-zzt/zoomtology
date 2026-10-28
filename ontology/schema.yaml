@@ -183,7 +183,7 @@ edges:
     from: [CodeUnit, File, Route, CronJob]
     to: [BusinessRule]
   BELONGS_TO_DOMAIN:
-    from: [Table, Route, Queue, QueueMessage, CronJob, BusinessRule, CodeUnit, Module]
+    from: [Table, Route, Queue, QueueMessage, CronJob, BusinessRule, CodeUnit, Module, Service]
     to: [Domain]
   USES_EXTERNAL:
     from: [CodeUnit, Module, Service]

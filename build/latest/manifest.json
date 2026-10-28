@@ -1,22 +1,24 @@
 {
-  "builtAt": "2026-10-28T06:39:13+00:00",
+  "builtAt": "2026-10-28T07:06:00+00:00",
   "counts": {
     "edges": {
+      "BELONGS_TO_DOMAIN": 148,
       "CALLS": 20281,
       "CALLS_HTTP": 521,
       "CONSUMES": 78,
       "CONTAINS": 31867,
       "DEFINES": 368,
-      "DOCUMENTED_BY": 580,
+      "DOCUMENTED_BY": 614,
       "HANDLES": 3533,
       "HAS_COLUMN": 4049,
-      "HAS_VALUE": 272,
-      "IMPLEMENTS_RULE": 97,
+      "HAS_VALUE": 273,
+      "IMPLEMENTS_RULE": 170,
       "JOINS": 1172,
       "MAPS_TO": 358,
       "PUBLISHES": 73,
       "READS": 8148,
-      "REFERENCES": 432,
+      "REFERENCES": 436,
+      "SUPERSEDES": 2,
       "TRIGGERS": 80,
       "WRITES": 3178
     },
@@ -26,11 +28,12 @@
       "Column": 4049,
       "CronJob": 55,
       "Database": 3,
-      "Doc": 161,
-      "EnumValue": 272,
+      "Doc": 162,
+      "Domain": 4,
+      "EnumValue": 273,
       "File": 6765,
       "Module": 186,
-      "Queue": 5,
+      "Queue": 6,
       "QueueMessage": 79,
       "Repo": 17,
       "Route": 3696,
@@ -41,17 +44,32 @@
   "dirty": true,
   "extractors": {
     "classification": "1",
+    "curated": "1",
     "docs": "1",
     "laravel": "1",
     "php": "1",
     "schema": "1",
     "ts": "1"
   },
-  "gitSha": "04629908e62ee5ff1d8f09fd73100fe4f81da79e",
+  "gitSha": "4d0fcaba936ff52c015a74db2cf48cb7c1695768",
   "inputs": {
     "classification": {
       "classified": "492",
       "excluded": "10"
+    },
+    "curated": {
+      "belongs_to_domain": "148",
+      "domains": "4",
+      "enum_values": "8",
+      "files": "domains.yaml,references.yaml,enum-overrides.yaml,queues.yaml,rules/auto-reject.yaml,rules/cart-status-flow.yaml,rules/discount-revenue.yaml,rules/partial-refund.yaml,rules/reservation-status-flow.yaml,rules/seller-payout-policy.yaml,processes/order-to-settlement.yaml,retired.yaml",
+      "implements_rule": "73",
+      "process_refs": "34",
+      "processes": "1",
+      "queue_constants": "5",
+      "references": "26",
+      "retired_edges": "4756",
+      "retired_nodes": "1659",
+      "supersedes": "2"
     },
     "docs": {
       "cronJobs": "59",
@@ -119,5 +137,5 @@
       "sha": "a40043b9bf7aeef27821e04e72a2cd72a18d18c5"
     }
   },
-  "version": "20261028T0639Z-0462990-dirty"
+  "version": "20261028T0706Z-4d0fcab-dirty"
 }

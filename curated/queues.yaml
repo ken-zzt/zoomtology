@@ -1,0 +1,12 @@
+# 레거시 PHP 의 SEND_*_QUEUE 상수 ↔ message-consumer 역할(SQS 큐 이름 꼬리). php.py 가 읽어 PUBLISHES 의 큐 역할을 정한다.
+# 근거: devenv/templates/nginx/zzt/{user,partner}.env.conf.tmpl, zoomzoom-services/docs/40-local-dev/devenv-architecture.md (2026-10-28 확인).
+confidence: verified
+lastVerifiedAt: 2026-10-28
+verifiedBy: claude
+
+constants:
+  SEND_ORDER_QUEUE: order
+  SEND_EMAIL_QUEUE: email
+  SEND_EVENT_QUEUE: event
+  SEND_PUSH_QUEUE: notif          # notif-message-consumer (SQSNotificationServiceKey.Push = 'push')
+  SEND_LAMBDA_QUEUE: lambda       # zoomzoom-api 의 dev-zzt-api 큐 — message-consumer 역할이 아니다

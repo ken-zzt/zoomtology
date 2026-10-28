@@ -1,0 +1,20 @@
+# 정책 문서: policies/discount-revenue.md (할인과 수익 계산). 유닛 수준.
+rule: rule:discount-revenue
+confidence: auto
+lastVerifiedAt: 2026-10-28
+verifiedBy: claude
+units:
+  - uid: code:zoomzoom-api/src/order/application/commands/create-order.command-handler.ts#CreateOrderCommandHandler::execute
+    role: 주문 생성 시 할인·수익 값 기록
+  - uid: code:zoomzoom-api/src/product/application/services/get-revenue-data-for-order.service.ts#GetRevenueDataForOrderService::get
+    role: 주문의 수익 데이터 계산
+  - uid: code:zoomzoom-api/src/product/application/services/get-commission-data-for-order.service.ts#GetCommissionDataForOrderService::get
+    role: 주문의 수수료 데이터 계산
+  - uid: code:zoomzoom-api/src/product-campaign/domain/product-campaign-price.ts#ProductCampaignPrice
+    role: 캠페인 할인가 계산
+  - uid: code:zoomzoom-api/src/order/domain/factories/order.factory.ts#OrderFactory::create
+    role: 주문 엔티티 조립(할인·총액)
+  - uid: code:zoomzoom-api/src/order/domain/factories/order.factory.ts#OrderFactory::createOrderProductData
+    role: zoom_ms_order_product_data 조립(store_discount·sale_fee_rate)
+  - uid: code:zoomzoom-admin/system/library/zoomtu/transactions.php#ZZTTransactions::getDiscountedInfoByOrderId
+    role: 레거시 할인 정보 조회(정산 계산에 사용)

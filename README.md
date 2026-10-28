@@ -32,7 +32,14 @@ uv run zoomtology build               # 추출 → 병합 → 검증 → build/d
 NestJS 계열(zoomzoom-api 등 6개)은 `extractors/ts`(node 24 + ts-morph)가 읽는다. 처음 한 번 `cd extractors/ts && npm install`.
 빌드가 저장소마다 `node src/extract.mjs` 를 돌려 `build/inputs/ts/<repo>.jsonl` 을 만든다(약 10초). `ZOOMTOLOGY_TS_CACHE=1` 이면 있는 JSONL 을 재사용한다.
 
-추출·빌드·배포 명령은 1~4단계(ZDV-345~348)에서 붙는다. 빌드는 **Ken 의 메인 Mac** 에서만 돌린다(형제 저장소 `../` 를 읽는다). 노트북(mbp2017)엔 번들만 보낸다 — [ADR 0002](docs/decisions/0002-git-source-laptop-gets-bundles.md).
+재빌드·배포는 스크립트 하나로 한다(메인 Mac 에서만 — 형제 저장소 `../` 를 읽는다). 노트북(mbp2017)엔 번들만 보낸다 — [ADR 0002](docs/decisions/0002-git-source-laptop-gets-bundles.md).
+
+```bash
+scripts/rebuild-and-deploy.sh             # build.sh → build/latest·state 커밋 → 태그 bundle/<version> → deploy-laptop.sh
+scripts/deploy-laptop.sh build/dist/zoomtology-<version>.tar.gz   # 번들만 다시 올릴 때
+```
+
+dev Prism(메인 Mac :4300)에 올릴 땐 `AgentPrism` 에서 `yarn kg:load <번들>`. 역량 질문 회귀는 `tests/cq/run_cq.py --stage N` (README 의 실행 절).
 
 ## 규칙
 

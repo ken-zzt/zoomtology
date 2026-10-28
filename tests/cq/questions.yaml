@@ -113,3 +113,34 @@
   tool: kg_neighbors
   args: { uid: "svc:zoomzoom-api/mq", direction: out, types: [CONTAINS] }
   must: ["module:zoomzoom-api/src/task"]
+# --- 4단계 (ZDV-348): curated ---
+- id: 5
+  stage: 4
+  tool: kg_neighbors
+  args: { uid: "rule:auto-reject", direction: in, types: [IMPLEMENTS_RULE], limit: 100 }
+  must: ["cron:admin/task/task/rejectorderafterweek", "ControllerTaskTask::_rejectNoAnswerOrder"]
+- id: 9
+  stage: 4
+  tool: kg_neighbors
+  args: { uid: "domain:settlement", direction: in, types: [BELONGS_TO_DOMAIN], limit: 100 }
+  must: ["table:zoom_seller_charge", "table:zoom_batch_payout_schedule", "table:zoom_transactions"]
+- id: 11
+  stage: 4
+  tool: kg_neighbors
+  args: { uid: "col:zoom_order_product.product_id", direction: out, types: [REFERENCES] }
+  must: ["col:zoom_product.product_id", "logical", "manual"]
+- id: 13
+  stage: 4
+  tool: kg_node
+  args: { uid: "code:zoomzoom-admin/system/library/zoomtu/transactions.php#ZZTTransactions::addTransactionV2" }
+  must: ["retired", "SUPERSEDES", "add-transaction-v2"]
+- id: 27
+  stage: 4
+  tool: kg_node
+  args: { uid: "route:zoomzoom-admin route=product/product" }
+  must: ["retired", "legacy-user-web"]
+- id: 28
+  stage: 4
+  tool: kg_node
+  args: { uid: "route:zoomzoom-admin route=task/task/rejectorderafterweek" }
+  must: ['"status":"active"']

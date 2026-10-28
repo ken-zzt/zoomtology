@@ -1,0 +1,3 @@
+confidence: verified
+lastVerifiedAt: 2026-10-28
+constants: {SEND_ORDER_QUEUE: order, SEND_PUSH_QUEUE: notif}

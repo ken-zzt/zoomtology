@@ -1,0 +1,22 @@
+# 정책 문서: policies/cart-status-flow.md (카트 상태, zoom_cart.status). 유닛 수준.
+rule: rule:cart-status-flow
+confidence: auto
+lastVerifiedAt: 2026-10-28
+verifiedBy: claude
+units:
+  - uid: code:zoomzoom-api/src/cart/domain/cart.ts#Cart::expired
+    role: 만료 판정
+  - uid: code:zoomzoom-api/src/cart/domain/cart.ts#Cart::extendSessionTimeout
+    role: 세션 연장
+  - uid: code:zoomzoom-api/src/cart/application/commands/create-cart.command.ts#CreateCartCommand::execute
+    role: 카트 생성
+  - uid: code:zoomzoom-api/src/cart/application/commands/patch-cart.command.ts#PatchCartCommand::execute
+    role: 카트 갱신(수량·옵션)
+  - uid: code:zoomzoom-api/src/cart/application/commands/set-coupon.command-handler.ts#SetCouponCommandHandler::execute
+    role: 쿠폰 적용
+  - uid: code:zoomzoom-api/src/cart/application/commands/unset-coupon.command-handler.ts#UnsetCouponCommandHandler::execute
+    role: 쿠폰 해제
+  - uid: code:zoomzoom-api/src/cart/application/commands/extend-session.command-handler.ts#ExtendSessionCommandHandler::execute
+    role: 세션 연장 커맨드
+  - uid: code:zoomzoom-api/src/cart/application/commands/set-order-id.command-handler.ts#SetOrderIdCommandHandler::execute
+    role: 주문 생성 뒤 카트에 주문 id 연결(Processed)

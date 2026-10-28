@@ -1,7 +1,7 @@
-# 빌드 report — 20261028T0639Z-0462990-dirty
+# 빌드 report — 20261028T0706Z-4d0fcab-dirty
 
-- builtAt: 2026-10-28T06:39:13+00:00  gitSha: 0462990 (dirty)
-- inputs: {"schema": {"primary": "local_zzt-2026-10-28.sql (502 tables)", "secondary": "urimalo_zzt-2026-04-22.sql (517 tables)", "tables": "519"}, "classification": {"classified": "492", "excluded": "10"}, "docs": {"docs": "102", "statusCodeValues": "124", "domainColumns": "432", "policies": "8", "cronJobs": "59", "glossary": "14", "ownership": "27", "repos": "17"}, "php": {"zoomzoom-admin": "files=879 classes=906 units=8417 queries=5559", "zoomzoom-partners": "files=463 classes=487 units=4461 queries=2875"}, "ts": {"zoomzoom-api": "files=3198 nodes=10320 edges=15887 ms=2894", "message-consumer": "files=103 nodes=461 edges=458 ms=826", "zoomzoom-back": "files=27 nodes=389 edges=394 ms=734", "external-api": "files=452 nodes=1665 edges=2236 ms=253", "data-api": "files=43 nodes=131 edges=170 ms=230", "zoomzoom-front": "files=856 nodes=2306 edges=2307 ms=2960"}, "laravel": {"zoomzoom-auth": "files=634 classes=594 units=2136 models=154 schedules=33 routes=194"}, "placeholders": {"calls": "85"}}
+- builtAt: 2026-10-28T07:06:00+00:00  gitSha: 4d0fcab (dirty)
+- inputs: {"schema": {"primary": "local_zzt-2026-10-28.sql (502 tables)", "secondary": "urimalo_zzt-2026-04-22.sql (517 tables)", "tables": "519"}, "classification": {"classified": "492", "excluded": "10"}, "docs": {"docs": "102", "statusCodeValues": "124", "domainColumns": "432", "policies": "8", "cronJobs": "59", "glossary": "14", "ownership": "27", "repos": "17"}, "php": {"zoomzoom-admin": "files=879 classes=906 units=8417 queries=5559", "zoomzoom-partners": "files=463 classes=487 units=4461 queries=2875"}, "ts": {"zoomzoom-api": "files=3198 nodes=10320 edges=15887 ms=2894", "message-consumer": "files=103 nodes=461 edges=458 ms=826", "zoomzoom-back": "files=27 nodes=389 edges=394 ms=734", "external-api": "files=452 nodes=1665 edges=2236 ms=253", "data-api": "files=43 nodes=131 edges=170 ms=230", "zoomzoom-front": "files=856 nodes=2306 edges=2307 ms=2960"}, "laravel": {"zoomzoom-auth": "files=634 classes=594 units=2136 models=154 schedules=33 routes=194"}, "placeholders": {"calls": "85"}, "curated": {"files": "domains.yaml,references.yaml,enum-overrides.yaml,queues.yaml,rules/auto-reject.yaml,rules/cart-status-flow.yaml,rules/discount-revenue.yaml,rules/partial-refund.yaml,rules/reservation-status-flow.yaml,rules/seller-payout-policy.yaml,processes/order-to-settlement.yaml,retired.yaml", "belongs_to_domain": "148", "domains": "4", "enum_values": "8", "implements_rule": "73", "process_refs": "34", "processes": "1", "queue_constants": "5", "references": "26", "retired_edges": "4756", "retired_nodes": "1659", "supersedes": "2"}}
 
 ## 건수
 
@@ -12,11 +12,12 @@
 | Column | 4049 |
 | CronJob | 55 |
 | Database | 3 |
-| Doc | 161 |
-| EnumValue | 272 |
+| Doc | 162 |
+| Domain | 4 |
+| EnumValue | 273 |
 | File | 6765 |
 | Module | 186 |
-| Queue | 5 |
+| Queue | 6 |
 | QueueMessage | 79 |
 | Repo | 17 |
 | Route | 3696 |
@@ -25,42 +26,30 @@
 
 | 관계 | 건수 |
 |---|---|
+| BELONGS_TO_DOMAIN | 148 |
 | CALLS | 20281 |
 | CALLS_HTTP | 521 |
 | CONSUMES | 78 |
 | CONTAINS | 31867 |
 | DEFINES | 368 |
-| DOCUMENTED_BY | 580 |
+| DOCUMENTED_BY | 614 |
 | HANDLES | 3533 |
 | HAS_COLUMN | 4049 |
-| HAS_VALUE | 272 |
-| IMPLEMENTS_RULE | 97 |
+| HAS_VALUE | 273 |
+| IMPLEMENTS_RULE | 170 |
 | JOINS | 1172 |
 | MAPS_TO | 358 |
 | PUBLISHES | 73 |
 | READS | 8148 |
-| REFERENCES | 432 |
+| REFERENCES | 436 |
+| SUPERSEDES | 2 |
 | TRIGGERS | 80 |
 | WRITES | 3178 |
 
-- 이번 빌드에 처음 보인 노드: 40364
-- 지난 빌드엔 있었는데 사라진 uid: 11
+- 이번 빌드에 처음 보인 노드: 40371
+- 지난 빌드엔 있었는데 사라진 uid: 0
 
-### 사라진 uid (verified 는 tombstone 대상 — 4단계에서 처리)
-
-- `cron:admin/cron/tasks/checkContinuouslyBlockedDays`
-- `cron:admin/cron/tasks/confirmBatchPayoutBalance`
-- `cron:admin/cron/tasks/emailTaskRun`
-- `cron:admin/cron/tasks/payoutEstimate`
-- `cron:admin/cron/tasks/payoutMarkDone`
-- `cron:admin/cron/tasks/resetCampaignCredits`
-- `cron:admin/cron/tasks/updateElasticSearchData`
-- `cron:admin/cron/tasks/updateTransactionFee`
-- `cron:admin/task/task/checkProviderOrderStatus`
-- `cron:admin/task/task/rejectOrderAfterWeek`
-- `cron:admin/task/task/runUpdateStats`
-
-- status: {'active': 40049, 'missing-from-source': 315}
+- status: {'active': 38402, 'missing-from-source': 310, 'retired': 1659}
 
 ## 추출기 report — php
 
@@ -478,6 +467,23 @@ Eloquent 호출인데 모델 클래스를 못 찾음 (상위 20):
 - `Client`: 1
 - `UnauthorizedException`: 1
 - `ResourceServer`: 1
+
+
+## 추출기 report — curated
+
+- 파일: domains.yaml, references.yaml, enum-overrides.yaml, queues.yaml, rules/auto-reject.yaml, rules/cart-status-flow.yaml, rules/discount-revenue.yaml, rules/partial-refund.yaml, rules/reservation-status-flow.yaml, rules/seller-payout-policy.yaml, processes/order-to-settlement.yaml, retired.yaml
+- 건수: {'domains': 4, 'belongs_to_domain': 148, 'references': 26, 'enum_values': 8, 'queue_constants': 5, 'implements_rule': 73, 'processes': 1, 'process_refs': 34, 'supersedes': 2, 'retired_nodes': 1659, 'retired_edges': 4756}
+- 폐기 규칙별 노드 수: {'legacy-user-web': 1424, 'add-transaction-v2': 2, 'paypal': 37, 'stripe-destination-payout': 202}
+
+충돌 (7건):
+
+- enum:zoom_order.order_status_id=1: 의미 불일치 — php@1 'book_requested' → manual '예약요청' (manual 적용, alt 에 보존)
+- enum:zoom_order.order_status_id=2: 의미 불일치 — php@1 'book_confirmed' → manual '예약확정' (manual 적용, alt 에 보존)
+- enum:zoom_order.order_status_id=3: 의미 불일치 — php@1 'book_rejected' → manual '예약거절' (manual 적용, alt 에 보존)
+- enum:zoom_order.order_status_id=4: 의미 불일치 — php@1 'payment_failed' → manual '결제실패(미사용)' (manual 적용, alt 에 보존)
+- enum:zoom_order.order_status_id=5: 의미 불일치 — php@1 'refund' → manual '환불' (manual 적용, alt 에 보존)
+- enum:zoom_order.order_status_id=6: 의미 불일치 — php@1 'book_pending' → manual '예약대기' (manual 적용, alt 에 보존)
+- enum:zoom_order.order_status_id=81: 의미 불일치 — php@1 'book_requested' → manual '결제시작' (manual 적용, alt 에 보존)
 
 
 ## 추출기 경고

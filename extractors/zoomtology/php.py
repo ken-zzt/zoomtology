@@ -36,6 +36,25 @@ QUEUE_CONST_RE = re.compile(r"^SEND_([A-Z_]+)_QUEUE$")
 # PHP 의 SEND_<X>_QUEUE 상수 → message-consumer 역할(큐 이름 꼬리). 근거: devenv/templates/nginx/zzt/*.env.conf.tmpl,
 # zoomzoom-services/docs/40-local-dev/devenv-architecture.md (SEND_PUSH_QUEUE → `-notif`). LAMBDA 는 zoomzoom-api 의 `dev-zzt-api` 큐.
 QUEUE_ROLE = {"ORDER": "order", "EMAIL": "email", "EVENT": "event", "PUSH": "notif", "LAMBDA": "lambda"}
+
+
+def _load_curated_maps() -> None:
+    """curated/queues.yaml(constants) 와 curated/enum-overrides.yaml(arrays) 가 있으면 내장 표를 덮는다."""
+    import yaml
+    from .sources import ZOOMTOLOGY
+    q = ZOOMTOLOGY / "curated" / "queues.yaml"
+    if q.exists():
+        doc = yaml.safe_load(q.read_text(encoding="utf-8")) or {}
+        for const, role in (doc.get("constants") or {}).items():
+            m = QUEUE_CONST_RE.match(const)
+            if m:
+                QUEUE_ROLE[m.group(1)] = role
+    e = ZOOMTOLOGY / "curated" / "enum-overrides.yaml"
+    if e.exists():
+        doc = yaml.safe_load(e.read_text(encoding="utf-8")) or {}
+        for a in doc.get("arrays") or []:
+            table, column = a["column"].split(".", 1)
+            STATIC_ENUM_MAP[a["array"]] = (table, column)
 MAX_EXAMPLES = 5
 
 
@@ -369,6 +388,7 @@ def _parse_publish(st: list[phplex.Tok], open_idx: int, line: int) -> _Publish:
 def extract(col: Collector, repos: list[RepoSpec] | None = None, schema: Schema | None = None) -> dict[str, str]:
     schema = schema or Schema.load()
     repos = repos if repos is not None else default_repos()
+    _load_curated_maps()
     known_tables = {uid[len("table:"):] for uid in col.nodes if uid.startswith("table:") and "/" not in uid}
     col.sections.setdefault("php", [])
     meta: dict[str, str] = {}
