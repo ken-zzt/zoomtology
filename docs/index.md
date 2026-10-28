@@ -13,7 +13,9 @@ related_to: []
 
 | 문서 | 내용 |
 |---|---|
+| [tour.md](tour.md) | **먼저 읽는 것.** 한 시간 투어 — 뭘 담았고, 어떻게 만들고, 어떻게 쓰고, 어떻게 유지하나 |
 | [design.md](design.md) | 전체 흐름·저장·추출기·보안 경계. 단계가 끝날 때마다 갱신 |
+| [next-slice.md](next-slice.md) | 다음 슬라이스(부서·역할·프로세스) 메모 |
 | [competency-questions.md](competency-questions.md) | 파일럿 역량 질문 20개 = 완료 기준 = `tests/cq/` 회귀 테스트 |
 | [decisions/](decisions/index.md) | ADR 0001~0007 — 왜 이렇게 정했나 |
 | [research/](research/) | 사전조사 보고서 4건(PDF). ADR 이 인용한다 |
