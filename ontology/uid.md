@@ -16,7 +16,7 @@
 | File | `file:` | `file:<repo>/<path>` | `file:zoomzoom-admin/system/library/zoomtu/order_info.php` |
 | CodeUnit | `code:` | `code:<repo>/<path>#<Class>::<method>` / `#<function>` / `#<Class>` | `code:zoomzoom-admin/system/library/zoomtu/order_info.php#ZZTOrderInfo::getOrder` |
 | Route | `route:` | `route:<repo> <METHOD> <path>` (HTTP), `route:<repo> route=<a/b/c>` (OpenCart, 소문자), `route:<repo> <METHOD> <regex>` (back AccessRule) | `route:zoomzoom-api PATCH /order/:id/rejected`, `route:zoomzoom-admin route=cron/tasks/statuscheck` |
-| Queue | `queue:` | `queue:<role>` | `queue:order` (email · entity · order · notif · event) |
+| Queue | `queue:` | `queue:<role>` — message-consumer 역할 = SQS 큐 이름 꼬리 | `queue:order` (email · entity · order · notif · event). 레거시 PHP 상수는 `SEND_ORDER/EMAIL/EVENT_QUEUE`→같은 이름, `SEND_PUSH_QUEUE`→`notif`, `SEND_LAMBDA_QUEUE`→`lambda`(zoomzoom-api 큐) |
 | QueueMessage | `msg:` | `msg:<role>/<key>` — key 는 enum 의 문자열 값 | `msg:order/confirm-order` |
 | CronJob | `cron:` | `cron:<host>/<route-or-command>` | `cron:admin/cron/tasks/statusCheck`, `cron:mq/task/product/discount-price`, `cron:zoomzoom-auth/zzt-cron:confim-mileage` |
 | Database | `db:` | `db:<handle>` | `db:zzt`, `db:stats`, `db:numbers`, `db:iso`, `db:wc` |

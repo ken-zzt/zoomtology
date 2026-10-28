@@ -33,6 +33,9 @@ HANDLE_DB = {"db": "zzt", "read_db": "zzt", "numbers_db": "numbers", "stats_db":
 STATIC_ENUM_MAP = {"order_status_string": ("zoom_order", "order_status_id")}
 SENSITIVE_RE = re.compile(r"(?i)password|secret|token|api[_-]?key|credential")
 QUEUE_CONST_RE = re.compile(r"^SEND_([A-Z_]+)_QUEUE$")
+# PHP 의 SEND_<X>_QUEUE 상수 → message-consumer 역할(큐 이름 꼬리). 근거: devenv/templates/nginx/zzt/*.env.conf.tmpl,
+# zoomzoom-services/docs/40-local-dev/devenv-architecture.md (SEND_PUSH_QUEUE → `-notif`). LAMBDA 는 zoomzoom-api 의 `dev-zzt-api` 큐.
+QUEUE_ROLE = {"ORDER": "order", "EMAIL": "email", "EVENT": "event", "PUSH": "notif", "LAMBDA": "lambda"}
 MAX_EXAMPLES = 5
 
 
@@ -563,7 +566,10 @@ def _unit_facts(col: Collector, unit: _Unit, facts: _BodyFacts, repo: str, idx: 
         if not p.key:
             stats.no_key_publish.append(f"{repo}/{rel}:{p.line}")
             continue
-        role = (QUEUE_CONST_RE.match(p.queue_const).group(1).lower() if p.queue_const else "lambda").replace("_", "")
+        const_key = QUEUE_CONST_RE.match(p.queue_const).group(1) if p.queue_const else "LAMBDA"
+        role = QUEUE_ROLE.get(const_key, const_key.lower().replace("_", ""))
+        if const_key not in QUEUE_ROLE:
+            col.warn(SOURCE, f"{repo}/{rel}:{p.line}: unknown queue const SEND_{const_key}_QUEUE — role guessed {role!r}")
         stats.queue_roles[role] += 1
         ref = f"{repo}/{rel}:{p.line}"
         quid = model.queue_uid(role)
