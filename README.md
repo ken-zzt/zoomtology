@@ -11,7 +11,7 @@
 | 경로 | 내용 |
 |---|---|
 | `ontology/schema.yaml`, `ontology/uid.md` | 온톨로지 원본 — 라벨·관계·속성·uid 규칙·content guard |
-| `extractors/` | Python 패키지 `zoomtology`(검증기·추출기·빌드) + `ts/`(ts-morph, NestJS 계열) |
+| `extractors/` | Python 패키지 `zoomtology`(검증기·추출기 schema_ddl/classification/docs/php/laravel/ts·빌드) + `ts/`(node + ts-morph, NestJS 계열 → JSONL) |
 | `curated/` | 사람이 쓰는 오버레이 YAML(도메인·논리 FK·폐기·enum 보정·규칙·파일럿 프로세스) |
 | `state/` | 드리프트 추적(`first-seen.tsv`, `uids.txt`) |
 | `build/latest/` | 마지막 빌드의 `manifest.json`·`report.md`(커밋). 번들 tar.gz 는 `build/dist/`(커밋 안 함) |
@@ -28,6 +28,9 @@ uv run pytest -q                    # 스키마 검증기 테스트
 uv run zoomtology validate ../tests/fixtures/nodes.jsonl ../tests/fixtures/edges.jsonl
 uv run zoomtology build               # 추출 → 병합 → 검증 → build/dist/*.tar.gz + build/latest/ + state/
 ```
+
+NestJS 계열(zoomzoom-api 등 6개)은 `extractors/ts`(node 24 + ts-morph)가 읽는다. 처음 한 번 `cd extractors/ts && npm install`.
+빌드가 저장소마다 `node src/extract.mjs` 를 돌려 `build/inputs/ts/<repo>.jsonl` 을 만든다(약 10초). `ZOOMTOLOGY_TS_CACHE=1` 이면 있는 JSONL 을 재사용한다.
 
 추출·빌드·배포 명령은 1~4단계(ZDV-345~348)에서 붙는다. 빌드는 **Ken 의 메인 Mac** 에서만 돌린다(형제 저장소 `../` 를 읽는다). 노트북(mbp2017)엔 번들만 보낸다 — [ADR 0002](docs/decisions/0002-git-source-laptop-gets-bundles.md).
 

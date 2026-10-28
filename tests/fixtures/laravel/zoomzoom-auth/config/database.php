@@ -1,0 +1,1 @@
+<?php return ["password" => "supersecretvalue"];

@@ -63,7 +63,7 @@ def main() -> int:
     qs = yaml.safe_load((HERE / "questions.yaml").read_text(encoding="utf-8"))
     failed = 0
     for q in qs:
-        if q["stage"] > a.stage or (only and q["id"] not in only):
+        if q["stage"] > a.stage or (only and q["id"] not in only) or q.get("skip"):
             continue
         try:
             r = call_tool(url, token, q["tool"], q.get("args") or {})

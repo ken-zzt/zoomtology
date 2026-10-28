@@ -1,36 +1,40 @@
 {
-  "builtAt": "2026-10-28T05:55:45+00:00",
+  "builtAt": "2026-10-28T06:28:38+00:00",
   "counts": {
     "edges": {
-      "CALLS": 14503,
-      "CONTAINS": 14803,
-      "DEFINES": 81,
+      "CALLS": 20281,
+      "CALLS_HTTP": 521,
+      "CONSUMES": 78,
+      "CONTAINS": 31867,
+      "DEFINES": 368,
       "DOCUMENTED_BY": 580,
-      "HANDLES": 2855,
+      "HANDLES": 3533,
       "HAS_COLUMN": 4049,
       "HAS_VALUE": 272,
       "IMPLEMENTS_RULE": 97,
       "JOINS": 1172,
-      "PUBLISHES": 10,
-      "READS": 6863,
+      "MAPS_TO": 358,
+      "PUBLISHES": 73,
+      "READS": 8148,
       "REFERENCES": 432,
-      "TRIGGERS": 47,
-      "WRITES": 2762
+      "TRIGGERS": 80,
+      "WRITES": 3178
     },
     "nodes": {
       "BusinessRule": 8,
-      "CodeUnit": 12924,
+      "CodeUnit": 24534,
       "Column": 4049,
       "CronJob": 55,
       "Database": 3,
       "Doc": 161,
       "EnumValue": 272,
-      "File": 1560,
-      "Module": 60,
-      "Queue": 2,
-      "QueueMessage": 5,
+      "File": 6765,
+      "Module": 186,
+      "Queue": 5,
+      "QueueMessage": 79,
       "Repo": 17,
-      "Route": 2758,
+      "Route": 3696,
+      "Service": 7,
       "Table": 527
     }
   },
@@ -38,10 +42,12 @@
   "extractors": {
     "classification": "1",
     "docs": "1",
+    "laravel": "1",
     "php": "1",
-    "schema": "1"
+    "schema": "1",
+    "ts": "1"
   },
-  "gitSha": "e3525493204e28ec2128da94d7e914fcdeb0f3f3",
+  "gitSha": "41a3b4a9f8506c7cc23aa21011bb90bc155f865c",
   "inputs": {
     "classification": {
       "classified": "492",
@@ -57,15 +63,28 @@
       "repos": "17",
       "statusCodeValues": "124"
     },
+    "laravel": {
+      "zoomzoom-auth": "files=634 classes=594 units=2136 models=154 schedules=33 routes=194"
+    },
     "php": {
-      "placeholders": "46",
       "zoomzoom-admin": "files=879 classes=906 units=8417 queries=5559",
       "zoomzoom-partners": "files=463 classes=487 units=4461 queries=2875"
+    },
+    "placeholders": {
+      "calls": "85"
     },
     "schema": {
       "primary": "local_zzt-2026-10-28.sql (502 tables)",
       "secondary": "urimalo_zzt-2026-04-22.sql (517 tables)",
       "tables": "519"
+    },
+    "ts": {
+      "data-api": "files=43 nodes=131 edges=170 ms=230",
+      "external-api": "files=452 nodes=1665 edges=2236 ms=253",
+      "message-consumer": "files=103 nodes=461 edges=458 ms=826",
+      "zoomzoom-api": "files=3198 nodes=10320 edges=15887 ms=2894",
+      "zoomzoom-back": "files=27 nodes=389 edges=394 ms=734",
+      "zoomzoom-front": "files=856 nodes=2306 edges=2307 ms=2960"
     }
   },
   "schemaVersion": 1,
@@ -92,13 +111,13 @@
   ],
   "sources": {
     "AgentPrism": {
-      "dirty": true,
-      "sha": "1812a1b47a0968fbef538ef944e39f41ce80946b"
+      "dirty": false,
+      "sha": "8f8748a942a98d8304d8dbd1559c8caf7a932b8b"
     },
     "zoomzoom-services": {
       "dirty": true,
       "sha": "a40043b9bf7aeef27821e04e72a2cd72a18d18c5"
     }
   },
-  "version": "20261028T0555Z-e352549-dirty"
+  "version": "20261028T0628Z-41a3b4a-dirty"
 }

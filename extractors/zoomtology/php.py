@@ -666,16 +666,23 @@ def ensure_placeholders(col: Collector) -> int:
     """CALLS 가 가리키는데 노드가 없는 CodeUnit 을 missing-from-source placeholder 로 만든다 (빌드 직전에 호출)."""
     n = 0
     for (f, t, to), rec in list(col.edges.items()):
-        if t == "CALLS" and rec.get("source") == SOURCE and to not in col.nodes and to.startswith("code:"):
-            tail = to.split("#", 1)[1]
-            cls, _, meth = tail.partition("::")
-            col.node(node_rec(to, "CodeUnit", tail, SOURCE, props={"kind": "method", "lineStart": 0, "lineEnd": 0, "class": cls, "placeholder": True},
-                              status="missing-from-source", source_ref=rec.get("sourceRef")))
-            fuid = "file:" + to[len("code:"):].split("#", 1)[0]
-            if fuid in col.nodes:
-                col.edge(edge_rec(fuid, "CONTAINS", to, SOURCE, source_ref=rec.get("sourceRef")))
+        if t in ("CALLS", "CONSUMES", "TRIGGERS") and f.startswith("code:") and f not in col.nodes and "#" in f:
+            _placeholder(col, f, rec.get("source", SOURCE), rec.get("sourceRef"))
+            n += 1
+        if t == "CALLS" and to not in col.nodes and to.startswith("code:") and "#" in to:
+            _placeholder(col, to, rec.get("source", SOURCE), rec.get("sourceRef"))
             n += 1
     return n
+
+
+def _placeholder(col: Collector, cuid: str, source: str, source_ref: str | None) -> None:
+    tail = cuid.split("#", 1)[1]
+    cls, _, _meth = tail.partition("::")
+    col.node(node_rec(cuid, "CodeUnit", tail, source, props={"kind": "method", "lineStart": 0, "lineEnd": 0, "class": cls, "placeholder": True},
+                      status="missing-from-source", source_ref=source_ref))
+    fuid = "file:" + cuid[len("code:"):].split("#", 1)[0]
+    if fuid in col.nodes:
+        col.edge(edge_rec(fuid, "CONTAINS", cuid, source, source_ref=source_ref))
 
 
 def _report(col: Collector, repo: str, s: _Stats) -> None:

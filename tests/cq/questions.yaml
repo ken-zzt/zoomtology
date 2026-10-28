@@ -77,3 +77,39 @@
   tool: kg_tables_for_code
   args: { uid: "code:zoomzoom-admin/system/library/zoomtu/order_info.php#ZZTOrderInfo::updateStatus", depth: 0 }
   must: ["table:zoom_order", "update"]
+# --- 3단계 (ZDV-347): NestJS·consumer·back·Laravel + 영향도 ---
+- id: 4
+  stage: 3
+  tool: kg_impact
+  args: { uid: "table:zoom_transactions", depth: 3 }
+  must: ["cron:admin/cron/tasks/updatetransactionfee", "cron:admin/cron/tasks/payoutestimate", "route:zoomzoom-admin route=cron/tasks/updatetransactionfee"]
+- id: 6
+  stage: 3
+  tool: kg_neighbors
+  args: { uid: "msg:order/confirm-order", direction: in, types: [PUBLISHES, CONSUMES] }
+  must: ["ConfirmOrderService::execute", "ControllerMultisellerEnquiries::addOrderHistory", "PatchJtrOrderCommand::execute"]
+- id: 7
+  stage: 3
+  tool: kg_path
+  args: { from: "code:message-consumer/src/services/sqs/order/confirm-order.ts#ConfirmOrderService::execute", to: "route:zoomzoom-api PATCH /order/:id/confirm", maxDepth: 3 }
+  must: ["\"found\":true", "route:zoomzoom-back PATCH ^order/(\\d+)/confirm$", "CALLS_HTTP"]
+- id: 15
+  stage: 3
+  tool: kg_path
+  args: { from: "code:zoomzoom-front/src/apis/order.ts#createOrder", to: "table:zoom_order", maxDepth: 6 }
+  must: ["\"found\":true", "route:zoomzoom-back POST ^order$", "route:zoomzoom-api POST /order", "CreateOrderController::create"]
+- id: 24
+  stage: 3
+  tool: kg_tables_for_code
+  args: { uid: "zoomzoom-api/src/order/presenters/http/controllers/confirm-order.controller.ts#ConfirmOrderController::confirm", depth: 2 }
+  must: ["table:zoom_order", "callee"]
+- id: 25
+  stage: 3
+  tool: kg_neighbors
+  args: { uid: "cron:zoomzoom-auth/confim-mileage", direction: out, types: [TRIGGERS] }
+  must: ["zoomzoom-auth/app/Console/Commands/Crons", "::handle"]
+- id: 26
+  stage: 3
+  tool: kg_neighbors
+  args: { uid: "svc:zoomzoom-api/mq", direction: out, types: [CONTAINS] }
+  must: ["module:zoomzoom-api/src/task"]

@@ -42,6 +42,9 @@ related_to:
 | 19 | 이 번들은 언제 어떤 커밋으로 만들어졌나? | `kg_bundle_info {}` | `build/latest/manifest.json` 의 version/sha 와 일치 | 1 |
 | 20 | `zoom_ms_requestpayment` 에 INSERT 하는 코드와 그 라우트 | `kg_code_for_table {table:"zoom_ms_requestpayment", op:"write"}` → `kg_impact` | PHP 체크아웃 경로 1개 이상 + api 라우트 1개 이상 | 2 |
 | 23 | (회귀) `ZZTOrderInfo::updateStatus` 가 직접 쓰는 테이블 | `kg_tables_for_code {uid:"code:…#ZZTOrderInfo::updateStatus", depth:0}` | `table:zoom_order` · ops `update` · via direct | 2 |
+| 24 | (회귀) api `ConfirmOrderController::confirm` 이 피호출자를 거쳐 닿는 테이블 | `kg_tables_for_code {uid:"zoomzoom-api/…#ConfirmOrderController::confirm", depth:2}` | `table:zoom_order` via callee | 3 |
+| 25 | (회귀) Laravel 스케줄 `confim-mileage` 가 실행하는 명령 클래스 | `kg_neighbors {uid:"cron:zoomzoom-auth/confim-mileage", types:["TRIGGERS"]}` | `app/Console/Commands/Crons/…::handle` | 3 |
+| 26 | (회귀) MQ 서버의 zoomzoom-api 사본이 담당하는 모듈 | `kg_neighbors {uid:"svc:zoomzoom-api/mq", types:["CONTAINS"]}` | `module:zoomzoom-api/src/task` | 3 |
 
 ## 측정
 

@@ -1,1 +1,1 @@
-3단계(ZDV-347): `nest.ts`(엔티티·리포지토리·라우트·DI·SQS 발행), `consumer.ts`, `back.ts`(AccessRule), `front.ts`. 출력은 Python 쪽과 같은 nodes/edges JSONL.
+`extract.mjs <repo> <root> <out.jsonl>` — `nest.mjs`(zoomzoom-api·external-api·data-api·message-consumer: 엔티티·리포지토리·QueryBuilder·라우트·DI·CQRS·SQS 발행/소비·HttpClient), `back.mjs`(AccessRule), `front.mjs`(fetchClient). 출력은 Python 쪽과 같은 nodes/edges JSONL + 마지막 줄 report. 저장소 간 해석(CALLS_HTTP 재연결, Service 노드)은 `extractors/zoomtology/ts.py` 가 한다.

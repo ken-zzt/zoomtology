@@ -1,85 +1,57 @@
-# 빌드 report — 20261028T0555Z-e352549-dirty
+# 빌드 report — 20261028T0628Z-41a3b4a-dirty
 
-- builtAt: 2026-10-28T05:55:45+00:00  gitSha: e352549 (dirty)
-- inputs: {"schema": {"primary": "local_zzt-2026-10-28.sql (502 tables)", "secondary": "urimalo_zzt-2026-04-22.sql (517 tables)", "tables": "519"}, "classification": {"classified": "492", "excluded": "10"}, "docs": {"docs": "102", "statusCodeValues": "124", "domainColumns": "432", "policies": "8", "cronJobs": "59", "glossary": "14", "ownership": "27", "repos": "17"}, "php": {"zoomzoom-admin": "files=879 classes=906 units=8417 queries=5559", "zoomzoom-partners": "files=463 classes=487 units=4461 queries=2875", "placeholders": "46"}}
+- builtAt: 2026-10-28T06:28:38+00:00  gitSha: 41a3b4a (dirty)
+- inputs: {"schema": {"primary": "local_zzt-2026-10-28.sql (502 tables)", "secondary": "urimalo_zzt-2026-04-22.sql (517 tables)", "tables": "519"}, "classification": {"classified": "492", "excluded": "10"}, "docs": {"docs": "102", "statusCodeValues": "124", "domainColumns": "432", "policies": "8", "cronJobs": "59", "glossary": "14", "ownership": "27", "repos": "17"}, "php": {"zoomzoom-admin": "files=879 classes=906 units=8417 queries=5559", "zoomzoom-partners": "files=463 classes=487 units=4461 queries=2875"}, "ts": {"zoomzoom-api": "files=3198 nodes=10320 edges=15887 ms=2894", "message-consumer": "files=103 nodes=461 edges=458 ms=826", "zoomzoom-back": "files=27 nodes=389 edges=394 ms=734", "external-api": "files=452 nodes=1665 edges=2236 ms=253", "data-api": "files=43 nodes=131 edges=170 ms=230", "zoomzoom-front": "files=856 nodes=2306 edges=2307 ms=2960"}, "laravel": {"zoomzoom-auth": "files=634 classes=594 units=2136 models=154 schedules=33 routes=194"}, "placeholders": {"calls": "85"}}
 
 ## 건수
 
 | 라벨 | 노드 |
 |---|---|
 | BusinessRule | 8 |
-| CodeUnit | 12924 |
+| CodeUnit | 24534 |
 | Column | 4049 |
 | CronJob | 55 |
 | Database | 3 |
 | Doc | 161 |
 | EnumValue | 272 |
-| File | 1560 |
-| Module | 60 |
-| Queue | 2 |
-| QueueMessage | 5 |
+| File | 6765 |
+| Module | 186 |
+| Queue | 5 |
+| QueueMessage | 79 |
 | Repo | 17 |
-| Route | 2758 |
+| Route | 3696 |
+| Service | 7 |
 | Table | 527 |
 
 | 관계 | 건수 |
 |---|---|
-| CALLS | 14503 |
-| CONTAINS | 14803 |
-| DEFINES | 81 |
+| CALLS | 20281 |
+| CALLS_HTTP | 521 |
+| CONSUMES | 78 |
+| CONTAINS | 31867 |
+| DEFINES | 368 |
 | DOCUMENTED_BY | 580 |
-| HANDLES | 2855 |
+| HANDLES | 3533 |
 | HAS_COLUMN | 4049 |
 | HAS_VALUE | 272 |
 | IMPLEMENTS_RULE | 97 |
 | JOINS | 1172 |
-| PUBLISHES | 10 |
-| READS | 6863 |
+| MAPS_TO | 358 |
+| PUBLISHES | 73 |
+| READS | 8148 |
 | REFERENCES | 432 |
-| TRIGGERS | 47 |
-| WRITES | 2762 |
+| TRIGGERS | 80 |
+| WRITES | 3178 |
 
-- 이번 빌드에 처음 보인 노드: 22401
-- 지난 빌드엔 있었는데 사라진 uid: 34
+- 이번 빌드에 처음 보인 노드: 40364
+- 지난 빌드엔 있었는데 사라진 uid: 2
 
 ### 사라진 uid (verified 는 tombstone 대상 — 4단계에서 처리)
 
-- `module:data-api/Dockerfile`
-- `module:data-api/Makefile`
-- `module:design-system/vite.config.mts`
-- `module:devenv/auth/sites/default.conf`
-- `module:devenv/env/copy-deny.txt`
-- `module:devenv/env/repos.list`
-- `module:devenv/logrotate/zzt.conf`
-- `module:devenv/nginx/snippets/partner.conf`
-- `module:devenv/nginx/snippets/user.conf`
-- `module:devenv/templates/auth/sites/default.conf.tmpl`
-- `module:devenv/templates/nginx/sites-available/default.tmpl`
-- `module:devenv/templates/nginx/sites-available/user.tmpl`
-- `module:devenv/templates/nginx/zzt/user.env.conf.tmpl`
-- `module:message-consumer/Makefile`
-- `module:partner-app/Makefile`
-- `module:user-app/Makefile`
-- `module:zoomzoom-api/Makefile`
-- `module:zoomzoom-front/Makefile`
-- `module:zoomzoom-partners/deploy/Dockerfile`
-- `module:zoomzoom-partners/deploy/nginx/partners.conf`
-- `module:zoomzoom-partners/deploy/nginx/zzt-http.conf`
-- `module:zoomzoom-partners/deploy/php/99-zzt-partners.ini`
-- `module:zoomzoom-partners/deploy/php/fpm-pool.conf`
-- `route:zoomzoom-admin route=cron/tasks/checkContinuouslyBlockedDays`
-- `route:zoomzoom-admin route=cron/tasks/confirmBatchPayoutBalance`
-- `route:zoomzoom-admin route=cron/tasks/emailTaskRun`
-- `route:zoomzoom-admin route=cron/tasks/payoutEstimate`
-- `route:zoomzoom-admin route=cron/tasks/payoutMarkDone`
-- `route:zoomzoom-admin route=cron/tasks/resetCampaignCredits`
-- `route:zoomzoom-admin route=cron/tasks/updateElasticSearchData`
-- `route:zoomzoom-admin route=cron/tasks/updateTransactionFee`
-- `route:zoomzoom-admin route=task/task/checkProviderOrderStatus`
-- `route:zoomzoom-admin route=task/task/rejectOrderAfterWeek`
-- `route:zoomzoom-admin route=task/task/runUpdateStats`
+- `msg:push/push`
+- `queue:push`
 
-- status: {'active': 22170, 'missing-from-source': 231}
+- status: {'active': 40049, 'missing-from-source': 315}
 
 ## 추출기 report — php
 
@@ -90,7 +62,7 @@
 - 테이블 이름은 있는데 전부 스키마에 없는 쿼리: 289건 (폐기 테이블·결제 확장)
 - 테이블 자리가 변수인 쿼리: 36건
 - 클래스는 있는데 메서드가 없어 placeholder 를 가리킨 호출: 214건
-- 큐 발행 role 별 건수: {'order': 3, 'push': 1} · key 를 못 읽은 sendMessage: 1건
+- 큐 발행 role 별 건수: {'order': 3, 'notif': 1} · key 를 못 읽은 sendMessage: 1건
 
 테이블 자리를 못 찾은 쿼리 (최대 40):
 
@@ -210,7 +182,7 @@
 - 테이블 이름은 있는데 전부 스키마에 없는 쿼리: 302건 (폐기 테이블·결제 확장)
 - 테이블 자리가 변수인 쿼리: 28건
 - 클래스는 있는데 메서드가 없어 placeholder 를 가리킨 호출: 20건
-- 큐 발행 role 별 건수: {'order': 5, 'push': 1}
+- 큐 발행 role 별 건수: {'order': 5, 'notif': 1}
 
 테이블 자리를 못 찾은 쿼리 (최대 40):
 
@@ -318,6 +290,185 @@
 - `model:model_openbay_amazon`: 3
 - `model:model_openbay_amazonus`: 3
 - `model:model_sale_order`: 2
+
+
+## 추출기 report — ts
+
+### zoomzoom-api
+
+- {'files': 3198, 'entities': 232, 'calls-placeholder': 54, 'routes': 310, 'publishes': 64, 'manager-call-unresolved': 7, 'qb-unresolved': 3}
+- raw-query-no-table (2): `zoomzoom-api/src/apis/v1/services/subproduct.ts:141`, `zoomzoom-api/src/product/infra/persistence/orm/repositories/subproduct.repository.ts:539`
+- cqrs-unresolved (1): `zoomzoom-api/src/cart/application/services/update-cart.service.ts:51`
+- qb-unresolved-sites (3): `59:queryRunner.manager.getRepository.createQueryBuilder`, `82:queryRunner.manager.getRepository.createQueryBuilder`, `7:repo.createQueryBuilder`
+- qb-join-unresolved (9): `'pcf.fiedType'`, `'pcf.preDefined'`, `'r.customer'`, `'r.partner'`, `'pp.detail'`, `'r.product'`, `'r.order'`, `'o.requestPayment'`, `'rp.comments'`
+
+### message-consumer
+
+- {'files': 103, 'entities': 0, 'routes': 1, 'consumes': 85, 'http-calls': 72}
+- http-call-unparsed (8): `message-consumer/src/services/sqs/conversation/conversation-updated.ts:20`, `message-consumer/src/services/sqs/conversation/first-conversation-replied.ts:20`, `message-consumer/src/services/sqs/luxury-escape/patch-price.ts:21`, `message-consumer/src/services/sqs/order/patch-order-status.ts:24`, `message-consumer/src/services/sqs/product/patch-product-available-date.ts:21`, `message-consumer/src/services/sqs/product/product-score-updated.ts:21`, `message-consumer/src/services/sqs/review/review-reminder.ts:90`, `message-consumer/src/services/sqs/triptopaz/patch-tour.ts:21`
+
+### zoomzoom-back
+
+- {'files': 27, 'rules-admin': 17, 'rules-partner': 11, 'rules-zoomzoom': 259}
+
+### external-api
+
+- {'files': 452, 'entities': 0, 'routes': 168}
+- http-call-unparsed (60): `external-api/src/apis/v1/services/airbridge.ts:18`, `external-api/src/apis/v1/services/api.ts:19`, `external-api/src/apis/v1/services/api.ts:34`, `external-api/src/apis/v1/services/api.ts:53`, `external-api/src/apis/v1/services/api.ts:70`, `external-api/src/apis/v1/services/bok.ts:99`, `external-api/src/apis/v1/services/channel-talk.ts:57`, `external-api/src/apis/v1/services/channel-talk.ts:75`, `external-api/src/apis/v1/services/channel-talk.ts:90`, `external-api/src/apis/v1/services/channel-talk.ts:101`, `external-api/src/apis/v1/services/google.ts:15`, `external-api/src/apis/v1/services/jejumobile.ts:30` …
+
+### data-api
+
+- {'files': 43, 'entities': 3, 'routes': 5}
+- http-call-unparsed (2): `data-api/src/airbridge/services/export-airbridge.ts:64`, `data-api/src/airbridge/services/import-airbridge.ts:110`
+- raw-query-no-table (1): `data-api/src/stat/repositories/partner-response-repository.ts:30`
+
+### zoomzoom-front
+
+- {'files': 856, 'http-calls': 105}
+- front-call-unparsed (7): `zoomzoom-front/src/apis/help.ts:8`, `zoomzoom-front/src/apis/help.ts:17`, `zoomzoom-front/src/apis/help.ts:42`, `zoomzoom-front/src/apis/help.ts:54`, `zoomzoom-front/src/apis/user.ts:136`, `zoomzoom-front/src/apis/wishlist.ts:19`, `zoomzoom-front/src/apis/wishlist.ts:37`
+
+### 저장소 간
+
+- 스키마에 없는 테이블로 향한 READS/WRITES/MAPS_TO 버림: 18건 — `table:iso/customer`×7, `table:jtr_category`×6, `table:vehicle_image`×3, `table:wc/zzt_crawling_data`×2
+- consumer/front → back AccessRule 해석: {'message-consumer': 44, 'external-api': 23, 'zoomzoom-front': 89} · 미해석(placeholder): 21
+- AccessRule → zoomzoom-api 라우트: {'regex': 262, 'exact': 79, 'target': 3} · 짝 없는 규칙: 16
+
+미해석 HTTP 호출 (최대 30):
+
+- `POST /zoomzoom/bemyguest/booking/:param ← message-consumer/src/services/sqs/provider/bemyguest-booking.ts:12`
+- `POST /zoomzoom/waug/booking/:param ← message-consumer/src/services/sqs/provider/waug-booking.ts:12`
+- `PATCH /zoomzoom/task/translation/product ← message-consumer/src/services/sqs/translation/product-updated.ts:14`
+- `POST /document/voucher/jejumobile ← message-consumer/src/services/sqs/voucher/jejumobile-voucher.ts:12`
+- `POST /document/voucher/zoomzoom ← message-consumer/src/services/sqs/voucher/zoomzoom-voucher.ts:13`
+- `POST /log/frontend ← zoomzoom-front/src/apis/actionlog.ts:7`
+- `POST /v2/auth/signin ← zoomzoom-front/src/apis/authentication.ts:22`
+- `POST /v2/auth/signup ← zoomzoom-front/src/apis/authentication.ts:69`
+- `GET /v2/auth/token ← zoomzoom-front/src/apis/authentication.ts:194`
+- `GET /v2/auth/:param ← zoomzoom-front/src/apis/authentication.ts:276`
+- `POST /v2/auth/refresh ← zoomzoom-front/src/apis/authentication.ts:381`
+- `POST /zoomzoom/payment ← zoomzoom-front/src/apis/checkout.ts:113`
+- `PATCH /zoomzoom/order/:param/payment ← zoomzoom-front/src/apis/checkout.ts:138`
+- `GET /:paramzendesk/article:param ← zoomzoom-front/src/apis/help.ts:66`
+- `GET /:paramzendesk/search ← zoomzoom-front/src/apis/help.ts:78`
+- `GET /zoomzoom/order/:param ← zoomzoom-front/src/apis/order.ts:32`
+- `GET /:param&files=:param ← zoomzoom-front/src/apis/review.ts:117`
+- `GET /v1/search/tour ← zoomzoom-front/src/apis/search.ts:31`
+- `POST /v2/social ← zoomzoom-front/src/apis/social.ts:22`
+- `DELETE /v2/social ← zoomzoom-front/src/apis/social.ts:40`
+- `DELETE /v2/user ← zoomzoom-front/src/apis/user.ts:163`
+
+api 라우트와 짝이 없는 AccessRule (최대 30):
+
+- `route:zoomzoom-back PATCH ^alimtalk$`
+- `route:zoomzoom-back GET ^affiliate/me/balance/(\d+)/transaction`
+- `route:zoomzoom-back GET ^banner/(\d+)$`
+- `route:zoomzoom-back POST ^auth/mobile$`
+- `route:zoomzoom-back POST ^auth/mobile/verify$`
+- `route:zoomzoom-back POST ^customer/me/social/(\w+)$`
+- `route:zoomzoom-back DELETE ^customer/me/social/(\w+)$`
+- `route:zoomzoom-back GET ^customer/me/review/(\d+)$`
+- `route:zoomzoom-back DELETE ^customer/me/wishlist/(\d+)`
+- `route:zoomzoom-back GET ^cms/(\d+)/me$`
+- `route:zoomzoom-back PUT ^task/bemyguest/product$`
+- `route:zoomzoom-back PATCH ^task/notif/order$`
+- `route:zoomzoom-back PATCH ^order/(\d+)/cancel$`
+- `route:zoomzoom-back GET ^store/(\d+)/voucher/.*$`
+- `route:zoomzoom-back PATCH ^notification/copy$`
+- `route:zoomzoom-back DELETE ^group-tag/product$`
+
+
+## 추출기 report — laravel
+
+### zoomzoom-auth
+
+- 파일 634 · 클래스 594 · 코드 유닛 2136 · DB 접근 지점 402
+- 모델 154 (`$table` 있음 127 · 없음 27) · 명령 74 · 스케줄 33 · 라우트 194
+- placeholder 로 만든 호출·핸들러 대상: 24건
+
+`$table` 이 없는 모델 (테이블을 추측하지 않음):
+
+- `App\Entities\CustomerData`
+- `App\Entities\DndVoucher`
+- `App\Entities\HomeServiceMenu`
+- `App\Entities\KakaoIdConnectReward`
+- `App\Entities\Log`
+- `App\Entities\NotificationJob`
+- `App\Entities\Permission`
+- `App\Entities\Role`
+- `App\Entities\ZZTBaseEntiry`
+- `App\Entities\ZZTPassportClientBaseEntiry`
+- `App\Entities\ZzimcarCoupon`
+- `App\Models\Commission`
+- `App\Models\Logs\Category`
+- `App\Models\Logs\Customer`
+- `App\Models\Logs\Customer\Platform`
+- `App\Models\Logs\Customer\Referer`
+- `App\Models\Logs\Customer\TrackingInfo`
+- `App\Models\Logs\Enquiry`
+- `App\Models\Logs\EventLog`
+- `App\Models\Logs\Order`
+- `App\Models\Logs\Product`
+- `App\Models\Logs\Review`
+- `App\Models\Logs\Review\ReviewContent`
+- `App\Models\Logs\Review\ReviewCustomer`
+- `App\Models\Logs\Review\ReviewProduct`
+- `App\Models\OauthUser`
+- `App\Models\User`
+
+`$fillable` 에 있는데 스키마에 없는 컬럼 (상위 20):
+
+- `zoom_address.first_name`
+- `zoom_address.last_name`
+- `zoom_customer.name`
+- `zoom_def_product_schedule_status.text`
+- `zoom_notification.data_added`
+- `zoom_notification_click.data_added`
+- `zoom_product.origin`
+- `zoom_product.dest`
+- `zoom_product_accommodation.accomodation_type`
+- `zoom_product_accommodation.discount_price`
+- `zoom_product_accommodation_type.date_updated`
+- `zoom_product_description.min_date`
+- `zoom_recipient_group.data_added`
+
+Eloquent 호출인데 모델 클래스를 못 찾음 (상위 20):
+
+- `ZzimcarCoupon (no $table)`: 19
+- `Request`: 5
+- `Token`: 5
+- `IP2LocationLaravel`: 5
+- `CustomerData (no $table)`: 4
+- `DndVoucher (no $table)`: 4
+- `NotificationJob (no $table)`: 2
+- `Role (no $table)`: 2
+- `Permission (no $table)`: 2
+- `HomeServiceMenu (no $table)`: 2
+- `KakaoIdConnectReward (no $table)`: 2
+- `ProductCustomField`: 1
+- `MsCommissionRate`: 1
+
+정적/DI 호출 대상 클래스를 못 찾음 (상위 20):
+
+- `Slack`: 22
+- `Request`: 16
+- `Passport`: 14
+- `OAuthServerException`: 9
+- `File`: 9
+- `Validator`: 7
+- `CarbonPeriod`: 6
+- `Excel`: 5
+- `App`: 4
+- `ASDecoder`: 2
+- `HTMLDomParser`: 2
+- `Cookie`: 2
+- `Builder`: 2
+- `BelongsToMany`: 2
+- `CryptoJsAes`: 1
+- `PhoneNumber`: 1
+- `Artisan`: 1
+- `Client`: 1
+- `UnauthorizedException`: 1
+- `ResourceServer`: 1
 
 
 ## 추출기 경고

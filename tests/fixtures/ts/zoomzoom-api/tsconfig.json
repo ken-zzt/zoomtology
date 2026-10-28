@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "commonjs",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "baseUrl": "./",
+    "strict": false,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "paths": {
+      "typeorm": [
+        "src/typeorm-stub.ts"
+      ],
+      "@nestjs/common": [
+        "src/nest-stub.ts"
+      ],
+      "@nestjs/typeorm": [
+        "src/nest-stub.ts"
+      ],
+      "@nestjs/cqrs": [
+        "src/nest-stub.ts"
+      ]
+    }
+  },
+  "include": [
+    "src/**/*.ts"
+  ]
+}
