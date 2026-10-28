@@ -45,7 +45,7 @@ related_to:
 | 24 | (회귀) api `ConfirmOrderCommand::execute` 가 피호출자를 거쳐 닿는 테이블 | `kg_tables_for_code {uid:"zoomzoom-api/…#ConfirmOrderCommand::execute", depth:2}` | `table:zoom_order`·`table:zoom_customer_mileages` via callee (컨트롤러→서비스→커맨드→리포지토리는 3단계) | 3 |
 | 25 | (회귀) Laravel 스케줄 `confim-mileage` 가 실행하는 명령 클래스 | `kg_neighbors {uid:"cron:zoomzoom-auth/confim-mileage", types:["TRIGGERS"]}` | `app/Console/Commands/Crons/…::handle` | 3 |
 | 26 | (회귀) MQ 서버의 zoomzoom-api 사본이 담당하는 모듈 | `kg_neighbors {uid:"svc:zoomzoom-api/mq", types:["CONTAINS"]}` | `module:zoomzoom-api/src/task` | 3 |
-| 27 | (회귀) 레거시 유저 웹 라우트는 폐기로 표시되나 | `kg_node {uid:"route:zoomzoom-admin route=product/product"}` | `status: retired`, `retiredBy: legacy-user-web` | 4 (curated) |
+| 27 | (회귀) 레거시 유저 웹 라우트는 폐기로 표시되나 | `kg_node {uid:"route:zoomzoom-admin route=account/order/info"}` | `status: retired`, `retiredBy: legacy-user-web` | 4 (curated) |
 | 28 | (회귀) 크론이 부르는 유저 웹 task 라우트는 살아 있나 | `kg_node {uid:"route:zoomzoom-admin route=task/task/rejectorderafterweek"}` | `status: active` (retired.yaml 의 except) | 4 (curated) |
 
 ## 측정
