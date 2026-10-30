@@ -1569,6 +1569,7 @@ code:zoomzoom-admin/admin/controller/catalog/product.php#ControllerCatalogProduc
 code:zoomzoom-admin/admin/controller/catalog/product.php#ControllerCatalogProduct::getSubProductInfoText
 code:zoomzoom-admin/admin/controller/catalog/product.php#ControllerCatalogProduct::getThumbnailVideoKey
 code:zoomzoom-admin/admin/controller/catalog/product.php#ControllerCatalogProduct::get_manage_pd_list
+code:zoomzoom-admin/admin/controller/catalog/product.php#ControllerCatalogProduct::get_pd_history
 code:zoomzoom-admin/admin/controller/catalog/product.php#ControllerCatalogProduct::get_pd_live_description
 code:zoomzoom-admin/admin/controller/catalog/product.php#ControllerCatalogProduct::get_pd_upload_config
 code:zoomzoom-admin/admin/controller/catalog/product.php#ControllerCatalogProduct::index
@@ -8722,10 +8723,15 @@ code:zoomzoom-admin/system/library/zoomtu/product_image_description.php#ZztProdu
 code:zoomzoom-admin/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::getApprovedDescription
 code:zoomzoom-admin/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::getDescription
 code:zoomzoom-admin/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::getDetailByUuid
+code:zoomzoom-admin/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::getHistoryByProductId
 code:zoomzoom-admin/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::getList
 code:zoomzoom-admin/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::getLiveDescription
+code:zoomzoom-admin/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::getReviewCounts
+code:zoomzoom-admin/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::getReviewList
 code:zoomzoom-admin/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::getStatusByUuid
+code:zoomzoom-admin/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::normalizeReviewView
 code:zoomzoom-admin/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::publishDescriptionToProduct
+code:zoomzoom-admin/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::reviewPreviousRejectSql
 code:zoomzoom-admin/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::updateDescription
 code:zoomzoom-admin/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::updateStatus
 code:zoomzoom-admin/system/library/zoomtu/product_label.php#ZztProductLabel
@@ -10518,6 +10524,12 @@ code:zoomzoom-api/src/bemyguest/application/ports/bemyguest-city.repository.port
 code:zoomzoom-api/src/bemyguest/application/ports/bemyguest-city.repository.port.ts#BemyguestCityRepositoryPort::get
 code:zoomzoom-api/src/bemyguest/application/ports/bemyguest-city.repository.port.ts#BemyguestCityRepositoryPort::getList
 code:zoomzoom-api/src/bemyguest/application/ports/bemyguest-city.repository.port.ts#BemyguestCityRepositoryPort::getModel
+code:zoomzoom-api/src/bemyguest/application/ports/bemyguest-price-series.repository.port.ts#BemyguestPriceSeriesRepositoryPort
+code:zoomzoom-api/src/bemyguest/application/ports/bemyguest-price-series.repository.port.ts#BemyguestPriceSeriesRepositoryPort::countActive
+code:zoomzoom-api/src/bemyguest/application/ports/bemyguest-price-series.repository.port.ts#BemyguestPriceSeriesRepositoryPort::get
+code:zoomzoom-api/src/bemyguest/application/ports/bemyguest-price-series.repository.port.ts#BemyguestPriceSeriesRepositoryPort::getFirstSaleDate
+code:zoomzoom-api/src/bemyguest/application/ports/bemyguest-price-series.repository.port.ts#BemyguestPriceSeriesRepositoryPort::getOldest
+code:zoomzoom-api/src/bemyguest/application/ports/bemyguest-price-series.repository.port.ts#BemyguestPriceSeriesRepositoryPort::save
 code:zoomzoom-api/src/bemyguest/application/ports/update-bemyguest-category.repository.port.ts#UpdateBemyguestCategoryRepositoryPort
 code:zoomzoom-api/src/bemyguest/application/ports/update-bemyguest-category.repository.port.ts#UpdateBemyguestCategoryRepositoryPort::save
 code:zoomzoom-api/src/bemyguest/application/ports/update-bemyguest-city.repository.port.ts#UpdateBemyguestCityRepositoryPort
@@ -10531,8 +10543,12 @@ code:zoomzoom-api/src/bemyguest/application/services/create-bemyguest-order.serv
 code:zoomzoom-api/src/bemyguest/application/services/create-bemyguest-voucher-event.service.ts#CreateBemyguestVoucherEventService
 code:zoomzoom-api/src/bemyguest/application/services/create-bemyguest-voucher-event.service.ts#CreateBemyguestVoucherEventService::execute
 code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService
+code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::fetch
 code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::get
-code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::resolveBasePrices
+code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::getRefreshTargets
+code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::merge
+code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::refresh
+code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::start
 code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-categories.service.ts#GetBemyguestCategoriesService
 code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-categories.service.ts#GetBemyguestCategoriesService::getList
 code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-category.service.ts#GetBemyguestCategoryService
@@ -10564,11 +10580,13 @@ code:zoomzoom-api/src/bemyguest/application/services/update-bemyguest-city.servi
 code:zoomzoom-api/src/bemyguest/bemyguest.module.ts#BemyguestModule
 code:zoomzoom-api/src/bemyguest/domain/bemyguest-base-price.ts#BemyguestBasePrice
 code:zoomzoom-api/src/bemyguest/domain/bemyguest-base-price.ts#BemyguestBasePrice::convert
+code:zoomzoom-api/src/bemyguest/domain/bemyguest-base-price.ts#BemyguestBasePrice::getFailedOptions
 code:zoomzoom-api/src/bemyguest/domain/bemyguest-base-price.ts#BemyguestBasePrice::getInfo
 code:zoomzoom-api/src/bemyguest/domain/bemyguest-base-price.ts#BemyguestBasePrice::getPrice
 code:zoomzoom-api/src/bemyguest/domain/bemyguest-base-price.ts#BemyguestBasePrice::getProfitRate
 code:zoomzoom-api/src/bemyguest/domain/bemyguest-base-price.ts#BemyguestBasePrice::hasFailedOptions
 code:zoomzoom-api/src/bemyguest/domain/bemyguest-base-price.ts#BemyguestBasePrice::validate
+code:zoomzoom-api/src/bemyguest/domain/bemyguest-base-price.ts#BemyguestPriceRetryError
 code:zoomzoom-api/src/bemyguest/domain/bemyguest-booking-payload.ts#BemyguestBookingPayload
 code:zoomzoom-api/src/bemyguest/domain/bemyguest-booking-payload.ts#BemyguestOptionItem
 code:zoomzoom-api/src/bemyguest/domain/bemyguest-booking-payload.ts#Booker
@@ -10578,6 +10596,16 @@ code:zoomzoom-api/src/bemyguest/domain/bemyguest-category.ts#BemyguestCategory
 code:zoomzoom-api/src/bemyguest/domain/bemyguest-city.ts#BemyguestCity
 code:zoomzoom-api/src/bemyguest/domain/bemyguest-environment.ts#BemyguestEnvironment
 code:zoomzoom-api/src/bemyguest/domain/bemyguest-environment.ts#BemyguestEnvironment::convertTo
+code:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts#BemyguestPriceSeries
+code:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts#BemyguestPriceSeries::basePrice
+code:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts#BemyguestPriceSeries::covers
+code:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts#BemyguestPriceSeries::isStale
+code:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts#BemyguestPriceSeries::normalizeCodes
+code:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts#BemyguestPriceSeries::sameOptions
+code:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts#BemyguestPriceSeries::window
+code:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts#addDays
+code:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts#effective
+code:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts#isCheaper
 code:zoomzoom-api/src/bemyguest/domain/bemyguest-price.ts#BemyguestPrice
 code:zoomzoom-api/src/bemyguest/domain/bemyguest-product-builder.ts#BemyguestProductBuilder
 code:zoomzoom-api/src/bemyguest/domain/bemyguest-product-builder.ts#BemyguestProductBuilder::applyNewProduct
@@ -10607,6 +10635,13 @@ code:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-cit
 code:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-city.repository.ts#BemyguestCityRepository::get
 code:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-city.repository.ts#BemyguestCityRepository::getList
 code:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-city.repository.ts#BemyguestCityRepository::getModel
+code:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-price-series.repository.ts#BemyguestPriceSeriesRepository
+code:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-price-series.repository.ts#BemyguestPriceSeriesRepository::activeQuery
+code:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-price-series.repository.ts#BemyguestPriceSeriesRepository::countActive
+code:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-price-series.repository.ts#BemyguestPriceSeriesRepository::get
+code:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-price-series.repository.ts#BemyguestPriceSeriesRepository::getFirstSaleDate
+code:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-price-series.repository.ts#BemyguestPriceSeriesRepository::getOldest
+code:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-price-series.repository.ts#BemyguestPriceSeriesRepository::save
 code:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/update-bemyguest-category.repository.ts#UpdateBemyguestCategoryRepository
 code:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/update-bemyguest-category.repository.ts#UpdateBemyguestCategoryRepository::save
 code:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/update-bemyguest-city.repository.ts#UpdateBemyguestCityRepository
@@ -12081,6 +12116,7 @@ code:zoomzoom-api/src/entities/promotion-event/promotion-event.entity.ts#Promoti
 code:zoomzoom-api/src/entities/provider/provider-category.ts#CategoryProviderCategory
 code:zoomzoom-api/src/entities/provider/provider-category.ts#ProviderCategory
 code:zoomzoom-api/src/entities/provider/provider-order.ts#ProviderOrder
+code:zoomzoom-api/src/entities/provider/provider-product-price-series.entity.ts#ProviderProductPriceSeriesEntity
 code:zoomzoom-api/src/entities/provider/provider-product.ts#LegacyProviderProduct
 code:zoomzoom-api/src/entities/provider/provider-product.ts#ProviderProduct
 code:zoomzoom-api/src/entities/provider/provider-product.ts#ProviderProductSnapshot
@@ -12243,6 +12279,7 @@ code:zoomzoom-api/src/external/application/services/bemyguest/get-bemyguest-subp
 code:zoomzoom-api/src/external/application/services/bemyguest/get-bemyguest-subproduct-prices.service.ts#GetBemyguestSubproductPricesService
 code:zoomzoom-api/src/external/application/services/bemyguest/get-bemyguest-subproduct-prices.service.ts#GetBemyguestSubproductPricesService::get
 code:zoomzoom-api/src/external/application/services/bemyguest/get-bemyguest-subproduct.service.ts#GetBemyguestSubproductService
+code:zoomzoom-api/src/external/application/services/bemyguest/get-bemyguest-subproduct.service.ts#GetBemyguestSubproductService::find
 code:zoomzoom-api/src/external/application/services/bemyguest/get-bemyguest-subproduct.service.ts#GetBemyguestSubproductService::get
 code:zoomzoom-api/src/external/application/services/bemyguest/get-bemyguest-subproducts.service.ts#GetBemyguestSubproductsService
 code:zoomzoom-api/src/external/application/services/bemyguest/get-bemyguest-subproducts.service.ts#GetBemyguestSubproductsService::getList
@@ -12367,6 +12404,8 @@ code:zoomzoom-api/src/external/application/services/waug/request-waug-refund.ser
 code:zoomzoom-api/src/external/application/services/waug/request-waug-refund.service.ts#RequestWaugRefundService::request
 code:zoomzoom-api/src/external/application/services/waug/waug.external.module.ts#WaugExternalModule
 code:zoomzoom-api/src/external/domain/bemyguest/bemyguest-booking-detail.ts#BemyguestBookingDetail
+code:zoomzoom-api/src/external/domain/bemyguest/bemyguest-error.ts#isListingNotFound
+code:zoomzoom-api/src/external/domain/bemyguest/bemyguest-error.ts#isProductTypeNotFound
 code:zoomzoom-api/src/external/domain/bemyguest/bemyguest-product.ts#BemyguestProduct
 code:zoomzoom-api/src/external/domain/bemyguest/bemyguest-subproduct-price.ts#BemyguestRate
 code:zoomzoom-api/src/external/domain/bemyguest/bemyguest-subproduct-price.ts#BemyguestRate::applyExchangeRate
@@ -15723,10 +15762,14 @@ code:zoomzoom-api/src/task/bemyguest/application/services/patch-bemyguest-produc
 code:zoomzoom-api/src/task/bemyguest/application/services/patch-bemyguest-product.service.ts#PatchBemyguestProductService::applyFailures
 code:zoomzoom-api/src/task/bemyguest/application/services/patch-bemyguest-product.service.ts#PatchBemyguestProductService::createDomain
 code:zoomzoom-api/src/task/bemyguest/application/services/patch-bemyguest-product.service.ts#PatchBemyguestProductService::initializeProduct
+code:zoomzoom-api/src/task/bemyguest/application/services/patch-bemyguest-product.service.ts#PatchBemyguestProductService::markRefreshFailed
 code:zoomzoom-api/src/task/bemyguest/application/services/patch-bemyguest-product.service.ts#PatchBemyguestProductService::patch
 code:zoomzoom-api/src/task/bemyguest/application/services/patch-bemyguest-product.service.ts#PatchBemyguestProductService::patchProduct
+code:zoomzoom-api/src/task/bemyguest/application/services/patch-bemyguest-product.service.ts#PatchBemyguestProductService::refreshPrices
 code:zoomzoom-api/src/task/bemyguest/application/services/patch-bemyguest-product.service.ts#PatchBemyguestProductService::summarize
 code:zoomzoom-api/src/task/bemyguest/application/services/patch-bemyguest-product.service.ts#PatchBemyguestProductService::translate
+code:zoomzoom-api/src/task/bemyguest/application/services/patch-bemyguest-product.service.ts#listOptions
+code:zoomzoom-api/src/task/bemyguest/application/services/patch-bemyguest-product.service.ts#priceRefreshFailedKey
 code:zoomzoom-api/src/task/bemyguest/bemyguest.module.ts#BemyguestTaskModule
 code:zoomzoom-api/src/task/bemyguest/presenter/controllers/check-bemyguest-product.controller.ts#CheckBemyguestProductController
 code:zoomzoom-api/src/task/bemyguest/presenter/controllers/check-bemyguest-product.controller.ts#CheckBemyguestProductController::patch
@@ -23727,6 +23770,7 @@ code:zoomzoom-partners/system/library/zoomtu/product_image_description.php#ZztPr
 code:zoomzoom-partners/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::getLatestByProductId
 code:zoomzoom-partners/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::getLatestStatusByProductId
 code:zoomzoom-partners/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::getList
+code:zoomzoom-partners/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::getPreviousRejectByProductId
 code:zoomzoom-partners/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::getProductIdsWithBaseDescription
 code:zoomzoom-partners/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::requestDescription
 code:zoomzoom-partners/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::saveDescription
@@ -29139,6 +29183,7 @@ file:devenv/compose/files.sh
 file:devenv/compose/main-ports.yml
 file:devenv/compose/node.yml
 file:devenv/compose/partner84.yml
+file:devenv/compose/replica.yml
 file:devenv/compose/sqs.yml
 file:devenv/env/copy-deny.txt
 file:devenv/env/repos.list
@@ -30908,6 +30953,7 @@ file:zoomzoom-api/src/bemyguest/application/commands/update-bemyguest-category.c
 file:zoomzoom-api/src/bemyguest/application/commands/update-bemyguest-city.command.ts
 file:zoomzoom-api/src/bemyguest/application/ports/bemyguest-category.repository.port.ts
 file:zoomzoom-api/src/bemyguest/application/ports/bemyguest-city.repository.port.ts
+file:zoomzoom-api/src/bemyguest/application/ports/bemyguest-price-series.repository.port.ts
 file:zoomzoom-api/src/bemyguest/application/ports/update-bemyguest-category.repository.port.ts
 file:zoomzoom-api/src/bemyguest/application/ports/update-bemyguest-city.repository.port.ts
 file:zoomzoom-api/src/bemyguest/application/services/bemyguest-product-viewed.service.ts
@@ -30930,6 +30976,7 @@ file:zoomzoom-api/src/bemyguest/application/services/set-bemyguest-subproduct-pr
 file:zoomzoom-api/src/bemyguest/application/services/update-bemyguest-category.service.ts
 file:zoomzoom-api/src/bemyguest/application/services/update-bemyguest-city.service.ts
 file:zoomzoom-api/src/bemyguest/bemyguest.module.ts
+file:zoomzoom-api/src/bemyguest/domain/bemyguest-availability.ts
 file:zoomzoom-api/src/bemyguest/domain/bemyguest-base-price.ts
 file:zoomzoom-api/src/bemyguest/domain/bemyguest-booking-payload.ts
 file:zoomzoom-api/src/bemyguest/domain/bemyguest-booking-result.ts
@@ -30938,6 +30985,7 @@ file:zoomzoom-api/src/bemyguest/domain/bemyguest-category.ts
 file:zoomzoom-api/src/bemyguest/domain/bemyguest-city.ts
 file:zoomzoom-api/src/bemyguest/domain/bemyguest-environment.ts
 file:zoomzoom-api/src/bemyguest/domain/bemyguest-order-status.ts
+file:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts
 file:zoomzoom-api/src/bemyguest/domain/bemyguest-price.ts
 file:zoomzoom-api/src/bemyguest/domain/bemyguest-product-builder.ts
 file:zoomzoom-api/src/bemyguest/domain/bemyguest-product-type.ts
@@ -30952,6 +31000,7 @@ file:zoomzoom-api/src/bemyguest/infra/persistence/orm/mappers/bemyguest-city.map
 file:zoomzoom-api/src/bemyguest/infra/persistence/orm/orm.bemyguest.module.ts
 file:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-category.repository.ts
 file:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-city.repository.ts
+file:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-price-series.repository.ts
 file:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/update-bemyguest-category.repository.ts
 file:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/update-bemyguest-city.repository.ts
 file:zoomzoom-api/src/bemyguest/presenter/controllers/bemyguest-product-viewed.controller.ts
@@ -31736,6 +31785,7 @@ file:zoomzoom-api/src/entities/promotion-event/promotion-event-target.entity.ts
 file:zoomzoom-api/src/entities/promotion-event/promotion-event.entity.ts
 file:zoomzoom-api/src/entities/provider/provider-category.ts
 file:zoomzoom-api/src/entities/provider/provider-order.ts
+file:zoomzoom-api/src/entities/provider/provider-product-price-series.entity.ts
 file:zoomzoom-api/src/entities/provider/provider-product.ts
 file:zoomzoom-api/src/entities/recipient-group.entity.ts
 file:zoomzoom-api/src/entities/refund-policy-term.entity.ts
@@ -31881,6 +31931,7 @@ file:zoomzoom-api/src/external/application/services/waug/get-waug-taxonomies.ser
 file:zoomzoom-api/src/external/application/services/waug/request-waug-refund.service.ts
 file:zoomzoom-api/src/external/application/services/waug/waug.external.module.ts
 file:zoomzoom-api/src/external/domain/bemyguest/bemyguest-booking-detail.ts
+file:zoomzoom-api/src/external/domain/bemyguest/bemyguest-error.ts
 file:zoomzoom-api/src/external/domain/bemyguest/bemyguest-product.ts
 file:zoomzoom-api/src/external/domain/bemyguest/bemyguest-subproduct-price.ts
 file:zoomzoom-api/src/external/domain/bemyguest/bemyguest-subproduct.ts
@@ -36027,6 +36078,7 @@ module:zoomzoom-partners/catalog/controller
 module:zoomzoom-partners/catalog/model
 module:zoomzoom-partners/catalog/view/theme/default/template/multiseller/product-form
 module:zoomzoom-partners/deploy
+module:zoomzoom-partners/deploy/logrotate/zoomzoom-partners
 module:zoomzoom-partners/system/library
 module:zoomzoom-partners/system/library/zoomtu
 msg:email/cancel-order
@@ -36817,6 +36869,7 @@ route:zoomzoom-admin route=catalog/product/delproductvideo
 route:zoomzoom-admin route=catalog/product/edit
 route:zoomzoom-admin route=catalog/product/errorproducts
 route:zoomzoom-admin route=catalog/product/get_manage_pd_list
+route:zoomzoom-admin route=catalog/product/get_pd_history
 route:zoomzoom-admin route=catalog/product/get_pd_live_description
 route:zoomzoom-admin route=catalog/product/get_pd_upload_config
 route:zoomzoom-admin route=catalog/product/getgrouptags

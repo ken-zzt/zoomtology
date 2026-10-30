@@ -1,74 +1,87 @@
-# 빌드 report — 20261028T0904Z-5b39e89
+# 빌드 report — 20261030T1413Z-9c604d6
 
-- builtAt: 2026-10-28T09:04:49+00:00  gitSha: 5b39e89
-- contentSha256: `979ee68fea0ad70f…` — 이전 빌드(20261028T0904Z-1b7bb7a-dirty)와 **같음** (입력 불변)
-- inputs: {"schema": {"primary": "local_zzt-2026-10-28.sql (502 tables)", "secondary": "urimalo_zzt-2026-04-22.sql (517 tables)", "tables": "519"}, "classification": {"classified": "492", "excluded": "10"}, "docs": {"docs": "102", "statusCodeValues": "124", "domainColumns": "432", "policies": "8", "cronJobs": "59", "glossary": "14", "ownership": "27", "repos": "17"}, "php": {"zoomzoom-admin": "files=879 classes=906 units=8417 queries=5559", "zoomzoom-partners": "files=463 classes=487 units=4461 queries=2875"}, "ts": {"zoomzoom-api": "files=3198 nodes=10320 edges=15887 ms=2828", "message-consumer": "files=103 nodes=461 edges=458 ms=769", "zoomzoom-back": "files=27 nodes=389 edges=394 ms=688", "external-api": "files=452 nodes=1665 edges=2236 ms=254", "data-api": "files=43 nodes=131 edges=170 ms=223", "zoomzoom-front": "files=856 nodes=2306 edges=2307 ms=2631"}, "laravel": {"zoomzoom-auth": "files=634 classes=594 units=2136 models=154 schedules=33 routes=194"}, "placeholders": {"calls": "85"}, "curated": {"files": "domains.yaml,references.yaml,enum-overrides.yaml,queues.yaml,rules/auto-reject.yaml,rules/cart-status-flow.yaml,rules/discount-revenue.yaml,rules/partial-refund.yaml,rules/reservation-status-flow.yaml,rules/seller-payout-policy.yaml,processes/order-to-settlement.yaml,retired.yaml", "belongs_to_domain": "148", "domains": "4", "enum_values": "8", "implements_rule": "73", "process_refs": "34", "processes": "1", "queue_constants": "5", "references": "26", "retired_edges": "4756", "retired_nodes": "1659", "supersedes": "2"}}
+- builtAt: 2026-10-30T14:13:36+00:00  gitSha: 9c604d6
+- contentSha256: `cd307149237aa4a7…` — 이전 빌드(20261028T0904Z-5b39e89)와 다름
+- inputs: {"schema": {"primary": "local_zzt-2026-10-28.sql (502 tables)", "secondary": "urimalo_zzt-2026-04-22.sql (517 tables)", "tables": "519"}, "classification": {"classified": "497", "excluded": "11"}, "docs": {"docs": "102", "statusCodeValues": "124", "domainColumns": "432", "policies": "8", "cronJobs": "59", "glossary": "14", "ownership": "29", "repos": "17"}, "php": {"zoomzoom-admin": "files=879 classes=906 units=8423 queries=5562", "zoomzoom-partners": "files=463 classes=487 units=4462 queries=2876"}, "ts": {"zoomzoom-api": "files=3203 nodes=10362 edges=15998 ms=2892", "message-consumer": "files=103 nodes=461 edges=458 ms=871", "zoomzoom-back": "files=27 nodes=389 edges=394 ms=765", "external-api": "files=452 nodes=1665 edges=2236 ms=252", "data-api": "files=43 nodes=131 edges=170 ms=228", "zoomzoom-front": "files=856 nodes=2306 edges=2307 ms=3152"}, "laravel": {"zoomzoom-auth": "files=634 classes=594 units=2136 models=154 schedules=33 routes=194"}, "placeholders": {"calls": "85"}, "curated": {"files": "domains.yaml,references.yaml,enum-overrides.yaml,queues.yaml,rules/auto-reject.yaml,rules/cart-status-flow.yaml,rules/discount-revenue.yaml,rules/partial-refund.yaml,rules/reservation-status-flow.yaml,rules/seller-payout-policy.yaml,processes/order-to-settlement.yaml,retired.yaml", "belongs_to_domain": "148", "domains": "4", "enum_values": "8", "implements_rule": "73", "process_refs": "34", "processes": "1", "queue_constants": "5", "references": "26", "retired_edges": "4756", "retired_nodes": "1659", "supersedes": "2"}}
 
 ## 이전 빌드 대비
 
 | 종류 | 이전 | 지금 | 증감 |
 |---|---|---|---|
-| (변화 없음) | | | |
+| CodeUnit | 24534 | 24578 | +44 |
+| File | 6765 | 6772 | +7 |
+| Module | 186 | 187 | +1 |
+| Route | 3696 | 3697 | +1 |
+| CALLS | 20281 | 20315 | +34 |
+| CONTAINS | 31867 | 31916 | +49 |
+| DOCUMENTED_BY | 614 | 625 | +11 |
+| HANDLES | 3533 | 3534 | +1 |
+| READS | 8148 | 8154 | +6 |
+| WRITES | 3178 | 3216 | +38 |
 
-- 드리프트: 사라진 uid 0 (이전 0) · tombstone 0 · 새 노드 40371
+- 드리프트: 사라진 uid 1 (이전 0) · tombstone 0 · 새 노드 54
 
 ## 건수
 
 | 라벨 | 노드 |
 |---|---|
 | BusinessRule | 8 |
-| CodeUnit | 24534 |
+| CodeUnit | 24578 |
 | Column | 4049 |
 | CronJob | 55 |
 | Database | 3 |
 | Doc | 162 |
 | Domain | 4 |
 | EnumValue | 273 |
-| File | 6765 |
-| Module | 186 |
+| File | 6772 |
+| Module | 187 |
 | Queue | 6 |
 | QueueMessage | 79 |
 | Repo | 17 |
-| Route | 3696 |
+| Route | 3697 |
 | Service | 7 |
 | Table | 527 |
 
 | 관계 | 건수 |
 |---|---|
 | BELONGS_TO_DOMAIN | 148 |
-| CALLS | 20281 |
+| CALLS | 20315 |
 | CALLS_HTTP | 521 |
 | CONSUMES | 78 |
-| CONTAINS | 31867 |
+| CONTAINS | 31916 |
 | DEFINES | 368 |
-| DOCUMENTED_BY | 614 |
-| HANDLES | 3533 |
+| DOCUMENTED_BY | 625 |
+| HANDLES | 3534 |
 | HAS_COLUMN | 4049 |
 | HAS_VALUE | 273 |
 | IMPLEMENTS_RULE | 170 |
 | JOINS | 1172 |
 | MAPS_TO | 358 |
 | PUBLISHES | 73 |
-| READS | 8148 |
+| READS | 8154 |
 | REFERENCES | 436 |
 | SUPERSEDES | 2 |
 | TRIGGERS | 80 |
-| WRITES | 3178 |
+| WRITES | 3216 |
 
-- 이번 빌드에 처음 보인 노드: 40371
-- 지난 빌드엔 있었는데 사라진 uid(auto, 삭제): 0
+- 이번 빌드에 처음 보인 노드: 54
+- 지난 빌드엔 있었는데 사라진 uid(auto, 삭제): 1
 - tombstone(verified 였는데 소스에 없음, missing-from-source 로 유지): 0
 
-- status: {'active': 38402, 'missing-from-source': 310, 'retired': 1659}
+### 사라진 uid (auto — 삭제됨)
+
+- `code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::resolveBasePrices`
+
+- status: {'active': 38455, 'missing-from-source': 310, 'retired': 1659}
 
 ## 추출기 report — php
 
 ### zoomzoom-admin
 
-- 파일 879 · 클래스 906 · 코드 유닛 8417 · `->query(` 5559건
+- 파일 879 · 클래스 906 · 코드 유닛 8423 · `->query(` 5562건
 - 테이블 자리를 못 찾은 쿼리: 204건 (헬퍼가 조립하는 SQL·SHOW/DESCRIBE — tree-sitter 업그레이드 판단 자료)
 - 테이블 이름은 있는데 전부 스키마에 없는 쿼리: 289건 (폐기 테이블·결제 확장)
-- 테이블 자리가 변수인 쿼리: 36건
+- 테이블 자리가 변수인 쿼리: 39건
 - 클래스는 있는데 메서드가 없어 placeholder 를 가리킨 호출: 214건
 - 큐 발행 role 별 건수: {'order': 3, 'notif': 1} · key 를 못 읽은 sendMessage: 1건
 
@@ -122,21 +135,21 @@
 - `zoomzoom-admin/catalog/controller/tool/batch.php:4016`
 - `zoomzoom-admin/catalog/model/catalog/product.php:1386`
 - `zoomzoom-admin/system/library/zoomtu/coupon.php:576`
-- `zoomzoom-admin/system/library/zoomtu/product_image_description.php:70`
-- `zoomzoom-admin/system/library/zoomtu/product_image_description.php:144`
-- `zoomzoom-admin/system/library/zoomtu/product_image_description.php:186`
-- `zoomzoom-admin/system/library/zoomtu/product_image_description.php:230`
-- `zoomzoom-admin/system/library/zoomtu/product_image_description.php:319`
-- `zoomzoom-admin/system/library/zoomtu/product_image_description.php:362`
-- `zoomzoom-admin/system/library/zoomtu/product_image_description.php:384`
-- `zoomzoom-admin/system/library/zoomtu/product_image_description.php:508`
-- `zoomzoom-admin/system/library/zoomtu/product_image_description.php:560`
-- `zoomzoom-admin/system/library/zoomtu/product_image_description.php:587`
+- `zoomzoom-admin/system/library/zoomtu/product_image_description.php:103`
+- `zoomzoom-admin/system/library/zoomtu/product_image_description.php:209`
+- `zoomzoom-admin/system/library/zoomtu/product_image_description.php:241`
+- `zoomzoom-admin/system/library/zoomtu/product_image_description.php:281`
+- `zoomzoom-admin/system/library/zoomtu/product_image_description.php:348`
+- `zoomzoom-admin/system/library/zoomtu/product_image_description.php:390`
+- `zoomzoom-admin/system/library/zoomtu/product_image_description.php:434`
+- `zoomzoom-admin/system/library/zoomtu/product_image_description.php:523`
+- `zoomzoom-admin/system/library/zoomtu/product_image_description.php:566`
+- `zoomzoom-admin/system/library/zoomtu/product_image_description.php:588`
+- `zoomzoom-admin/system/library/zoomtu/product_image_description.php:712`
+- `zoomzoom-admin/system/library/zoomtu/product_image_description.php:764`
+- `zoomzoom-admin/system/library/zoomtu/product_image_description.php:791`
 - `zoomzoom-admin/system/library/zoomtu/support_ticket.php:263`
 - `zoomzoom-admin/system/library/zoomtu/support_ticket.php:286`
-- `zoomzoom-admin/system/library/zoomtu/support_ticket.php:340`
-- `zoomzoom-admin/system/library/zoomtu/support_ticket.php:360`
-- `zoomzoom-admin/system/library/zoomtu/support_ticket.php:386`
 
 키워드 자리에 왔지만 스키마에 없는 이름 (상위 30):
 
@@ -185,10 +198,10 @@
 
 ### zoomzoom-partners
 
-- 파일 463 · 클래스 487 · 코드 유닛 4461 · `->query(` 2875건
+- 파일 463 · 클래스 487 · 코드 유닛 4462 · `->query(` 2876건
 - 테이블 자리를 못 찾은 쿼리: 91건 (헬퍼가 조립하는 SQL·SHOW/DESCRIBE — tree-sitter 업그레이드 판단 자료)
 - 테이블 이름은 있는데 전부 스키마에 없는 쿼리: 302건 (폐기 테이블·결제 확장)
-- 테이블 자리가 변수인 쿼리: 28건
+- 테이블 자리가 변수인 쿼리: 29건
 - 클래스는 있는데 메서드가 없어 placeholder 를 가리킨 호출: 20건
 - 큐 발행 role 별 건수: {'order': 5, 'notif': 1}
 
@@ -241,22 +254,22 @@
 - `zoomzoom-partners/system/library/zoomtu/coupon.php:676`
 - `zoomzoom-partners/system/library/zoomtu/product_image_description.php:69`
 - `zoomzoom-partners/system/library/zoomtu/product_image_description.php:92`
-- `zoomzoom-partners/system/library/zoomtu/product_image_description.php:100`
-- `zoomzoom-partners/system/library/zoomtu/product_image_description.php:108`
-- `zoomzoom-partners/system/library/zoomtu/product_image_description.php:288`
-- `zoomzoom-partners/system/library/zoomtu/product_image_description.php:341`
-- `zoomzoom-partners/system/library/zoomtu/product_image_description.php:481`
-- `zoomzoom-partners/system/library/zoomtu/product_image_description.php:510`
-- `zoomzoom-partners/system/library/zoomtu/product_image_description.php:550`
-- `zoomzoom-partners/system/library/zoomtu/product_image_description.php:575`
-- `zoomzoom-partners/system/library/zoomtu/product_image_description.php:616`
+- `zoomzoom-partners/system/library/zoomtu/product_image_description.php:131`
+- `zoomzoom-partners/system/library/zoomtu/product_image_description.php:147`
+- `zoomzoom-partners/system/library/zoomtu/product_image_description.php:155`
+- `zoomzoom-partners/system/library/zoomtu/product_image_description.php:335`
+- `zoomzoom-partners/system/library/zoomtu/product_image_description.php:388`
+- `zoomzoom-partners/system/library/zoomtu/product_image_description.php:528`
+- `zoomzoom-partners/system/library/zoomtu/product_image_description.php:557`
+- `zoomzoom-partners/system/library/zoomtu/product_image_description.php:600`
+- `zoomzoom-partners/system/library/zoomtu/product_image_description.php:625`
+- `zoomzoom-partners/system/library/zoomtu/product_image_description.php:666`
 - `zoomzoom-partners/system/library/zoomtu/support_ticket.php:232`
 - `zoomzoom-partners/system/library/zoomtu/support_ticket.php:287`
 - `zoomzoom-partners/system/library/zoomtu/support_ticket.php:315`
 - `zoomzoom-partners/system/library/zoomtu/support_ticket.php:318`
 - `zoomzoom-partners/system/library/zoomtu/support_ticket.php:346`
 - `zoomzoom-partners/system/library/zoomtu/support_ticket.php:497`
-- `zoomzoom-partners/system/library/zoomtu/support_ticket.php:551`
 
 키워드 자리에 왔지만 스키마에 없는 이름 (상위 30):
 
@@ -304,7 +317,7 @@
 
 ### zoomzoom-api
 
-- {'files': 3198, 'entities': 232, 'calls-placeholder': 54, 'routes': 310, 'publishes': 64, 'manager-call-unresolved': 7, 'qb-unresolved': 3}
+- {'files': 3203, 'entities': 233, 'calls-placeholder': 54, 'routes': 310, 'publishes': 64, 'manager-call-unresolved': 7, 'qb-unresolved': 3}
 - raw-query-no-table (2): `zoomzoom-api/src/apis/v1/services/subproduct.ts:141`, `zoomzoom-api/src/product/infra/persistence/orm/repositories/subproduct.repository.ts:539`
 - cqrs-unresolved (1): `zoomzoom-api/src/cart/application/services/update-cart.service.ts:51`
 - qb-unresolved-sites (3): `59:queryRunner.manager.getRepository.createQueryBuilder`, `82:queryRunner.manager.getRepository.createQueryBuilder`, `7:repo.createQueryBuilder`
@@ -337,7 +350,7 @@
 
 ### 저장소 간
 
-- 스키마에 없는 테이블로 향한 READS/WRITES/MAPS_TO 버림: 18건 — `table:iso/customer`×7, `table:jtr_category`×6, `table:vehicle_image`×3, `table:wc/zzt_crawling_data`×2
+- 스키마에 없는 테이블로 향한 READS/WRITES/MAPS_TO 버림: 21건 — `table:iso/customer`×7, `table:jtr_category`×6, `table:vehicle_image`×3, `table:provider_product_price_series`×3, `table:wc/zzt_crawling_data`×2
 - consumer/front → back AccessRule 해석: {'message-consumer': 44, 'external-api': 23, 'zoomzoom-front': 89} · 미해석(placeholder): 21
 - AccessRule → zoomzoom-api 라우트: {'regex': 262, 'exact': 79, 'target': 3} · 짝 없는 규칙: 16
 
@@ -506,6 +519,21 @@ Eloquent 호출인데 모델 클래스를 못 찾음 (상위 20):
 문서가 가리키는 컬럼이 스키마에 없거나(문서 부패), 아직 추출기가 없는 코드 유닛(2·3단계)이다.
 
 
-## 노드가 없어 버린 부분 레코드 (0건)
+## 노드가 없어 버린 부분 레코드 (13건)
 
-- 없음
+- col: ← classification@1: 10
+- table: ← classification@1: 2
+- table: ← doc:zoomzoom-services/docs/20-database/table-ownership.md: 1
+
+문서에는 있는데 스키마엔 없는 컬럼(검토 필요):
+
+- `col:jtr_category.category_id`
+- `col:jtr_category.city_id`
+- `col:jtr_category.city_name`
+- `col:provider_product_price_series.currency`
+- `col:provider_product_price_series.date_from`
+- `col:provider_product_price_series.date_to`
+- `col:provider_product_price_series.fetched_at`
+- `col:provider_product_price_series.prices`
+- `col:provider_product_price_series.provider_product_id`
+- `col:provider_product_price_series.subproduct_codes`

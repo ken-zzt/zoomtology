@@ -115821,3 +115821,206 @@ table:zoom_transaction_scheduled -BELONGS_TO_DOMAIN-> domain:refund	2026-10-28
 table:zoom_transaction_scheduled -DOCUMENTED_BY-> doc:zoomtology/curated/processes/order-to-settlement.yaml	2026-10-28
 table:zoom_transactions -BELONGS_TO_DOMAIN-> domain:settlement	2026-10-28
 table:zoom_transactions -DOCUMENTED_BY-> doc:zoomtology/curated/processes/order-to-settlement.yaml	2026-10-28
+code:zoomzoom-admin/admin/controller/catalog/product.php#ControllerCatalogProduct::get_pd_history	2026-10-31
+code:zoomzoom-admin/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::getHistoryByProductId	2026-10-31
+code:zoomzoom-admin/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::getReviewCounts	2026-10-31
+code:zoomzoom-admin/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::getReviewList	2026-10-31
+code:zoomzoom-admin/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::normalizeReviewView	2026-10-31
+code:zoomzoom-admin/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::reviewPreviousRejectSql	2026-10-31
+code:zoomzoom-api/src/bemyguest/application/ports/bemyguest-price-series.repository.port.ts#BemyguestPriceSeriesRepositoryPort	2026-10-31
+code:zoomzoom-api/src/bemyguest/application/ports/bemyguest-price-series.repository.port.ts#BemyguestPriceSeriesRepositoryPort::countActive	2026-10-31
+code:zoomzoom-api/src/bemyguest/application/ports/bemyguest-price-series.repository.port.ts#BemyguestPriceSeriesRepositoryPort::get	2026-10-31
+code:zoomzoom-api/src/bemyguest/application/ports/bemyguest-price-series.repository.port.ts#BemyguestPriceSeriesRepositoryPort::getFirstSaleDate	2026-10-31
+code:zoomzoom-api/src/bemyguest/application/ports/bemyguest-price-series.repository.port.ts#BemyguestPriceSeriesRepositoryPort::getOldest	2026-10-31
+code:zoomzoom-api/src/bemyguest/application/ports/bemyguest-price-series.repository.port.ts#BemyguestPriceSeriesRepositoryPort::save	2026-10-31
+code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::fetch	2026-10-31
+code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::getRefreshTargets	2026-10-31
+code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::merge	2026-10-31
+code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::refresh	2026-10-31
+code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::start	2026-10-31
+code:zoomzoom-api/src/bemyguest/domain/bemyguest-base-price.ts#BemyguestBasePrice::getFailedOptions	2026-10-31
+code:zoomzoom-api/src/bemyguest/domain/bemyguest-base-price.ts#BemyguestPriceRetryError	2026-10-31
+code:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts#BemyguestPriceSeries	2026-10-31
+code:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts#BemyguestPriceSeries::basePrice	2026-10-31
+code:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts#BemyguestPriceSeries::covers	2026-10-31
+code:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts#BemyguestPriceSeries::isStale	2026-10-31
+code:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts#BemyguestPriceSeries::normalizeCodes	2026-10-31
+code:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts#BemyguestPriceSeries::sameOptions	2026-10-31
+code:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts#BemyguestPriceSeries::window	2026-10-31
+code:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts#addDays	2026-10-31
+code:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts#effective	2026-10-31
+code:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts#isCheaper	2026-10-31
+code:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-price-series.repository.ts#BemyguestPriceSeriesRepository	2026-10-31
+code:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-price-series.repository.ts#BemyguestPriceSeriesRepository::activeQuery	2026-10-31
+code:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-price-series.repository.ts#BemyguestPriceSeriesRepository::countActive	2026-10-31
+code:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-price-series.repository.ts#BemyguestPriceSeriesRepository::get	2026-10-31
+code:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-price-series.repository.ts#BemyguestPriceSeriesRepository::getFirstSaleDate	2026-10-31
+code:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-price-series.repository.ts#BemyguestPriceSeriesRepository::getOldest	2026-10-31
+code:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-price-series.repository.ts#BemyguestPriceSeriesRepository::save	2026-10-31
+code:zoomzoom-api/src/entities/provider/provider-product-price-series.entity.ts#ProviderProductPriceSeriesEntity	2026-10-31
+code:zoomzoom-api/src/external/application/services/bemyguest/get-bemyguest-subproduct.service.ts#GetBemyguestSubproductService::find	2026-10-31
+code:zoomzoom-api/src/external/domain/bemyguest/bemyguest-error.ts#isListingNotFound	2026-10-31
+code:zoomzoom-api/src/external/domain/bemyguest/bemyguest-error.ts#isProductTypeNotFound	2026-10-31
+code:zoomzoom-api/src/task/bemyguest/application/services/patch-bemyguest-product.service.ts#PatchBemyguestProductService::markRefreshFailed	2026-10-31
+code:zoomzoom-api/src/task/bemyguest/application/services/patch-bemyguest-product.service.ts#PatchBemyguestProductService::refreshPrices	2026-10-31
+code:zoomzoom-api/src/task/bemyguest/application/services/patch-bemyguest-product.service.ts#listOptions	2026-10-31
+code:zoomzoom-api/src/task/bemyguest/application/services/patch-bemyguest-product.service.ts#priceRefreshFailedKey	2026-10-31
+code:zoomzoom-partners/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::getPreviousRejectByProductId	2026-10-31
+file:devenv/compose/replica.yml	2026-10-31
+file:zoomzoom-api/src/bemyguest/application/ports/bemyguest-price-series.repository.port.ts	2026-10-31
+file:zoomzoom-api/src/bemyguest/domain/bemyguest-availability.ts	2026-10-31
+file:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts	2026-10-31
+file:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-price-series.repository.ts	2026-10-31
+file:zoomzoom-api/src/entities/provider/provider-product-price-series.entity.ts	2026-10-31
+file:zoomzoom-api/src/external/domain/bemyguest/bemyguest-error.ts	2026-10-31
+module:zoomzoom-partners/deploy/logrotate/zoomzoom-partners	2026-10-31
+route:zoomzoom-admin route=catalog/product/get_pd_history	2026-10-31
+code:zoomzoom-admin/admin/controller/catalog/product.php#ControllerCatalogProduct::get_manage_pd_list -CALLS-> code:zoomzoom-admin/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::getReviewCounts	2026-10-31
+code:zoomzoom-admin/admin/controller/catalog/product.php#ControllerCatalogProduct::get_manage_pd_list -CALLS-> code:zoomzoom-admin/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::getReviewList	2026-10-31
+code:zoomzoom-admin/admin/controller/catalog/product.php#ControllerCatalogProduct::get_manage_pd_list -CALLS-> code:zoomzoom-admin/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::normalizeReviewView	2026-10-31
+code:zoomzoom-admin/admin/controller/catalog/product.php#ControllerCatalogProduct::get_pd_history -CALLS-> code:zoomzoom-admin/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::getHistoryByProductId	2026-10-31
+code:zoomzoom-admin/admin/controller/catalog/product.php#ControllerCatalogProduct::get_pd_history -HANDLES-> route:zoomzoom-admin route=catalog/product/get_pd_history	2026-10-31
+code:zoomzoom-admin/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::getHistoryByProductId -READS-> table:zoom_user	2026-10-31
+code:zoomzoom-admin/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::getReviewCounts -CALLS-> code:zoomzoom-admin/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::reviewPreviousRejectSql	2026-10-31
+code:zoomzoom-admin/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::getReviewList -CALLS-> code:zoomzoom-admin/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::decodeDescription	2026-10-31
+code:zoomzoom-admin/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::getReviewList -CALLS-> code:zoomzoom-admin/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::normalizeReviewView	2026-10-31
+code:zoomzoom-admin/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::getReviewList -CALLS-> code:zoomzoom-admin/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::reviewPreviousRejectSql	2026-10-31
+code:zoomzoom-admin/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::getReviewList -READS-> table:zoom_ms_seller	2026-10-31
+code:zoomzoom-admin/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::getReviewList -READS-> table:zoom_product	2026-10-31
+code:zoomzoom-api/src/affiliate/infra/persistence/orm/repositories/affiliate-balance.repository.ts#AffiliateBalanceRepository::createBalance -WRITES-> table:zoom_affiliate_balance_transaction	2026-10-31
+code:zoomzoom-api/src/apis/v1/controllers/viator.ts#ViatorController::update -WRITES-> table:zoom_product_to_category	2026-10-31
+code:zoomzoom-api/src/apis/v1/controllers/viator.ts#ViatorController::update -WRITES-> table:zoom_product_to_tour_category	2026-10-31
+code:zoomzoom-api/src/apis/v1/controllers/viator.ts#ViatorController::update -WRITES-> table:zoom_refund_policy_terms	2026-10-31
+code:zoomzoom-api/src/apis/v1/services/conversation.ts#ConversationService::save -WRITES-> table:zoom_ms_requestpayment	2026-10-31
+code:zoomzoom-api/src/apis/v1/services/customer.ts#CustomerService::activate -WRITES-> table:zoom_country	2026-10-31
+code:zoomzoom-api/src/apis/v1/services/customer.ts#CustomerService::deactivate -WRITES-> table:zoom_country	2026-10-31
+code:zoomzoom-api/src/apis/v1/services/customer.ts#CustomerService::updateSafePoint -WRITES-> table:zoom_country	2026-10-31
+code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::fetch -CALLS-> code:zoomzoom-api/src/bemyguest/application/ports/bemyguest-price-series.repository.port.ts#BemyguestPriceSeriesRepositoryPort::save	2026-10-31
+code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::fetch -CALLS-> code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::merge	2026-10-31
+code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::fetch -CALLS-> code:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts#BemyguestPriceSeries::normalizeCodes	2026-10-31
+code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::fetch -CALLS-> code:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts#BemyguestPriceSeries::window	2026-10-31
+code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::fetch -CALLS-> code:zoomzoom-api/src/external/application/services/bemyguest/get-bemyguest-subproduct-prices.service.ts#GetBemyguestSubproductPricesService::get	2026-10-31
+code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::fetch -CALLS-> code:zoomzoom-api/src/helpers/date.ts#DateHelper::getUTC	2026-10-31
+code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::get -CALLS-> code:zoomzoom-api/src/bemyguest/application/ports/bemyguest-price-series.repository.port.ts#BemyguestPriceSeriesRepositoryPort::get	2026-10-31
+code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::get -CALLS-> code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::fetch	2026-10-31
+code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::get -CALLS-> code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::start	2026-10-31
+code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::get -CALLS-> code:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts#BemyguestPriceSeries::window	2026-10-31
+code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::get -CALLS-> code:zoomzoom-api/src/helpers/date.ts#DateHelper::getUTC	2026-10-31
+code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::getRefreshTargets -CALLS-> code:zoomzoom-api/src/bemyguest/application/ports/bemyguest-price-series.repository.port.ts#BemyguestPriceSeriesRepositoryPort::countActive	2026-10-31
+code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::getRefreshTargets -CALLS-> code:zoomzoom-api/src/bemyguest/application/ports/bemyguest-price-series.repository.port.ts#BemyguestPriceSeriesRepositoryPort::getOldest	2026-10-31
+code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::refresh -CALLS-> code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::fetch	2026-10-31
+code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::refresh -CALLS-> code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::start	2026-10-31
+code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::start -CALLS-> code:zoomzoom-api/src/bemyguest/application/ports/bemyguest-price-series.repository.port.ts#BemyguestPriceSeriesRepositoryPort::getFirstSaleDate	2026-10-31
+code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::start -CALLS-> code:zoomzoom-api/src/helpers/date.ts#DateHelper::format	2026-10-31
+code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::start -CALLS-> code:zoomzoom-api/src/helpers/date.ts#DateHelper::getUTC	2026-10-31
+code:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-price-series.repository.ts#BemyguestPriceSeriesRepository::activeQuery -READS-> table:provider_product	2026-10-31
+code:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-price-series.repository.ts#BemyguestPriceSeriesRepository::activeQuery -READS-> table:zoom_product	2026-10-31
+code:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-price-series.repository.ts#BemyguestPriceSeriesRepository::countActive -CALLS-> code:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-price-series.repository.ts#BemyguestPriceSeriesRepository::activeQuery	2026-10-31
+code:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-price-series.repository.ts#BemyguestPriceSeriesRepository::getFirstSaleDate -READS-> table:product_available_date	2026-10-31
+code:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-price-series.repository.ts#BemyguestPriceSeriesRepository::getOldest -CALLS-> code:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-price-series.repository.ts#BemyguestPriceSeriesRepository::activeQuery	2026-10-31
+code:zoomzoom-api/src/coupon/infra/persistence/orm/repositories/customer-coupon.repository.ts#UpdateCustomerCouponRepository::download -WRITES-> table:zoom_coupon_customer_history	2026-10-31
+code:zoomzoom-api/src/coupon/infra/persistence/orm/repositories/customer-coupon.repository.ts#UpdateCustomerCouponRepository::save -WRITES-> table:zoom_coupon_customer_history	2026-10-31
+code:zoomzoom-api/src/customer/infra/persistence/orm/repositories/update-customer.repository.ts#UpdateCustomerRepository::save -WRITES-> table:zoom_country	2026-10-31
+code:zoomzoom-api/src/external/application/services/bemyguest/get-bemyguest-subproduct.service.ts#GetBemyguestSubproductService::find -CALLS-> code:zoomzoom-api/src/helpers/http-client.ts#HttpClient::request	2026-10-31
+code:zoomzoom-api/src/order/infra/persistence/orm/repositories/update-order.repository.ts#UpdateOrderRepository::completePayment -WRITES-> table:zoom_ms_requestpayment	2026-10-31
+code:zoomzoom-api/src/order/infra/persistence/orm/repositories/update-order.repository.ts#UpdateOrderRepository::confirm -WRITES-> table:zoom_ms_suborder_history	2026-10-31
+code:zoomzoom-api/src/order/infra/persistence/orm/repositories/update-order.repository.ts#UpdateOrderRepository::create -WRITES-> table:zoom_ms_requestpayment	2026-10-31
+code:zoomzoom-api/src/order/infra/persistence/orm/repositories/update-order.repository.ts#UpdateOrderRepository::create -WRITES-> table:zoom_ms_suborder	2026-10-31
+code:zoomzoom-api/src/order/infra/persistence/orm/repositories/update-order.repository.ts#UpdateOrderRepository::create -WRITES-> table:zoom_ms_suborder_history	2026-10-31
+code:zoomzoom-api/src/order/infra/persistence/orm/repositories/update-order.repository.ts#UpdateOrderRepository::reject -WRITES-> table:zoom_ms_suborder_history	2026-10-31
+code:zoomzoom-api/src/order/infra/persistence/orm/repositories/update-order.repository.ts#UpdateOrderRepository::save -WRITES-> table:zoom_ms_requestpayment	2026-10-31
+code:zoomzoom-api/src/order/infra/persistence/orm/repositories/update-order.repository.ts#UpdateOrderRepository::save -WRITES-> table:zoom_ms_suborder	2026-10-31
+code:zoomzoom-api/src/order/infra/persistence/orm/repositories/update-order.repository.ts#UpdateOrderRepository::save -WRITES-> table:zoom_ms_suborder_history	2026-10-31
+code:zoomzoom-api/src/product/application/services/update-product-available-date.service.ts#UpdateProductAvailableDateService::update -CALLS-> code:zoomzoom-api/src/category/application/services/get-category-timezone-by-product-id.service.ts#GetCategoryTimezoneByProductIdService::get	2026-10-31
+code:zoomzoom-api/src/product/application/services/update-product-available-date.service.ts#UpdateProductAvailableDateService::update -CALLS-> code:zoomzoom-api/src/helpers/date.ts#DateHelper::get	2026-10-31
+code:zoomzoom-api/src/product/infra/persistence/orm/repositories/update-product.repository.ts#UpdateProductRepository::save -WRITES-> table:zoom_product_data	2026-10-31
+code:zoomzoom-api/src/product/infra/persistence/orm/repositories/update-product.repository.ts#UpdateProductRepository::save -WRITES-> table:zoom_product_place	2026-10-31
+code:zoomzoom-api/src/product/infra/persistence/orm/repositories/update-product.repository.ts#UpdateProductRepository::save -WRITES-> table:zoom_product_to_category	2026-10-31
+code:zoomzoom-api/src/product/infra/persistence/orm/repositories/update-product.repository.ts#UpdateProductRepository::save -WRITES-> table:zoom_product_to_tour_category	2026-10-31
+code:zoomzoom-api/src/product/infra/persistence/orm/repositories/update-product.repository.ts#UpdateProductRepository::saveBasePrice -WRITES-> table:zoom_product_data	2026-10-31
+code:zoomzoom-api/src/product/infra/persistence/orm/repositories/update-product.repository.ts#UpdateProductRepository::saveBasePrice -WRITES-> table:zoom_product_place	2026-10-31
+code:zoomzoom-api/src/product/infra/persistence/orm/repositories/update-product.repository.ts#UpdateProductRepository::saveBasePrice -WRITES-> table:zoom_product_to_category	2026-10-31
+code:zoomzoom-api/src/product/infra/persistence/orm/repositories/update-product.repository.ts#UpdateProductRepository::saveBasePrice -WRITES-> table:zoom_product_to_tour_category	2026-10-31
+code:zoomzoom-api/src/product/infra/persistence/orm/repositories/update-product.repository.ts#UpdateProductRepository::update -WRITES-> table:zoom_product_place	2026-10-31
+code:zoomzoom-api/src/product/infra/persistence/orm/repositories/update-product.repository.ts#UpdateProductRepository::updatePrice -WRITES-> table:zoom_product_data	2026-10-31
+code:zoomzoom-api/src/product/infra/persistence/orm/repositories/update-product.repository.ts#UpdateProductRepository::updatePrice -WRITES-> table:zoom_product_place	2026-10-31
+code:zoomzoom-api/src/product/infra/persistence/orm/repositories/update-product.repository.ts#UpdateProductRepository::updatePrice -WRITES-> table:zoom_product_to_category	2026-10-31
+code:zoomzoom-api/src/product/infra/persistence/orm/repositories/update-product.repository.ts#UpdateProductRepository::updatePrice -WRITES-> table:zoom_product_to_tour_category	2026-10-31
+code:zoomzoom-api/src/review/infra/persistence/orm/repositories/update-review.repository.ts#UpdateReviewRepository::save -WRITES-> table:additional_review	2026-10-31
+code:zoomzoom-api/src/review/infra/persistence/orm/repositories/update-review.repository.ts#UpdateReviewRepository::save -WRITES-> table:zoom_review_image	2026-10-31
+code:zoomzoom-api/src/review/infra/persistence/orm/repositories/update-review.repository.ts#UpdateReviewRepository::update -WRITES-> table:additional_review	2026-10-31
+code:zoomzoom-api/src/support-ticket/infra/persistence/orm/repositories/support-ticket.repository.ts#SupportTicketRepository::save -WRITES-> table:zoom_support_ticket_history	2026-10-31
+code:zoomzoom-api/src/support-ticket/infra/persistence/orm/repositories/support-ticket.repository.ts#SupportTicketRepository::save -WRITES-> table:zoom_support_ticket_user	2026-10-31
+code:zoomzoom-api/src/task/bemyguest/application/services/patch-bemyguest-product.service.ts#PatchBemyguestProductService::createDomain -CALLS-> code:zoomzoom-api/src/external/application/services/bemyguest/get-bemyguest-subproduct.service.ts#GetBemyguestSubproductService::find	2026-10-31
+code:zoomzoom-api/src/task/bemyguest/application/services/patch-bemyguest-product.service.ts#PatchBemyguestProductService::markRefreshFailed -CALLS-> code:zoomzoom-api/src/redis/services/cache.ts#RedisCacheService::set	2026-10-31
+code:zoomzoom-api/src/task/bemyguest/application/services/patch-bemyguest-product.service.ts#PatchBemyguestProductService::patch -CALLS-> code:zoomzoom-api/src/task/bemyguest/application/services/patch-bemyguest-product.service.ts#PatchBemyguestProductService::refreshPrices	2026-10-31
+code:zoomzoom-api/src/task/bemyguest/application/services/patch-bemyguest-product.service.ts#PatchBemyguestProductService::patchProduct -CALLS-> code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::refresh	2026-10-31
+code:zoomzoom-api/src/task/bemyguest/application/services/patch-bemyguest-product.service.ts#PatchBemyguestProductService::refreshPrices -CALLS-> code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::getRefreshTargets	2026-10-31
+code:zoomzoom-api/src/task/bemyguest/application/services/patch-bemyguest-product.service.ts#PatchBemyguestProductService::refreshPrices -CALLS-> code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::refresh	2026-10-31
+code:zoomzoom-api/src/task/bemyguest/application/services/patch-bemyguest-product.service.ts#PatchBemyguestProductService::refreshPrices -CALLS-> code:zoomzoom-api/src/product/application/services/patch-product-price.service.ts#PatchProductPriceService::patch	2026-10-31
+code:zoomzoom-api/src/task/bemyguest/application/services/patch-bemyguest-product.service.ts#PatchBemyguestProductService::refreshPrices -CALLS-> code:zoomzoom-api/src/provider/application/services/get-provider-subproducts.service.ts#GetProviderSubproductsService::getList	2026-10-31
+code:zoomzoom-api/src/task/bemyguest/application/services/patch-bemyguest-product.service.ts#PatchBemyguestProductService::refreshPrices -CALLS-> code:zoomzoom-api/src/redis/services/cache.ts#RedisCacheService::get	2026-10-31
+code:zoomzoom-api/src/task/bemyguest/application/services/patch-bemyguest-product.service.ts#PatchBemyguestProductService::refreshPrices -CALLS-> code:zoomzoom-api/src/task/bemyguest/application/services/patch-bemyguest-product.service.ts#PatchBemyguestProductService::markRefreshFailed	2026-10-31
+code:zoomzoom-partners/catalog/controller/seller/account-product-description.php#ControllerSellerAccountProductDescription::getDescription -CALLS-> code:zoomzoom-partners/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::getPreviousRejectByProductId	2026-10-31
+code:zoomzoom-partners/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::requestDescription -CALLS-> code:zoomzoom-partners/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::getPreviousRejectByProductId	2026-10-31
+file:devenv/compose/files.sh -DOCUMENTED_BY-> doc:zoomzoom-services/docs/40-local-dev/agent-envs.md	2026-10-31
+file:devenv/compose/replica.yml -DOCUMENTED_BY-> doc:zoomzoom-services/docs/40-local-dev/devenv-architecture.md	2026-10-31
+file:devenv/compose/sqs.yml -DOCUMENTED_BY-> doc:zoomzoom-services/docs/40-local-dev/agent-envs.md	2026-10-31
+file:zoomzoom-admin/admin/controller/catalog/product.php -CONTAINS-> code:zoomzoom-admin/admin/controller/catalog/product.php#ControllerCatalogProduct::get_pd_history	2026-10-31
+file:zoomzoom-admin/system/library/zoomtu/coupon.php -DOCUMENTED_BY-> doc:zoomzoom-services/docs/20-database/domains/coupon.md	2026-10-31
+file:zoomzoom-admin/system/library/zoomtu/coupon.php -DOCUMENTED_BY-> doc:zoomzoom-services/docs/20-database/domains/order.md	2026-10-31
+file:zoomzoom-admin/system/library/zoomtu/product_image_description.php -CONTAINS-> code:zoomzoom-admin/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::getHistoryByProductId	2026-10-31
+file:zoomzoom-admin/system/library/zoomtu/product_image_description.php -CONTAINS-> code:zoomzoom-admin/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::getReviewCounts	2026-10-31
+file:zoomzoom-admin/system/library/zoomtu/product_image_description.php -CONTAINS-> code:zoomzoom-admin/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::getReviewList	2026-10-31
+file:zoomzoom-admin/system/library/zoomtu/product_image_description.php -CONTAINS-> code:zoomzoom-admin/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::normalizeReviewView	2026-10-31
+file:zoomzoom-admin/system/library/zoomtu/product_image_description.php -CONTAINS-> code:zoomzoom-admin/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::reviewPreviousRejectSql	2026-10-31
+file:zoomzoom-api/src/bemyguest/application/ports/bemyguest-price-series.repository.port.ts -CONTAINS-> code:zoomzoom-api/src/bemyguest/application/ports/bemyguest-price-series.repository.port.ts#BemyguestPriceSeriesRepositoryPort	2026-10-31
+file:zoomzoom-api/src/bemyguest/application/ports/bemyguest-price-series.repository.port.ts -CONTAINS-> code:zoomzoom-api/src/bemyguest/application/ports/bemyguest-price-series.repository.port.ts#BemyguestPriceSeriesRepositoryPort::countActive	2026-10-31
+file:zoomzoom-api/src/bemyguest/application/ports/bemyguest-price-series.repository.port.ts -CONTAINS-> code:zoomzoom-api/src/bemyguest/application/ports/bemyguest-price-series.repository.port.ts#BemyguestPriceSeriesRepositoryPort::get	2026-10-31
+file:zoomzoom-api/src/bemyguest/application/ports/bemyguest-price-series.repository.port.ts -CONTAINS-> code:zoomzoom-api/src/bemyguest/application/ports/bemyguest-price-series.repository.port.ts#BemyguestPriceSeriesRepositoryPort::getFirstSaleDate	2026-10-31
+file:zoomzoom-api/src/bemyguest/application/ports/bemyguest-price-series.repository.port.ts -CONTAINS-> code:zoomzoom-api/src/bemyguest/application/ports/bemyguest-price-series.repository.port.ts#BemyguestPriceSeriesRepositoryPort::getOldest	2026-10-31
+file:zoomzoom-api/src/bemyguest/application/ports/bemyguest-price-series.repository.port.ts -CONTAINS-> code:zoomzoom-api/src/bemyguest/application/ports/bemyguest-price-series.repository.port.ts#BemyguestPriceSeriesRepositoryPort::save	2026-10-31
+file:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts -CONTAINS-> code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::fetch	2026-10-31
+file:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts -CONTAINS-> code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::getRefreshTargets	2026-10-31
+file:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts -CONTAINS-> code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::merge	2026-10-31
+file:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts -CONTAINS-> code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::refresh	2026-10-31
+file:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts -CONTAINS-> code:zoomzoom-api/src/bemyguest/application/services/get-bemyguest-base-price.service.ts#GetBemyguestBasePriceService::start	2026-10-31
+file:zoomzoom-api/src/bemyguest/domain/bemyguest-availability.ts -DOCUMENTED_BY-> doc:zoomzoom-services/docs/50-integrations/bemyguest.md	2026-10-31
+file:zoomzoom-api/src/bemyguest/domain/bemyguest-base-price.ts -CONTAINS-> code:zoomzoom-api/src/bemyguest/domain/bemyguest-base-price.ts#BemyguestBasePrice::getFailedOptions	2026-10-31
+file:zoomzoom-api/src/bemyguest/domain/bemyguest-base-price.ts -CONTAINS-> code:zoomzoom-api/src/bemyguest/domain/bemyguest-base-price.ts#BemyguestPriceRetryError	2026-10-31
+file:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts -CONTAINS-> code:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts#BemyguestPriceSeries	2026-10-31
+file:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts -CONTAINS-> code:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts#BemyguestPriceSeries::basePrice	2026-10-31
+file:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts -CONTAINS-> code:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts#BemyguestPriceSeries::covers	2026-10-31
+file:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts -CONTAINS-> code:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts#BemyguestPriceSeries::isStale	2026-10-31
+file:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts -CONTAINS-> code:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts#BemyguestPriceSeries::normalizeCodes	2026-10-31
+file:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts -CONTAINS-> code:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts#BemyguestPriceSeries::sameOptions	2026-10-31
+file:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts -CONTAINS-> code:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts#BemyguestPriceSeries::window	2026-10-31
+file:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts -CONTAINS-> code:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts#addDays	2026-10-31
+file:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts -CONTAINS-> code:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts#effective	2026-10-31
+file:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts -CONTAINS-> code:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts#isCheaper	2026-10-31
+file:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-price-series.repository.ts -CONTAINS-> code:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-price-series.repository.ts#BemyguestPriceSeriesRepository	2026-10-31
+file:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-price-series.repository.ts -CONTAINS-> code:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-price-series.repository.ts#BemyguestPriceSeriesRepository::activeQuery	2026-10-31
+file:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-price-series.repository.ts -CONTAINS-> code:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-price-series.repository.ts#BemyguestPriceSeriesRepository::countActive	2026-10-31
+file:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-price-series.repository.ts -CONTAINS-> code:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-price-series.repository.ts#BemyguestPriceSeriesRepository::get	2026-10-31
+file:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-price-series.repository.ts -CONTAINS-> code:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-price-series.repository.ts#BemyguestPriceSeriesRepository::getFirstSaleDate	2026-10-31
+file:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-price-series.repository.ts -CONTAINS-> code:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-price-series.repository.ts#BemyguestPriceSeriesRepository::getOldest	2026-10-31
+file:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-price-series.repository.ts -CONTAINS-> code:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-price-series.repository.ts#BemyguestPriceSeriesRepository::save	2026-10-31
+file:zoomzoom-api/src/entities/provider/provider-product-price-series.entity.ts -CONTAINS-> code:zoomzoom-api/src/entities/provider/provider-product-price-series.entity.ts#ProviderProductPriceSeriesEntity	2026-10-31
+file:zoomzoom-api/src/external/application/services/bemyguest/get-bemyguest-subproduct.service.ts -CONTAINS-> code:zoomzoom-api/src/external/application/services/bemyguest/get-bemyguest-subproduct.service.ts#GetBemyguestSubproductService::find	2026-10-31
+file:zoomzoom-api/src/external/domain/bemyguest/bemyguest-error.ts -CONTAINS-> code:zoomzoom-api/src/external/domain/bemyguest/bemyguest-error.ts#isListingNotFound	2026-10-31
+file:zoomzoom-api/src/external/domain/bemyguest/bemyguest-error.ts -CONTAINS-> code:zoomzoom-api/src/external/domain/bemyguest/bemyguest-error.ts#isProductTypeNotFound	2026-10-31
+file:zoomzoom-api/src/order/infra/persistence/orm/repositories/update-order.repository.ts -DOCUMENTED_BY-> doc:zoomzoom-services/docs/20-database/domains/coupon.md	2026-10-31
+file:zoomzoom-api/src/product/application/commands/get-product-headline-price.command.ts -DOCUMENTED_BY-> doc:zoomzoom-services/docs/50-integrations/bemyguest.md	2026-10-31
+file:zoomzoom-api/src/product/application/commands/update-product-sort.command.ts -DOCUMENTED_BY-> doc:zoomzoom-services/docs/50-integrations/bemyguest.md	2026-10-31
+file:zoomzoom-api/src/product/application/services/update-product-available-date.service.ts -DOCUMENTED_BY-> doc:zoomzoom-services/docs/50-integrations/bemyguest.md	2026-10-31
+file:zoomzoom-api/src/task/bemyguest/application/services/patch-bemyguest-product.service.ts -CONTAINS-> code:zoomzoom-api/src/task/bemyguest/application/services/patch-bemyguest-product.service.ts#PatchBemyguestProductService::markRefreshFailed	2026-10-31
+file:zoomzoom-api/src/task/bemyguest/application/services/patch-bemyguest-product.service.ts -CONTAINS-> code:zoomzoom-api/src/task/bemyguest/application/services/patch-bemyguest-product.service.ts#PatchBemyguestProductService::refreshPrices	2026-10-31
+file:zoomzoom-api/src/task/bemyguest/application/services/patch-bemyguest-product.service.ts -CONTAINS-> code:zoomzoom-api/src/task/bemyguest/application/services/patch-bemyguest-product.service.ts#listOptions	2026-10-31
+file:zoomzoom-api/src/task/bemyguest/application/services/patch-bemyguest-product.service.ts -CONTAINS-> code:zoomzoom-api/src/task/bemyguest/application/services/patch-bemyguest-product.service.ts#priceRefreshFailedKey	2026-10-31
+file:zoomzoom-partners/system/library/zoomtu/product_image_description.php -CONTAINS-> code:zoomzoom-partners/system/library/zoomtu/product_image_description.php#ZztProductImageDescription::getPreviousRejectByProductId	2026-10-31
+module:zoomzoom-api/src/bemyguest -CONTAINS-> file:zoomzoom-api/src/bemyguest/application/ports/bemyguest-price-series.repository.port.ts	2026-10-31
+module:zoomzoom-api/src/bemyguest -CONTAINS-> file:zoomzoom-api/src/bemyguest/domain/bemyguest-price-series.ts	2026-10-31
+module:zoomzoom-api/src/bemyguest -CONTAINS-> file:zoomzoom-api/src/bemyguest/infra/persistence/orm/repositories/bemyguest-price-series.repository.ts	2026-10-31
+module:zoomzoom-api/src/entities -CONTAINS-> file:zoomzoom-api/src/entities/provider/provider-product-price-series.entity.ts	2026-10-31
+module:zoomzoom-api/src/external -CONTAINS-> file:zoomzoom-api/src/external/domain/bemyguest/bemyguest-error.ts	2026-10-31
+module:zoomzoom-partners/deploy/logrotate/zoomzoom-partners -DOCUMENTED_BY-> doc:zoomzoom-services/docs/30-operations/runbooks/partners-php84-server.md	2026-10-31

@@ -1,52 +1,52 @@
 {
-  "builtAt": "2026-10-28T09:04:49+00:00",
-  "contentSha256": "979ee68fea0ad70f6ba117148616669836163584623c81e3c0bb81bb8275d2b8",
+  "builtAt": "2026-10-30T14:13:36+00:00",
+  "contentSha256": "cd307149237aa4a7700d8997b9e376224984b551676f1d7d3bab8549162cf593",
   "counts": {
     "edges": {
       "BELONGS_TO_DOMAIN": 148,
-      "CALLS": 20281,
+      "CALLS": 20315,
       "CALLS_HTTP": 521,
       "CONSUMES": 78,
-      "CONTAINS": 31867,
+      "CONTAINS": 31916,
       "DEFINES": 368,
-      "DOCUMENTED_BY": 614,
-      "HANDLES": 3533,
+      "DOCUMENTED_BY": 625,
+      "HANDLES": 3534,
       "HAS_COLUMN": 4049,
       "HAS_VALUE": 273,
       "IMPLEMENTS_RULE": 170,
       "JOINS": 1172,
       "MAPS_TO": 358,
       "PUBLISHES": 73,
-      "READS": 8148,
+      "READS": 8154,
       "REFERENCES": 436,
       "SUPERSEDES": 2,
       "TRIGGERS": 80,
-      "WRITES": 3178
+      "WRITES": 3216
     },
     "nodes": {
       "BusinessRule": 8,
-      "CodeUnit": 24534,
+      "CodeUnit": 24578,
       "Column": 4049,
       "CronJob": 55,
       "Database": 3,
       "Doc": 162,
       "Domain": 4,
       "EnumValue": 273,
-      "File": 6765,
-      "Module": 186,
+      "File": 6772,
+      "Module": 187,
       "Queue": 6,
       "QueueMessage": 79,
       "Repo": 17,
-      "Route": 3696,
+      "Route": 3697,
       "Service": 7,
       "Table": 527
     }
   },
   "dirty": false,
   "drift": {
-    "newNodes": 40371,
+    "newNodes": 54,
     "tombstones": 0,
-    "vanished": 0
+    "vanished": 1
   },
   "extractors": {
     "classification": "1",
@@ -57,11 +57,11 @@
     "schema": "1",
     "ts": "1"
   },
-  "gitSha": "5b39e896cf6f8f3601b47bec46be68c62ce76c4b",
+  "gitSha": "9c604d6ba62dd1d56d8ccaa7a47fc7e5067212fd",
   "inputs": {
     "classification": {
-      "classified": "492",
-      "excluded": "10"
+      "classified": "497",
+      "excluded": "11"
     },
     "curated": {
       "belongs_to_domain": "148",
@@ -82,7 +82,7 @@
       "docs": "102",
       "domainColumns": "432",
       "glossary": "14",
-      "ownership": "27",
+      "ownership": "29",
       "policies": "8",
       "repos": "17",
       "statusCodeValues": "124"
@@ -91,8 +91,8 @@
       "zoomzoom-auth": "files=634 classes=594 units=2136 models=154 schedules=33 routes=194"
     },
     "php": {
-      "zoomzoom-admin": "files=879 classes=906 units=8417 queries=5559",
-      "zoomzoom-partners": "files=463 classes=487 units=4461 queries=2875"
+      "zoomzoom-admin": "files=879 classes=906 units=8423 queries=5562",
+      "zoomzoom-partners": "files=463 classes=487 units=4462 queries=2876"
     },
     "placeholders": {
       "calls": "85"
@@ -103,15 +103,15 @@
       "tables": "519"
     },
     "ts": {
-      "data-api": "files=43 nodes=131 edges=170 ms=223",
-      "external-api": "files=452 nodes=1665 edges=2236 ms=254",
-      "message-consumer": "files=103 nodes=461 edges=458 ms=769",
-      "zoomzoom-api": "files=3198 nodes=10320 edges=15887 ms=2828",
-      "zoomzoom-back": "files=27 nodes=389 edges=394 ms=688",
-      "zoomzoom-front": "files=856 nodes=2306 edges=2307 ms=2631"
+      "data-api": "files=43 nodes=131 edges=170 ms=228",
+      "external-api": "files=452 nodes=1665 edges=2236 ms=252",
+      "message-consumer": "files=103 nodes=461 edges=458 ms=871",
+      "zoomzoom-api": "files=3203 nodes=10362 edges=15998 ms=2892",
+      "zoomzoom-back": "files=27 nodes=389 edges=394 ms=765",
+      "zoomzoom-front": "files=856 nodes=2306 edges=2307 ms=3152"
     }
   },
-  "previousVersion": "20261028T0904Z-1b7bb7a-dirty",
+  "previousVersion": "20261028T0904Z-5b39e89",
   "schemaVersion": 1,
   "smoke": [
     {
@@ -137,13 +137,13 @@
   "sources": {
     "AgentPrism": {
       "dirty": false,
-      "sha": "a384550a9aafc39c27a63ea8eaeb266da3b32e1d"
+      "sha": "59a5789119997925538c53d5940ed53b7e6ce336"
     },
     "zoomzoom-services": {
-      "dirty": true,
-      "sha": "a40043b9bf7aeef27821e04e72a2cd72a18d18c5"
+      "dirty": false,
+      "sha": "3a12112ca0b67963c3e865f6491f917aff3ea33d"
     }
   },
-  "unchanged": true,
-  "version": "20261028T0904Z-5b39e89"
+  "unchanged": false,
+  "version": "20261030T1413Z-9c604d6"
 }
