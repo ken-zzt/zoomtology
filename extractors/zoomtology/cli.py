@@ -27,6 +27,7 @@ def main(argv: list[str] | None = None) -> int:
     b = sub.add_parser("build", help="추출 → 병합 → 검증 → 번들(build/dist) + build/latest + state")
     b.add_argument("--out", type=Path, default=None)
     b.add_argument("--no-state", action="store_true", help="state/ 를 갱신하지 않는다")
+    sub.add_parser("check-sources", help="입력 저장소가 메인 브랜치인지, 커밋하지 않은 변경이 없는지 경고한다 (항상 0 으로 끝난다)")
     args = parser.parse_args(argv)
 
     if args.cmd == "validate":
@@ -36,6 +37,11 @@ def main(argv: list[str] | None = None) -> int:
             print(p, file=sys.stderr)
         print(f"{'FAIL' if problems else 'OK'}: {len(problems)} problem(s)")
         return 1 if problems else 0
+    if args.cmd == "check-sources":
+        from .build import source_state, source_warnings
+        for w in source_warnings(source_state()):
+            print(f"경고: {w}. 그래프에 메인에 없는 코드가 섞일 수 있습니다.", file=sys.stderr)
+        return 0
     if args.cmd == "build":
         from .build import BuildError, run
         try:

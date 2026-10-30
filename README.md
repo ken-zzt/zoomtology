@@ -82,6 +82,8 @@ scripts/rebuild-and-deploy.sh
 PRISM_URL=http://localhost:4300/mcp PRISM_TOKEN=prt_… uv run --project extractors python tests/cq/run_cq.py --stage 4
 ```
 
+빌드는 형제 저장소의 작업 체크아웃을 그대로 읽는다. 입력 저장소가 메인 브랜치가 아니거나 커밋하지 않은 변경이 있으면 `build.sh` 가 시작할 때 경고하고, 빌드는 멈추지 않는다. 경고가 뜨면 Ctrl-C 로 멈추고 메인으로 돌린 뒤 다시 돌린다. 브랜치·sha·변경 여부는 `manifest.json` 의 `sources` 에, 경고는 `sourceWarnings` 와 report 맨 위에 남는다. 지금 상태만 보려면 `uv run --project extractors zoomtology check-sources`.
+
 번들 보관(Ken 결정 2026-10-28): **태그만** — `bundle/<version>` 태그 + 커밋된 `build/latest`·`state` 로 재현한다. `build/dist/*.tar.gz` 는 로컬(gitignore), 노트북은 `var/kg/` 최근 5개. GitHub release·JSONL 커밋은 하지 않는다. 재빌드 주기: 스키마 덤프를 갱신했을 때·큐레이션을 바꿨을 때, 그 밖엔 2주마다.
 
 `build/latest/report.md` 의 "이전 빌드 대비" 표로 무엇이 늘고 줄었는지 본다. `manifest.json` 의 `contentSha256` 이 같으면 입력이 안 바뀐 것이다(날짜 거버넌스는 제외).

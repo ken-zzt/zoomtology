@@ -97,18 +97,15 @@ def run(out_dir: Path | None = None, update_state: bool = True, strict: bool = F
     version = f"{now:%Y%m%dT%H%MZ}-{sha[:7]}{'-dirty' if dirty else ''}"
     counts = {"nodes": dict(sorted(Counter(n["label"] for n in nodes).items())),
               "edges": dict(sorted(Counter(e["type"] for e in edges).items()))}
-    src_shas = {}
-    for name, path in (("zoomzoom-services", sources.HUB), ("AgentPrism", sources.AGENT_PRISM)):
-        s = sources.git_sha(path)
-        if s:
-            src_shas[name] = {"sha": s, "dirty": sources.git_dirty(path)}
+    src_state = source_state()
+    src_warnings = source_warnings(src_state)
     content_sha = _content_sha(nodes, edges)
     previous = _read_previous_manifest()
     manifest = {
         "schemaVersion": schema.version, "version": version, "gitSha": sha, "dirty": dirty, "builtAt": now.isoformat(timespec="seconds"),
         "contentSha256": content_sha, "unchanged": bool(previous and previous.get("contentSha256") == content_sha),
         "previousVersion": previous.get("version") if previous else None,
-        "extractors": EXTRACTORS, "inputs": meta, "sources": src_shas, "counts": counts,
+        "extractors": EXTRACTORS, "inputs": meta, "sources": src_state, "sourceWarnings": src_warnings, "counts": counts,
         "drift": {"vanished": len(vanished), "tombstones": len(tombstones), "newNodes": sum(1 for u in col.nodes if first_seen.get(u, today) == today)},
         "smoke": [
             {"tool": "kg_node", "args": {"uid": "table:zoom_order"}},
@@ -144,7 +141,38 @@ def run(out_dir: Path | None = None, update_state: bool = True, strict: bool = F
         _write_verified(nodes)
     return {"bundle": str(bundle), "version": version, "contentSha256": content_sha, "unchanged": manifest["unchanged"],
             "counts": counts, "dangling": sum(len(v) for v in dangling.values()),
-            "warnings": len(col.warnings), "vanished": len(vanished), "tombstones": len(tombstones)}
+            "warnings": len(col.warnings), "vanished": len(vanished), "tombstones": len(tombstones),
+            "sourceWarnings": src_warnings}
+
+
+def source_repos() -> dict[str, Path]:
+    """그래프 입력이 되는 저장소. 빌드는 작업 체크아웃을 그대로 읽으므로, 여기의 브랜치·변경이 곧 그래프 내용이다."""
+    repos = {"zoomzoom-services": sources.HUB, "AgentPrism": sources.AGENT_PRISM}
+    repos.update({r.name: r.root for r in php.default_repos()})
+    repos.update({r.name: r.root for r in ts.default_repos()})
+    repos[laravel.REPO] = sources.SERVICE / laravel.REPO
+    return repos
+
+
+def source_state(repos: dict[str, Path] | None = None) -> dict[str, dict]:
+    defaults = sources.default_branches()
+    state: dict[str, dict] = {}
+    for name, path in sorted((repos or source_repos()).items()):
+        sha = sources.git_sha(path)
+        if sha:
+            state[name] = {"sha": sha, "branch": sources.git_branch(path), "defaultBranch": defaults.get(name, "main"), "dirty": sources.git_dirty(path)}
+    return state
+
+
+def source_warnings(state: dict[str, dict]) -> list[str]:
+    """메인 브랜치가 아니거나 커밋하지 않은 변경이 있는 저장소. 빌드를 막지는 않는다 — 그래프에 영향이 없는 브랜치도 있다."""
+    result: list[str] = []
+    for name, s in sorted(state.items()):
+        if s["branch"] != s["defaultBranch"]:
+            result.append(f"{name}: {s['branch'] or '분리된 HEAD'} 에 있습니다 (메인 {s['defaultBranch']})")
+        if s["dirty"]:
+            result.append(f"{name}: 커밋하지 않은 변경이 있습니다")
+    return result
 
 
 def _ekey(e: Record) -> str:
@@ -237,6 +265,8 @@ def _report(manifest: dict, col: Collector, dangling: dict[str, list[str]], vani
              f"- builtAt: {manifest['builtAt']}  gitSha: {manifest['gitSha'][:7]}{' (dirty)' if manifest['dirty'] else ''}",
              f"- contentSha256: `{manifest['contentSha256'][:16]}…` — 이전 빌드({manifest.get('previousVersion') or '없음'})와 {'**같음** (입력 불변)' if manifest['unchanged'] else '다름'}",
              f"- inputs: {json.dumps(manifest['inputs'], ensure_ascii=False)}", ""]
+    if manifest.get("sourceWarnings"):
+        lines += ["## 소스 저장소 경고", "", "이 그래프에는 메인 브랜치에 없는 코드가 섞였을 수 있다.", ""] + [f"- {w}" for w in manifest["sourceWarnings"]] + [""]
     if previous and previous.get("counts"):
         lines += ["## 이전 빌드 대비", "", "| 종류 | 이전 | 지금 | 증감 |", "|---|---|---|---|"]
         for kind in ("nodes", "edges"):
