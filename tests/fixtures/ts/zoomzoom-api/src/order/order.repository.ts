@@ -13,6 +13,10 @@ export class OrderRepository {
     return this.orders.createQueryBuilder('o').innerJoinAndSelect('o.products', 'p').where('o.order_id = :id', { id }).getOne()
   }
 
+  async createWithProducts(order: Order) {
+    return this.orders.save(order)          // cascade: zoom_order_product 에도 INSERT
+  }
+
   async confirm(id: number) {
     await this.orders.update({ id }, { orderStatusId: 2 })
     const products = await this.dataSource.getRepository(OrderProductEntity).find({ where: { orderId: id } })

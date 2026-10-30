@@ -6,5 +6,5 @@ export class OrderEntity {
   @PrimaryGeneratedColumn({ name: 'order_id' }) id: number
   @Column() orderStatusId: number
   @Column({ name: 'date_modified' }) dateModified: Date
-  @OneToMany(() => OrderProductEntity, (p) => p.order) products: OrderProductEntity[]
+  @OneToMany(() => OrderProductEntity, (p) => p.order, { cascade: true }) products: OrderProductEntity[]
 }

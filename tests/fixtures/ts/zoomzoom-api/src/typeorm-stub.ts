@@ -7,6 +7,7 @@ export function OneToMany(_a?: any, _b?: any): PropertyDecorator { return () => 
 export class Repository<T> {
   createQueryBuilder(_alias?: string): any { return null }
   update(_c: any, _v: any): Promise<any> { return null }
+  save(e: T): Promise<T> { return null }
   find(_o?: any): Promise<T[]> { return null }
 }
 export class EntityManager {

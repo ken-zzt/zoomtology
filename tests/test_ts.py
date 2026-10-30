@@ -62,6 +62,8 @@ def test_entities_and_repository_access(built):
     assert r["table:zoom_order_product"]["handle"] in ("typeorm", "raw-sql") and "select" in r["table:zoom_order_product"]["ops"]
     jr = {e["to"] for e in _edges(col, "READS", U["repo_find"])}
     assert jr == {"table:zoom_order", "table:zoom_order_product"}         # createQueryBuilder('o').innerJoinAndSelect('o.products')
+    cw = {e["to"]: e["props"]["ops"] for e in _edges(col, "WRITES", model.code_uid(API, "src/order/order.repository.ts", "OrderRepository", "createWithProducts"))}
+    assert cw == {"table:zoom_order": ["upsert"], "table:zoom_order_product": ["cascade:upsert"]}   # cascade: true 전파
 
 
 def test_routes_calls_cqrs_publishes(built):

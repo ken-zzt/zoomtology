@@ -48,13 +48,27 @@ export function extractNest(repo, root, opts = {}) {
         let db = null
         for (const [prefix, handle] of DB_BY_DIR) if (rel.startsWith(prefix)) db = handle
         const relations = new Map()
+        const cascades = new Map()   // prop → {target, ops}
         const columns = []
         for (const p of cls.getProperties()) {
           const rd = p.getDecorators().find((d) => ['ManyToOne', 'OneToMany', 'OneToOne', 'ManyToMany'].includes(d.getName()))
           if (rd) {
             const a0 = rd.getArguments()[0]
             const body = a0 && Node.isArrowFunction(a0) ? a0.getBody() : null
-            if (body) relations.set(p.getName(), className(body))
+            if (body) {
+              const target = className(body)
+              relations.set(p.getName(), target)
+              // cascade: true | ['insert','update',…] → 부모를 save/insert/update 하면 자식 테이블에도 쓴다
+              const opts = rd.getArguments().find((a) => Node.isObjectLiteralExpression(a))
+              const cas = opts?.getProperty('cascade')
+              if (cas && Node.isPropertyAssignment(cas)) {
+                const init = cas.getInitializer()
+                let ops = null
+                if (init && Node.isTrueLiteral(init)) ops = ['insert', 'update', 'remove']
+                else if (init && Node.isArrayLiteralExpression(init)) ops = init.getElements().map((e) => e.getText().replace(/['"]/g, ''))
+                if (ops && ops.length) cascades.set(p.getName(), { target, ops })
+              }
+            }
             continue
           }
           const cd = p.getDecorators().find((d) => /Column$/.test(d.getName()) || d.getName() === 'Column')
@@ -63,7 +77,7 @@ export function extractNest(repo, root, opts = {}) {
             columns.push(typeof a === 'object' && a?.name ? a.name : snake(p.getName()))
           }
         }
-        entity.set(name, { table, db, tuid: uid.table(table, db), rel, relations, columns, database: typeof arg === 'object' ? arg.database : undefined })
+        entity.set(name, { table, db, tuid: uid.table(table, db), rel, relations, cascades, columns, database: typeof arg === 'object' ? arg.database : undefined })
       }
       for (const dn of ['CommandHandler', 'QueryHandler', 'EventsHandler']) {
         const d = cls.getDecorator(dn)
@@ -193,12 +207,25 @@ function analyzeBody(fn, unitUid, ctx) {
   const body = fn.getBody?.()
   if (!body) return
   const rw = new Map()   // tuid → {ops:Set, lines:Set, handle}
-  const touch = (ent, op, line, handle = 'typeorm') => {
+  const CASCADE_OP = { upsert: ['insert', 'update'], insert: ['insert'], update: ['update'], delete: ['remove'] }
+  // cascade 는 TypeORM 의 save/remove/softRemove/recover 에서만 일어난다. update()/insert()/delete()·QueryBuilder 는 cascade 하지 않는다.
+  const CASCADING_METHODS = new Set(['save', 'remove', 'softRemove', 'recover'])
+  const touch = (ent, op, line, handle = 'typeorm', cascading = false, seen = new Set()) => {
     if (!ent) return
     const e = rw.get(ent.tuid) ?? { ops: new Set(), lines: new Set(), handle }
     e.ops.add(op)
     e.lines.add(line)
     rw.set(ent.tuid, e)
+    if (!cascading) return
+    const base = op.startsWith('cascade:') ? op.slice(8) : op
+    const wanted = CASCADE_OP[base]
+    if (!wanted || !ent.cascades || seen.has(ent.tuid)) return
+    seen.add(ent.tuid)
+    for (const [, c] of ent.cascades) {
+      if (!c.ops.some((o) => wanted.includes(o))) continue
+      const child = resolveEntity(c.target)
+      if (child && !seen.has(child.tuid)) touch(child, `cascade:${base}`, line, handle, true, seen)
+    }
   }
   const calls = new Map()  // target uid → {kind, lines}
   const call = (target, kind, line) => {
@@ -244,7 +271,7 @@ function analyzeBody(fn, unitUid, ctx) {
           }
         }
       }
-      if (ent) touch(ent, op, line)
+      if (ent) touch(ent, op, line, 'typeorm', CASCADING_METHODS.has(callee))
       else if (chain[0] === 'this' && chain.length === 3 && repoProps.has(chain[1])) {
         out.count('repo-call-unresolved-entity')
         out.list('repo-entity-unresolved', repoProps.get(chain[1]))
